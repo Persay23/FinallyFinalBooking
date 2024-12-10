@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FinallyFinalBoocking
+{
+    public class Room
+    {
+        private int _hotelId;
+        private string _hotelName;
+        private string _location;
+        private DateTime _dateAvb;
+        private int _amountOfRooms;
+        private int _costForNight;
+        
+
+        public Room(int hotelId, string hotelName, string hotelLocation, DateTime hotelDateAvb, 
+            int hotelAmountOfRooms, int hotelCostForNight)
+        {
+            _hotelName = hotelName;
+            _location = hotelLocation;
+            _dateAvb = hotelDateAvb;
+            _amountOfRooms = hotelAmountOfRooms;
+            _costForNight = hotelCostForNight;
+            _hotelId = hotelId;
+
+        }
+    }
+}
