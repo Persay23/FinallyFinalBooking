@@ -36,6 +36,7 @@ namespace FinallyFinalBoocking
         {
             var lines = File.ReadLines(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt");
 
+
             foreach (var line in lines)
             {
                 var split = line.Split(";");
