@@ -1,6 +1,6 @@
 ﻿namespace FinallyFinalBoocking
 {
-    partial class Form1
+    partial class Cover
     {
         /// <summary>
         ///  Required designer variable.
@@ -63,6 +63,7 @@
             UsernameInputTextBox.PlaceholderText = "User name";
             UsernameInputTextBox.Size = new Size(321, 29);
             UsernameInputTextBox.TabIndex = 2;
+            UsernameInputTextBox.Text = "user_1";
             UsernameInputTextBox.TextChanged += UsernameInputTextBox_TextChanged;
             // 
             // PasswordInputTextBox
@@ -73,6 +74,7 @@
             PasswordInputTextBox.PlaceholderText = "Password";
             PasswordInputTextBox.Size = new Size(321, 29);
             PasswordInputTextBox.TabIndex = 3;
+            PasswordInputTextBox.Text = "password1";
             PasswordInputTextBox.TextChanged += PasswordInputTextBox_TextChanged;
             // 
             // label1
@@ -94,7 +96,7 @@
             exitbtn.UseVisualStyleBackColor = true;
             exitbtn.Click += exitbtn_Click;
             // 
-            // Form1
+            // Cover
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -105,7 +107,7 @@
             Controls.Add(UsernameInputTextBox);
             Controls.Add(logInbtn);
             Controls.Add(singInbtn);
-            Name = "Form1";
+            Name = "Cover";
             Text = "CoverPage";
             ResumeLayout(false);
             PerformLayout();

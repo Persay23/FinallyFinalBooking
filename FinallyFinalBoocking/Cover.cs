@@ -1,8 +1,8 @@
 namespace FinallyFinalBoocking
 {
-    public partial class Form1 : Form
+    public partial class Cover : Form
     {
-        public Form1()
+        public Cover()
         {
             InitializeComponent();
         }

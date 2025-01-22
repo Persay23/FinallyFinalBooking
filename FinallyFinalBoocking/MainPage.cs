@@ -34,7 +34,7 @@ namespace FinallyFinalBoocking
 
         private void openbtn_Click(object sender, EventArgs e)
         {
-            var lines = File.ReadLines(@"C:\Users\Orest\source\repos\FinallyFinalBoocking - Copy\FinallyFinalBoocking\DumbStaffDB\Rooms1.txt");
+            var lines = File.ReadLines(@"D:\Orest_D\projects\Proga\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt");
 
             foreach (var line in lines)
             {
@@ -90,6 +90,11 @@ namespace FinallyFinalBoocking
         {
             // here must be at least 5 hotels/rooms
             // and also somehow make scroll menu like on a page
+        }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
         }
     }
 }

@@ -44,7 +44,7 @@
             // 
             // personalpictureBox
             // 
-            personalpictureBox.Location = new Point(379, 98);
+            personalpictureBox.Location = new Point(396, 108);
             personalpictureBox.Name = "personalpictureBox";
             personalpictureBox.Size = new Size(926, 247);
             personalpictureBox.TabIndex = 0;
@@ -55,7 +55,7 @@
             // 
             descriptionPoloniaTextBox.BackColor = SystemColors.HighlightText;
             descriptionPoloniaTextBox.Enabled = false;
-            descriptionPoloniaTextBox.Location = new Point(379, 379);
+            descriptionPoloniaTextBox.Location = new Point(396, 383);
             descriptionPoloniaTextBox.Multiline = true;
             descriptionPoloniaTextBox.Name = "descriptionPoloniaTextBox";
             descriptionPoloniaTextBox.Size = new Size(926, 160);

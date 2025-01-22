@@ -35,8 +35,8 @@
             groupBox1 = new GroupBox();
             Exitbtn2 = new Button();
             openbtn = new Button();
-            groupBox2 = new GroupBox();
-            groupBox3 = new GroupBox();
+            openFileDialog1 = new OpenFileDialog();
+            vScrollBar1 = new VScrollBar();
             pictureBox1 = new PictureBox();
             showRoomsBtn = new Button();
             hotelAmountOfRoomsTextBox = new TextBox();
@@ -44,10 +44,7 @@
             hotelDateAvbTextBox = new TextBox();
             hotelTotalCostTextBox = new TextBox();
             hotelNameTextBox = new TextBox();
-            openFileDialog1 = new OpenFileDialog();
             groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
-            groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -114,125 +111,109 @@
             openbtn.UseVisualStyleBackColor = true;
             openbtn.Click += openbtn_Click;
             // 
-            // groupBox2
+            // openFileDialog1
             // 
-            groupBox2.Controls.Add(groupBox3);
-            groupBox2.Location = new Point(327, 234);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1062, 564);
-            groupBox2.TabIndex = 4;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
-            groupBox2.Enter += groupBox2_Enter;
+            openFileDialog1.FileName = "openFileDialog1";
             // 
-            // groupBox3
+            // vScrollBar1
             // 
-            groupBox3.Controls.Add(pictureBox1);
-            groupBox3.Controls.Add(showRoomsBtn);
-            groupBox3.Controls.Add(hotelAmountOfRoomsTextBox);
-            groupBox3.Controls.Add(hotelLocationTextBox);
-            groupBox3.Controls.Add(hotelDateAvbTextBox);
-            groupBox3.Controls.Add(hotelTotalCostTextBox);
-            groupBox3.Controls.Add(hotelNameTextBox);
-            groupBox3.Location = new Point(82, 38);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(932, 309);
-            groupBox3.TabIndex = 0;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "groupBox3";
+            vScrollBar1.Location = new Point(327, 255);
+            vScrollBar1.Name = "vScrollBar1";
+            vScrollBar1.Size = new Size(1062, 425);
+            vScrollBar1.TabIndex = 5;
+            vScrollBar1.Scroll += vScrollBar1_Scroll;
             // 
             // pictureBox1
             // 
             pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
-            pictureBox1.Location = new Point(516, 101);
+            pictureBox1.Location = new Point(907, 421);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(368, 169);
-            pictureBox1.TabIndex = 5;
+            pictureBox1.TabIndex = 11;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // showRoomsBtn
             // 
-            showRoomsBtn.Location = new Point(54, 241);
+            showRoomsBtn.Location = new Point(445, 561);
             showRoomsBtn.Name = "showRoomsBtn";
             showRoomsBtn.Size = new Size(368, 29);
-            showRoomsBtn.TabIndex = 5;
+            showRoomsBtn.TabIndex = 12;
             showRoomsBtn.Text = "Show";
             showRoomsBtn.UseVisualStyleBackColor = true;
-            showRoomsBtn.Click += showRoomsBtn_Click;
             // 
             // hotelAmountOfRoomsTextBox
             // 
             hotelAmountOfRoomsTextBox.BackColor = SystemColors.HighlightText;
             hotelAmountOfRoomsTextBox.Enabled = false;
-            hotelAmountOfRoomsTextBox.Location = new Point(54, 171);
+            hotelAmountOfRoomsTextBox.Location = new Point(445, 491);
             hotelAmountOfRoomsTextBox.Name = "hotelAmountOfRoomsTextBox";
             hotelAmountOfRoomsTextBox.PlaceholderText = "hotelAmountOfRooms";
             hotelAmountOfRoomsTextBox.Size = new Size(368, 29);
-            hotelAmountOfRoomsTextBox.TabIndex = 4;
+            hotelAmountOfRoomsTextBox.TabIndex = 10;
             // 
             // hotelLocationTextBox
             // 
             hotelLocationTextBox.BackColor = SystemColors.HighlightText;
             hotelLocationTextBox.Enabled = false;
-            hotelLocationTextBox.Location = new Point(54, 101);
+            hotelLocationTextBox.Location = new Point(445, 421);
             hotelLocationTextBox.Name = "hotelLocationTextBox";
             hotelLocationTextBox.PlaceholderText = "hotelLocation";
             hotelLocationTextBox.Size = new Size(368, 29);
-            hotelLocationTextBox.TabIndex = 3;
+            hotelLocationTextBox.TabIndex = 9;
             // 
             // hotelDateAvbTextBox
             // 
             hotelDateAvbTextBox.BackColor = SystemColors.HighlightText;
             hotelDateAvbTextBox.Enabled = false;
-            hotelDateAvbTextBox.Location = new Point(54, 136);
+            hotelDateAvbTextBox.Location = new Point(445, 456);
             hotelDateAvbTextBox.Name = "hotelDateAvbTextBox";
             hotelDateAvbTextBox.PlaceholderText = "hotelDateAvb";
             hotelDateAvbTextBox.Size = new Size(368, 29);
-            hotelDateAvbTextBox.TabIndex = 2;
+            hotelDateAvbTextBox.TabIndex = 8;
             // 
             // hotelTotalCostTextBox
             // 
             hotelTotalCostTextBox.BackColor = SystemColors.HighlightText;
             hotelTotalCostTextBox.Enabled = false;
-            hotelTotalCostTextBox.Location = new Point(54, 206);
+            hotelTotalCostTextBox.Location = new Point(445, 526);
             hotelTotalCostTextBox.Name = "hotelTotalCostTextBox";
             hotelTotalCostTextBox.PlaceholderText = "hotelTotalCost";
             hotelTotalCostTextBox.Size = new Size(368, 29);
-            hotelTotalCostTextBox.TabIndex = 1;
+            hotelTotalCostTextBox.TabIndex = 7;
             // 
             // hotelNameTextBox
             // 
             hotelNameTextBox.BackColor = SystemColors.HighlightText;
             hotelNameTextBox.Enabled = false;
-            hotelNameTextBox.Location = new Point(54, 28);
+            hotelNameTextBox.Location = new Point(445, 348);
             hotelNameTextBox.Multiline = true;
             hotelNameTextBox.Name = "hotelNameTextBox";
             hotelNameTextBox.PlaceholderText = "hotelName";
             hotelNameTextBox.Size = new Size(830, 51);
-            hotelNameTextBox.TabIndex = 0;
+            hotelNameTextBox.TabIndex = 6;
             hotelNameTextBox.TextAlign = HorizontalAlignment.Center;
-            // 
-            // openFileDialog1
-            // 
-            openFileDialog1.FileName = "openFileDialog1";
             // 
             // MainPage
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1672, 803);
-            Controls.Add(groupBox2);
+            Controls.Add(pictureBox1);
+            Controls.Add(showRoomsBtn);
+            Controls.Add(hotelAmountOfRoomsTextBox);
+            Controls.Add(hotelLocationTextBox);
+            Controls.Add(hotelDateAvbTextBox);
+            Controls.Add(hotelTotalCostTextBox);
+            Controls.Add(hotelNameTextBox);
+            Controls.Add(vScrollBar1);
             Controls.Add(groupBox1);
             Name = "MainPage";
             Text = "MainPage";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            groupBox2.ResumeLayout(false);
-            groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -241,17 +222,16 @@
         private Button accountInfo;
         private ComboBox comboBoxFilter;
         private GroupBox groupBox1;
-        private GroupBox groupBox2;
-        private GroupBox groupBox3;
-        private TextBox hotelNameTextBox;
-        private TextBox hotelLocationTextBox;
-        private TextBox hotelDateAvbTextBox;
-        private TextBox hotelTotalCostTextBox;
-        private Button showRoomsBtn;
-        private PictureBox pictureBox1;
-        private TextBox hotelAmountOfRoomsTextBox;
         private OpenFileDialog openFileDialog1;
         private Button openbtn;
         private Button Exitbtn2;
+        private VScrollBar vScrollBar1;
+        private PictureBox pictureBox1;
+        private Button showRoomsBtn;
+        private TextBox hotelAmountOfRoomsTextBox;
+        private TextBox hotelLocationTextBox;
+        private TextBox hotelDateAvbTextBox;
+        private TextBox hotelTotalCostTextBox;
+        private TextBox hotelNameTextBox;
     }
 }
