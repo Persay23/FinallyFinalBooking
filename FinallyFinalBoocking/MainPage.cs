@@ -34,7 +34,7 @@ namespace FinallyFinalBoocking
 
         private void openbtn_Click(object sender, EventArgs e)
         {
-            var lines = File.ReadLines(@"D:\Orest_D\projects\Proga\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt");
+            var lines = File.ReadLines(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt");
 
             foreach (var line in lines)
             {
