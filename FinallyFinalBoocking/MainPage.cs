@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace FinallyFinalBoocking
 {
@@ -26,51 +28,62 @@ namespace FinallyFinalBoocking
 
         private void showRoomsBtn_Click(object sender, EventArgs e)
         {
-            var newPropertyPage = new PropertysPage();
-            newPropertyPage.Show();
-            this.Hide();
+            
 
         }
 
         private void openbtn_Click(object sender, EventArgs e)
         {
-            var lines = File.ReadLines(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt");
+
+
+            string path1 = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            string path2 = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            string selectedPath = null;
+
+
+            if (File.Exists(path1))
+            {
+                selectedPath = path1;
+            }
+            else if (File.Exists(path2))
+            {
+                selectedPath = path2;
+            }
+            else
+            {
+                MessageBox.Show("User data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            var lines = File.ReadLines(selectedPath);
+
 
 
             foreach (var line in lines)
             {
-                var split = line.Split(";");
+                    var split = line.Split(";");
 
-                var hotelId = int.Parse(split[0]);
-                var hotelName = split[1];
-                var hotelLocation = split[2];
-                var hotelDateAvb = DateTime.Parse(split[3]);
-                var hotelAmount = int.Parse(split[4]);
-                var hotelTotalCost = int.Parse(split[5]);
+                    var hotelId = int.Parse(split[0]);
+                    var hotelName = split[1];
+                    var hotelLocation = split[2];
+                    var hotelDateAvb = DateTime.Parse(split[3]);
+                    var hotelAmount = int.Parse(split[4]);
+                    var hotelTotalCost = int.Parse(split[5]);
 
-                var room = new Room(hotelId, hotelName, hotelName, hotelDateAvb, hotelAmount, hotelTotalCost);
-                _rooms.Add(room);
+                    var room = new Room(hotelId, hotelName, hotelName, hotelDateAvb, hotelAmount, hotelTotalCost);
+                    _rooms.Add(room);
 
-                hotelNameTextBox.Text = String.Join(Environment.NewLine, hotelName);
-                hotelLocationTextBox.Text = String.Join(Environment.NewLine, hotelLocation);
-                hotelDateAvbTextBox.Text = String.Join(Environment.NewLine, hotelDateAvb);
-                hotelAmountOfRoomsTextBox.Text = String.Join(Environment.NewLine, hotelAmount);
-                hotelTotalCostTextBox.Text = String.Join(Environment.NewLine, hotelTotalCost);
+                    hotelNameTextBox.Text = String.Join(Environment.NewLine, hotelName);
+                    hotelLocationTextBox.Text = String.Join(Environment.NewLine, hotelLocation);
+                    hotelDateAvbTextBox.Text = String.Join(Environment.NewLine, hotelDateAvb);
+                    hotelAmountOfRoomsTextBox.Text = String.Join(Environment.NewLine, hotelAmount);
+                    hotelTotalCostTextBox.Text = String.Join(Environment.NewLine, hotelTotalCost);
 
             }
-
-
-            //}
-
         }
+            
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            //string logoPath = "\"C:\\Users\\Orest\\source\\repos\\FinallyFinalBoocking - Copy\\" +
-            //    "FinallyFinalBoocking\\DumbStaffDB\\Screenshot 2024-12-10 023140.png\"";
-            //pictureBox1.Image = Image.FromFile(logoPath);
-            //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-        }
 
         private void Exitbtn2_Click(object sender, EventArgs e)
         {
@@ -95,7 +108,29 @@ namespace FinallyFinalBoocking
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
+        }
 
+        private void PictureBox_Load(object sender, EventArgs e)
+        {
+            string logoPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+
+            if (File.Exists(logoPath))
+            {
+                pictureBox1.Image = Image.FromFile(logoPath);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            else
+            {
+                MessageBox.Show("Image file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void showRoomsBtn_Click_1(object sender, EventArgs e)
+        {
+            var newPropertyPage = new PropertysPage();
+            newPropertyPage.Show();
+            this.Hide();
         }
     }
 }

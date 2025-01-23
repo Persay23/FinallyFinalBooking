@@ -53,5 +53,10 @@ namespace FinallyFinalBoocking
         {
             // Here will be short info about your books, the same as on the main page
         }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
     }
 }

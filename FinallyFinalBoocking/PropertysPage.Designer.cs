@@ -44,7 +44,7 @@
             // 
             // personalpictureBox
             // 
-            personalpictureBox.Location = new Point(396, 108);
+            personalpictureBox.Location = new Point(12, 87);
             personalpictureBox.Name = "personalpictureBox";
             personalpictureBox.Size = new Size(926, 247);
             personalpictureBox.TabIndex = 0;
@@ -55,7 +55,7 @@
             // 
             descriptionPoloniaTextBox.BackColor = SystemColors.HighlightText;
             descriptionPoloniaTextBox.Enabled = false;
-            descriptionPoloniaTextBox.Location = new Point(396, 383);
+            descriptionPoloniaTextBox.Location = new Point(12, 362);
             descriptionPoloniaTextBox.Multiline = true;
             descriptionPoloniaTextBox.Name = "descriptionPoloniaTextBox";
             descriptionPoloniaTextBox.Size = new Size(926, 160);
@@ -64,7 +64,7 @@
             // 
             // reserveBtn
             // 
-            reserveBtn.Location = new Point(460, 577);
+            reserveBtn.Location = new Point(76, 556);
             reserveBtn.Name = "reserveBtn";
             reserveBtn.Size = new Size(163, 43);
             reserveBtn.TabIndex = 2;
@@ -73,7 +73,7 @@
             // 
             // contactBtn
             // 
-            contactBtn.Location = new Point(460, 645);
+            contactBtn.Location = new Point(76, 624);
             contactBtn.Name = "contactBtn";
             contactBtn.Size = new Size(163, 43);
             contactBtn.TabIndex = 3;
@@ -83,7 +83,7 @@
             // 
             // commentBtn
             // 
-            commentBtn.Location = new Point(1094, 645);
+            commentBtn.Location = new Point(710, 624);
             commentBtn.Name = "commentBtn";
             commentBtn.Size = new Size(163, 43);
             commentBtn.TabIndex = 4;
@@ -92,7 +92,7 @@
             // 
             // buyBtn
             // 
-            buyBtn.Location = new Point(1094, 577);
+            buyBtn.Location = new Point(710, 556);
             buyBtn.Name = "buyBtn";
             buyBtn.Size = new Size(163, 43);
             buyBtn.TabIndex = 5;
@@ -102,7 +102,7 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(460, 745);
+            textBox2.Location = new Point(76, 724);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(797, 114);
@@ -112,7 +112,7 @@
             // hotelNameLabel
             // 
             hotelNameLabel.AutoSize = true;
-            hotelNameLabel.Location = new Point(795, 37);
+            hotelNameLabel.Location = new Point(411, 16);
             hotelNameLabel.Name = "hotelNameLabel";
             hotelNameLabel.Size = new Size(135, 21);
             hotelNameLabel.TabIndex = 7;
@@ -120,7 +120,7 @@
             // 
             // submitBtn
             // 
-            submitBtn.Location = new Point(795, 878);
+            submitBtn.Location = new Point(411, 857);
             submitBtn.Name = "submitBtn";
             submitBtn.Size = new Size(135, 31);
             submitBtn.TabIndex = 8;
@@ -130,7 +130,7 @@
             // 
             // reload2
             // 
-            reload2.Location = new Point(488, 878);
+            reload2.Location = new Point(104, 857);
             reload2.Name = "reload2";
             reload2.Size = new Size(135, 31);
             reload2.TabIndex = 9;
@@ -140,7 +140,7 @@
             // 
             // exit2
             // 
-            exit2.Location = new Point(1122, 878);
+            exit2.Location = new Point(738, 857);
             exit2.Name = "exit2";
             exit2.Size = new Size(135, 31);
             exit2.TabIndex = 10;
@@ -152,7 +152,7 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1718, 921);
+            ClientSize = new Size(953, 921);
             Controls.Add(exit2);
             Controls.Add(reload2);
             Controls.Add(submitBtn);

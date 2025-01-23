@@ -41,9 +41,17 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            panel1 = new Panel();
+            groupBox5 = new GroupBox();
+            textBox2 = new TextBox();
+            groupBox4 = new GroupBox();
+            textBox1 = new TextBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            panel1.SuspendLayout();
+            groupBox5.SuspendLayout();
+            groupBox4.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -94,7 +102,7 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(theBookedOneTextBox);
-            groupBox2.Location = new Point(200, 56);
+            groupBox2.Location = new Point(16, 3);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(402, 135);
             groupBox2.TabIndex = 0;
@@ -104,7 +112,7 @@
             // theBookedOneTextBox
             // 
             theBookedOneTextBox.Enabled = false;
-            theBookedOneTextBox.Location = new Point(6, 28);
+            theBookedOneTextBox.Location = new Point(6, 25);
             theBookedOneTextBox.Multiline = true;
             theBookedOneTextBox.Name = "theBookedOneTextBox";
             theBookedOneTextBox.ReadOnly = true;
@@ -182,15 +190,66 @@
             label3.TabIndex = 4;
             label3.Text = "label3";
             // 
+            // panel1
+            // 
+            panel1.AutoScroll = true;
+            panel1.Controls.Add(groupBox5);
+            panel1.Controls.Add(groupBox4);
+            panel1.Controls.Add(groupBox2);
+            panel1.Location = new Point(158, 56);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(484, 382);
+            panel1.TabIndex = 7;
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(textBox2);
+            groupBox5.Location = new Point(16, 265);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(402, 135);
+            groupBox5.TabIndex = 2;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "groupBox5";
+            // 
+            // textBox2
+            // 
+            textBox2.Enabled = false;
+            textBox2.Location = new Point(6, 25);
+            textBox2.Multiline = true;
+            textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(390, 101);
+            textBox2.TabIndex = 4;
+            // 
+            // groupBox4
+            // 
+            groupBox4.Controls.Add(textBox1);
+            groupBox4.Location = new Point(15, 124);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(402, 135);
+            groupBox4.TabIndex = 1;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "groupBox4";
+            // 
+            // textBox1
+            // 
+            textBox1.Enabled = false;
+            textBox1.Location = new Point(6, 25);
+            textBox1.Multiline = true;
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(390, 101);
+            textBox1.TabIndex = 4;
+            // 
             // AccountPage
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(panel1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(groupBox2);
             Controls.Add(groupBox3);
             Controls.Add(groupBox1);
             Name = "AccountPage";
@@ -201,6 +260,11 @@
             groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            panel1.ResumeLayout(false);
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -220,5 +284,10 @@
         private Button exit3;
         private Button cancelBtn;
         private TextBox accountNameTextBOx;
+        private Panel panel1;
+        private GroupBox groupBox5;
+        private TextBox textBox2;
+        private GroupBox groupBox4;
+        private TextBox textBox1;
     }
 }
