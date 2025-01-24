@@ -44,7 +44,7 @@
             hotelTotalCostTextBox = new TextBox();
             hotelNameTextBox = new TextBox();
             groupBox2 = new GroupBox();
-            panel1 = new Panel();
+            scrollablePanel = new Panel();
             groupBox4 = new GroupBox();
             textBox6 = new TextBox();
             pictureBox3 = new PictureBox();
@@ -64,7 +64,7 @@
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBox2.SuspendLayout();
-            panel1.SuspendLayout();
+            scrollablePanel.SuspendLayout();
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             groupBox3.SuspendLayout();
@@ -226,16 +226,16 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "groupBox2";
             // 
-            // panel1
+            // scrollablePanel
             // 
-            panel1.AutoScroll = true;
-            panel1.Controls.Add(groupBox4);
-            panel1.Controls.Add(groupBox3);
-            panel1.Controls.Add(groupBox2);
-            panel1.Location = new Point(95, 159);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(952, 506);
-            panel1.TabIndex = 14;
+            scrollablePanel.AutoScroll = true;
+            scrollablePanel.Controls.Add(groupBox4);
+            scrollablePanel.Controls.Add(groupBox3);
+            scrollablePanel.Controls.Add(groupBox2);
+            scrollablePanel.Location = new Point(95, 159);
+            scrollablePanel.Name = "scrollablePanel";
+            scrollablePanel.Size = new Size(952, 506);
+            scrollablePanel.TabIndex = 14;
             // 
             // groupBox4
             // 
@@ -414,16 +414,17 @@
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1092, 677);
-            Controls.Add(panel1);
+            Controls.Add(scrollablePanel);
             Controls.Add(groupBox1);
             Name = "MainPage";
             Text = "MainPage";
+            Load += MainPage_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            panel1.ResumeLayout(false);
+            scrollablePanel.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
@@ -450,7 +451,7 @@
         private TextBox hotelTotalCostTextBox;
         private TextBox hotelNameTextBox;
         private GroupBox groupBox2;
-        private Panel panel1;
+        private Panel scrollablePanel;
         private GroupBox groupBox4;
         private TextBox textBox6;
         private PictureBox pictureBox3;

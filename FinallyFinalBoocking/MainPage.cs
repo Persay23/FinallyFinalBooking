@@ -16,6 +16,7 @@ namespace FinallyFinalBoocking
     {
         private List<Room> _rooms = new List<Room>();
 
+
         public MainPage()
         {
             InitializeComponent();
@@ -26,11 +27,6 @@ namespace FinallyFinalBoocking
             // this shold open new window with personal data
         }
 
-        private void showRoomsBtn_Click(object sender, EventArgs e)
-        {
-            
-
-        }
 
         private void openbtn_Click(object sender, EventArgs e)
         {
@@ -62,27 +58,29 @@ namespace FinallyFinalBoocking
 
             foreach (var line in lines)
             {
-                    var split = line.Split(";");
+                var split = line.Split(";");
 
-                    var hotelId = int.Parse(split[0]);
-                    var hotelName = split[1];
-                    var hotelLocation = split[2];
-                    var hotelDateAvb = DateTime.Parse(split[3]);
-                    var hotelAmount = int.Parse(split[4]);
-                    var hotelTotalCost = int.Parse(split[5]);
+                var hotelId = int.Parse(split[0]);
+                var hotelName = split[1];
+                var hotelLocation = split[2];
+                var hotelDateAvb = split[3];
+                var hotelAmount = int.Parse(split[4]);
+                var hotelTotalCost = int.Parse(split[5]);
 
-                    var room = new Room(hotelId, hotelName, hotelName, hotelDateAvb, hotelAmount, hotelTotalCost);
-                    _rooms.Add(room);
+                var room = new Room(hotelId, hotelName, hotelName, hotelDateAvb, hotelAmount, hotelTotalCost);
+                _rooms.Add(room);
 
-                    hotelNameTextBox.Text = String.Join(Environment.NewLine, hotelName);
-                    hotelLocationTextBox.Text = String.Join(Environment.NewLine, hotelLocation);
-                    hotelDateAvbTextBox.Text = String.Join(Environment.NewLine, hotelDateAvb);
-                    hotelAmountOfRoomsTextBox.Text = String.Join(Environment.NewLine, hotelAmount);
-                    hotelTotalCostTextBox.Text = String.Join(Environment.NewLine, hotelTotalCost);
+                hotelNameTextBox.Text = String.Join(Environment.NewLine, hotelName);
+                hotelLocationTextBox.Text = String.Join(Environment.NewLine, hotelLocation);
+                hotelDateAvbTextBox.Text = String.Join(Environment.NewLine, hotelDateAvb);
+                hotelAmountOfRoomsTextBox.Text = String.Join(Environment.NewLine, hotelAmount);
+                hotelTotalCostTextBox.Text = String.Join(Environment.NewLine, hotelTotalCost);
 
             }
+
+            hotelsScrollMenu(_rooms);
         }
-            
+
 
 
         private void Exitbtn2_Click(object sender, EventArgs e)
@@ -100,11 +98,7 @@ namespace FinallyFinalBoocking
             //this should work as a filter
         }
 
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-            // here must be at least 5 hotels/rooms
-            // and also somehow make scroll menu like on a page
-        }
+
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
@@ -131,6 +125,88 @@ namespace FinallyFinalBoocking
             var newPropertyPage = new PropertysPage();
             newPropertyPage.Show();
             this.Hide();
+        }
+
+        private void hotelsScrollMenu(List<Room> rooms)
+        {
+            scrollablePanel.Controls.Clear();
+
+            int groupBoxHeight = 150;
+            int spacing = 10;
+            int currentY = 10;
+
+            foreach (var room in rooms)
+            {
+
+                GroupBox groupBox = new GroupBox
+                {
+                    Text = room.HotelName,
+                    AutoSize = true,
+                    Location = new Point((scrollablePanel.Width - 500) / 2, currentY),
+                };
+
+                Label locationLabel = new Label
+                {
+                    Text = $"Location: {room.HotelLocation}",
+                    Location = new Point(10, 20),
+                    AutoSize = true
+                };
+
+                Label datesLabel = new Label
+                {
+                    Text = $"Available Dates: {room.HotelDateAvb}",
+                    Location = new Point(10, 40),
+                    AutoSize = true
+                };
+
+                Label roomsLabel = new Label
+                {
+                    Text = $"Rooms: {room.HotelAmountOfRooms}",
+                    Location = new Point(10, 60),
+                    AutoSize = true
+                };
+
+                Label priceLabel = new Label
+                {
+                    Text = $"Price: {room.HotelCostForNight} USD/night",
+                    Location = new Point(10, 80),
+                    AutoSize = true
+                };
+                // this button should open the property page
+                //Button button = new Button
+                //{
+                //    Text = "Show",
+                //    Location = new Point(10, groupBox.Height - 40),
+                //    AutoSize = true,
+                //};
+
+                //PictureBox pictureBox = new PictureBox
+                //{
+                //    Size = new Size(200, 200),
+                //    Location = new Point(10, 10),
+                //    BorderStyle = BorderStyle.Fixed3D
+                //};
+
+                //pictureBox.ImageLocation = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+
+                groupBox.Controls.Add(locationLabel);
+                groupBox.Controls.Add(datesLabel);
+                groupBox.Controls.Add(roomsLabel);
+                groupBox.Controls.Add(priceLabel);
+                //groupBox.Controls.Add(button);
+                //groupBox.Controls.Add(pictureBox);
+
+                scrollablePanel.Controls.Add(groupBox);
+
+                currentY += groupBoxHeight + spacing;
+
+            }
+        }
+
+        private void MainPage_Load(object sender, EventArgs e)
+        {
+            
+            
         }
     }
 }

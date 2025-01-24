@@ -11,12 +11,12 @@ namespace FinallyFinalBoocking
         private int _hotelId;
         private string _hotelName;
         private string _location;
-        private DateTime _dateAvb;
+        private string _dateAvb;
         private int _amountOfRooms;
         private int _costForNight;
         
 
-        public Room(int hotelId, string hotelName, string hotelLocation, DateTime hotelDateAvb, 
+        public Room(int hotelId, string hotelName, string hotelLocation, string hotelDateAvb, 
             int hotelAmountOfRooms, int hotelCostForNight)
         {
             _hotelName = hotelName;
@@ -25,7 +25,12 @@ namespace FinallyFinalBoocking
             _amountOfRooms = hotelAmountOfRooms;
             _costForNight = hotelCostForNight;
             _hotelId = hotelId;
-
         }
+        public int HotelId => _hotelId;
+        public string HotelName => _hotelName;
+        public string HotelLocation => _location;
+        public string HotelDateAvb => _dateAvb;
+        public int HotelAmountOfRooms => _amountOfRooms;
+        public int HotelCostForNight => _costForNight;
     }
 }

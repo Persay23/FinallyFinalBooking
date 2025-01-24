@@ -165,7 +165,7 @@
             Controls.Add(descriptionPoloniaTextBox);
             Controls.Add(personalpictureBox);
             Name = "PropertysPage";
-            Text = "Form2";
+            Text = "Property";
             ((System.ComponentModel.ISupportInitialize)personalpictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
