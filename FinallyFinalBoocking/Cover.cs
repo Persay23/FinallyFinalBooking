@@ -1,3 +1,5 @@
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+
 namespace FinallyFinalBoocking
 {
     public partial class Cover : Form
@@ -22,19 +24,18 @@ namespace FinallyFinalBoocking
             {
                 MessageBox.Show("Invalid username or password.", "Login Failed");
             }
+            validation(usernameInput, passwordInput);
         }
 
         private bool validation(string username, string password)
         {
-            if (!File.Exists("\"C:\\Users\\Orest\\source\\repos\\" +
-                "FinallyFinalBoocking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt\""))
+            if (!File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt"))
             {
                 MessageBox.Show("User data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-            var lines = File.ReadAllLines("\"C:\\Users\\Orest\\source\\repos\\" +
-                "FinallyFinalBoocking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt\"");
+            var lines = File.ReadAllLines(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt");
 
             foreach (string line in lines)
             {
@@ -50,6 +51,7 @@ namespace FinallyFinalBoocking
             }
 
             return false;
+            // validation work only for user_1
         }
 
         private void singInbtn_Click(object sender, EventArgs e)
@@ -63,11 +65,6 @@ namespace FinallyFinalBoocking
         }
 
         private void PasswordInputTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
         {
 
         }
