@@ -70,11 +70,11 @@ namespace FinallyFinalBoocking
                 var room = new Room(hotelId, hotelName, hotelName, hotelDateAvb, hotelAmount, hotelTotalCost);
                 _rooms.Add(room);
 
-                hotelNameTextBox.Text = String.Join(Environment.NewLine, hotelName);
-                hotelLocationTextBox.Text = String.Join(Environment.NewLine, hotelLocation);
-                hotelDateAvbTextBox.Text = String.Join(Environment.NewLine, hotelDateAvb);
-                hotelAmountOfRoomsTextBox.Text = String.Join(Environment.NewLine, hotelAmount);
-                hotelTotalCostTextBox.Text = String.Join(Environment.NewLine, hotelTotalCost);
+                //hotelNameTextBox.Text = String.Join(Environment.NewLine, hotelName);
+                //hotelLocationTextBox.Text = String.Join(Environment.NewLine, hotelLocation);
+                //hotelDateAvbTextBox.Text = String.Join(Environment.NewLine, hotelDateAvb);
+                //hotelAmountOfRoomsTextBox.Text = String.Join(Environment.NewLine, hotelAmount);
+                //hotelTotalCostTextBox.Text = String.Join(Environment.NewLine, hotelTotalCost);
 
             }
 
@@ -99,19 +99,14 @@ namespace FinallyFinalBoocking
         }
 
 
-
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
-        {
-        }
-
         private void PictureBox_Load(object sender, EventArgs e)
         {
             string logoPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
 
             if (File.Exists(logoPath))
             {
-                pictureBox1.Image = Image.FromFile(logoPath);
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                //pictureBox1.Image = Image.FromFile(logoPath);
+                //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             }
             else
             {
@@ -120,12 +115,12 @@ namespace FinallyFinalBoocking
 
         }
 
-        private void showRoomsBtn_Click_1(object sender, EventArgs e)
-        {
-            var newPropertyPage = new PropertysPage();
-            newPropertyPage.Show();
-            this.Hide();
-        }
+        //private void showRoomsBtn_Click_1(object sender, EventArgs e)
+        //{
+        //    var newPropertyPage = new PropertysPage();
+        //    newPropertyPage.Show();
+        //    this.Hide();
+        //}
 
         private void hotelsScrollMenu(List<Room> rooms)
         {
@@ -172,29 +167,33 @@ namespace FinallyFinalBoocking
                     Location = new Point(10, 80),
                     AutoSize = true
                 };
-                // this button should open the property page
-                //Button button = new Button
-                //{
-                //    Text = "Show",
-                //    Location = new Point(10, groupBox.Height - 40),
-                //    AutoSize = true,
-                //};
 
-                //PictureBox pictureBox = new PictureBox
-                //{
-                //    Size = new Size(200, 200),
-                //    Location = new Point(10, 10),
-                //    BorderStyle = BorderStyle.Fixed3D
-                //};
+                Button button = new Button
+                {
+                    Text = "Show",
+                    Location = new Point(10, 100),
+                    AutoSize = true,
+                    Tag = room
+                };
+                button.Click += ShowPropertyPage;
 
-                //pictureBox.ImageLocation = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+
+                PictureBox pictureBox = new PictureBox
+                {
+                    Size = new Size(200, 150),
+                    Location = new Point(10, 20),
+                    BorderStyle = BorderStyle.Fixed3D,
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+
+                pictureBox.ImageLocation = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
 
                 groupBox.Controls.Add(locationLabel);
                 groupBox.Controls.Add(datesLabel);
                 groupBox.Controls.Add(roomsLabel);
                 groupBox.Controls.Add(priceLabel);
-                //groupBox.Controls.Add(button);
-                //groupBox.Controls.Add(pictureBox);
+                groupBox.Controls.Add(button);
+                groupBox.Controls.Add(pictureBox);
 
                 scrollablePanel.Controls.Add(groupBox);
 
@@ -203,9 +202,30 @@ namespace FinallyFinalBoocking
             }
         }
 
+       
+        private void ShowPropertyPage(object sender, EventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            if (clickedButton.Tag is Room selectedRoom)
+            {
+                SetSelectedRoom(selectedRoom);
+
+                var newPropertyPage = new PropertysPage(selectedRoom);
+                newPropertyPage.Show();
+                this.Hide();
+            }
+        }
+
+
+        public Room SelectedRoom { get; private set; }
+
+        public void SetSelectedRoom(Room room)
+        {
+            SelectedRoom = room;
+        }
+
         private void MainPage_Load(object sender, EventArgs e)
         {
-            
             
         }
     }
