@@ -16,10 +16,13 @@ namespace FinallyFinalBoocking
 {
     public partial class PropertysPage : Form
     {
-        public PropertysPage()
+        public PropertysPage(Room selectedRoom)
         {
             InitializeComponent();
+            _selectedRoom = selectedRoom;
         }
+
+        private Room _selectedRoom;
 
         private void descriptionTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -34,7 +37,7 @@ namespace FinallyFinalBoocking
         }
         private void reload2_Click(object sender, EventArgs e)
         {
-            string filePath = @"C:\Users\Orest\source\repos\FinallyFinalBoocking - Copy\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+            string filePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
 
             if (!File.Exists(filePath))
             {
@@ -66,8 +69,8 @@ namespace FinallyFinalBoocking
 
         private void buyBtn_Click(object sender, EventArgs e)
         {
-            var newAccountPage = new AccountPage();
-            newAccountPage.Show();
+            var accountPage = new AccountPage(this);
+            accountPage.Show();
             this.Hide();
 
             // it also has to hide this advertisment from main page

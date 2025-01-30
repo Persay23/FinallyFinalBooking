@@ -38,7 +38,7 @@
             // 
             // singInbtn
             // 
-            singInbtn.Location = new Point(457, 373);
+            singInbtn.Location = new Point(121, 264);
             singInbtn.Name = "singInbtn";
             singInbtn.Size = new Size(102, 29);
             singInbtn.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // logInbtn
             // 
-            logInbtn.Location = new Point(457, 324);
+            logInbtn.Location = new Point(121, 215);
             logInbtn.Name = "logInbtn";
             logInbtn.Size = new Size(102, 29);
             logInbtn.TabIndex = 1;
@@ -58,7 +58,7 @@
             // 
             // UsernameInputTextBox
             // 
-            UsernameInputTextBox.Location = new Point(348, 186);
+            UsernameInputTextBox.Location = new Point(12, 77);
             UsernameInputTextBox.Name = "UsernameInputTextBox";
             UsernameInputTextBox.PlaceholderText = "User name";
             UsernameInputTextBox.Size = new Size(321, 29);
@@ -68,7 +68,7 @@
             // 
             // PasswordInputTextBox
             // 
-            PasswordInputTextBox.Location = new Point(348, 255);
+            PasswordInputTextBox.Location = new Point(12, 146);
             PasswordInputTextBox.Name = "PasswordInputTextBox";
             PasswordInputTextBox.PasswordChar = '*';
             PasswordInputTextBox.PlaceholderText = "Password";
@@ -80,7 +80,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(460, 120);
+            label1.Location = new Point(124, 11);
             label1.Name = "label1";
             label1.Size = new Size(96, 21);
             label1.TabIndex = 4;
@@ -88,7 +88,7 @@
             // 
             // exitbtn
             // 
-            exitbtn.Location = new Point(457, 420);
+            exitbtn.Location = new Point(121, 311);
             exitbtn.Name = "exitbtn";
             exitbtn.Size = new Size(102, 31);
             exitbtn.TabIndex = 5;
@@ -100,7 +100,7 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1020, 566);
+            ClientSize = new Size(349, 369);
             Controls.Add(exitbtn);
             Controls.Add(label1);
             Controls.Add(PasswordInputTextBox);

@@ -32,8 +32,6 @@
             accountNameTextBOx = new TextBox();
             bookingCounterTextBox = new TextBox();
             accountPasswordTextBox = new TextBox();
-            groupBox2 = new GroupBox();
-            theBookedOneTextBox = new TextBox();
             groupBox3 = new GroupBox();
             exit3 = new Button();
             cancelBtn = new Button();
@@ -41,8 +39,8 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
+            panel1 = new Panel();
             groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
             SuspendLayout();
             // 
@@ -90,27 +88,6 @@
             accountPasswordTextBox.Size = new Size(128, 31);
             accountPasswordTextBox.TabIndex = 4;
             accountPasswordTextBox.TextChanged += accountPasswordTextBox_TextChanged;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(theBookedOneTextBox);
-            groupBox2.Location = new Point(200, 56);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(402, 135);
-            groupBox2.TabIndex = 0;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
-            // 
-            // theBookedOneTextBox
-            // 
-            theBookedOneTextBox.Enabled = false;
-            theBookedOneTextBox.Location = new Point(6, 28);
-            theBookedOneTextBox.Multiline = true;
-            theBookedOneTextBox.Name = "theBookedOneTextBox";
-            theBookedOneTextBox.ReadOnly = true;
-            theBookedOneTextBox.Size = new Size(390, 101);
-            theBookedOneTextBox.TabIndex = 4;
-            theBookedOneTextBox.TextChanged += theBookedOneTextBox_TextChanged;
             // 
             // groupBox3
             // 
@@ -182,23 +159,30 @@
             label3.TabIndex = 4;
             label3.Text = "label3";
             // 
+            // panel1
+            // 
+            panel1.AutoScroll = true;
+            panel1.Location = new Point(158, 56);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(484, 382);
+            panel1.TabIndex = 7;
+            panel1.Paint += panel1_Paint;
+            // 
             // AccountPage
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(panel1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(groupBox2);
             Controls.Add(groupBox3);
             Controls.Add(groupBox1);
             Name = "AccountPage";
             Text = "AccountPage";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ResumeLayout(false);
@@ -208,8 +192,6 @@
         #endregion
 
         private GroupBox groupBox1;
-        private GroupBox groupBox2;
-        private TextBox theBookedOneTextBox;
         private GroupBox groupBox3;
         private TextBox statusTextBox;
         private TextBox bookingCounterTextBox;
@@ -220,5 +202,6 @@
         private Button exit3;
         private Button cancelBtn;
         private TextBox accountNameTextBOx;
+        private Panel panel1;
     }
 }

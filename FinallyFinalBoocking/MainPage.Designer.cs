@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainPage));
             searchTextBox = new TextBox();
             accountInfo = new Button();
             comboBoxFilter = new ComboBox();
@@ -36,16 +35,8 @@
             Exitbtn2 = new Button();
             openbtn = new Button();
             openFileDialog1 = new OpenFileDialog();
-            vScrollBar1 = new VScrollBar();
-            pictureBox1 = new PictureBox();
-            showRoomsBtn = new Button();
-            hotelAmountOfRoomsTextBox = new TextBox();
-            hotelLocationTextBox = new TextBox();
-            hotelDateAvbTextBox = new TextBox();
-            hotelTotalCostTextBox = new TextBox();
-            hotelNameTextBox = new TextBox();
+            scrollablePanel = new Panel();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // searchTextBox
@@ -84,7 +75,7 @@
             groupBox1.Controls.Add(accountInfo);
             groupBox1.Controls.Add(comboBoxFilter);
             groupBox1.Controls.Add(searchTextBox);
-            groupBox1.Location = new Point(327, 46);
+            groupBox1.Location = new Point(13, 16);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(1062, 135);
             groupBox1.TabIndex = 3;
@@ -115,105 +106,27 @@
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
-            // vScrollBar1
+            // scrollablePanel
             // 
-            vScrollBar1.Location = new Point(327, 255);
-            vScrollBar1.Name = "vScrollBar1";
-            vScrollBar1.Size = new Size(1062, 425);
-            vScrollBar1.TabIndex = 5;
-            vScrollBar1.Scroll += vScrollBar1_Scroll;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.InitialImage = (Image)resources.GetObject("pictureBox1.InitialImage");
-            pictureBox1.Location = new Point(907, 421);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(368, 169);
-            pictureBox1.TabIndex = 11;
-            pictureBox1.TabStop = false;
-            // 
-            // showRoomsBtn
-            // 
-            showRoomsBtn.Location = new Point(445, 561);
-            showRoomsBtn.Name = "showRoomsBtn";
-            showRoomsBtn.Size = new Size(368, 29);
-            showRoomsBtn.TabIndex = 12;
-            showRoomsBtn.Text = "Show";
-            showRoomsBtn.UseVisualStyleBackColor = true;
-            // 
-            // hotelAmountOfRoomsTextBox
-            // 
-            hotelAmountOfRoomsTextBox.BackColor = SystemColors.HighlightText;
-            hotelAmountOfRoomsTextBox.Enabled = false;
-            hotelAmountOfRoomsTextBox.Location = new Point(445, 491);
-            hotelAmountOfRoomsTextBox.Name = "hotelAmountOfRoomsTextBox";
-            hotelAmountOfRoomsTextBox.PlaceholderText = "hotelAmountOfRooms";
-            hotelAmountOfRoomsTextBox.Size = new Size(368, 29);
-            hotelAmountOfRoomsTextBox.TabIndex = 10;
-            // 
-            // hotelLocationTextBox
-            // 
-            hotelLocationTextBox.BackColor = SystemColors.HighlightText;
-            hotelLocationTextBox.Enabled = false;
-            hotelLocationTextBox.Location = new Point(445, 421);
-            hotelLocationTextBox.Name = "hotelLocationTextBox";
-            hotelLocationTextBox.PlaceholderText = "hotelLocation";
-            hotelLocationTextBox.Size = new Size(368, 29);
-            hotelLocationTextBox.TabIndex = 9;
-            // 
-            // hotelDateAvbTextBox
-            // 
-            hotelDateAvbTextBox.BackColor = SystemColors.HighlightText;
-            hotelDateAvbTextBox.Enabled = false;
-            hotelDateAvbTextBox.Location = new Point(445, 456);
-            hotelDateAvbTextBox.Name = "hotelDateAvbTextBox";
-            hotelDateAvbTextBox.PlaceholderText = "hotelDateAvb";
-            hotelDateAvbTextBox.Size = new Size(368, 29);
-            hotelDateAvbTextBox.TabIndex = 8;
-            // 
-            // hotelTotalCostTextBox
-            // 
-            hotelTotalCostTextBox.BackColor = SystemColors.HighlightText;
-            hotelTotalCostTextBox.Enabled = false;
-            hotelTotalCostTextBox.Location = new Point(445, 526);
-            hotelTotalCostTextBox.Name = "hotelTotalCostTextBox";
-            hotelTotalCostTextBox.PlaceholderText = "hotelTotalCost";
-            hotelTotalCostTextBox.Size = new Size(368, 29);
-            hotelTotalCostTextBox.TabIndex = 7;
-            // 
-            // hotelNameTextBox
-            // 
-            hotelNameTextBox.BackColor = SystemColors.HighlightText;
-            hotelNameTextBox.Enabled = false;
-            hotelNameTextBox.Location = new Point(445, 348);
-            hotelNameTextBox.Multiline = true;
-            hotelNameTextBox.Name = "hotelNameTextBox";
-            hotelNameTextBox.PlaceholderText = "hotelName";
-            hotelNameTextBox.Size = new Size(830, 51);
-            hotelNameTextBox.TabIndex = 6;
-            hotelNameTextBox.TextAlign = HorizontalAlignment.Center;
+            scrollablePanel.AutoScroll = true;
+            scrollablePanel.Location = new Point(95, 159);
+            scrollablePanel.Name = "scrollablePanel";
+            scrollablePanel.Size = new Size(952, 506);
+            scrollablePanel.TabIndex = 14;
             // 
             // MainPage
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1672, 803);
-            Controls.Add(pictureBox1);
-            Controls.Add(showRoomsBtn);
-            Controls.Add(hotelAmountOfRoomsTextBox);
-            Controls.Add(hotelLocationTextBox);
-            Controls.Add(hotelDateAvbTextBox);
-            Controls.Add(hotelTotalCostTextBox);
-            Controls.Add(hotelNameTextBox);
-            Controls.Add(vScrollBar1);
+            ClientSize = new Size(1092, 677);
+            Controls.Add(scrollablePanel);
             Controls.Add(groupBox1);
             Name = "MainPage";
             Text = "MainPage";
+            Load += MainPage_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -225,13 +138,6 @@
         private OpenFileDialog openFileDialog1;
         private Button openbtn;
         private Button Exitbtn2;
-        private VScrollBar vScrollBar1;
-        private PictureBox pictureBox1;
-        private Button showRoomsBtn;
-        private TextBox hotelAmountOfRoomsTextBox;
-        private TextBox hotelLocationTextBox;
-        private TextBox hotelDateAvbTextBox;
-        private TextBox hotelTotalCostTextBox;
-        private TextBox hotelNameTextBox;
+        private Panel scrollablePanel;
     }
 }
