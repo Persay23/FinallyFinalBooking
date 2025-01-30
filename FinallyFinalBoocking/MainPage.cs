@@ -70,11 +70,13 @@ namespace FinallyFinalBoocking
                 var room = new Room(hotelId, hotelName, hotelName, hotelDateAvb, hotelAmount, hotelTotalCost);
                 _rooms.Add(room);
 
-                //hotelNameTextBox.Text = String.Join(Environment.NewLine, hotelName);
-                //hotelLocationTextBox.Text = String.Join(Environment.NewLine, hotelLocation);
-                //hotelDateAvbTextBox.Text = String.Join(Environment.NewLine, hotelDateAvb);
-                //hotelAmountOfRoomsTextBox.Text = String.Join(Environment.NewLine, hotelAmount);
-                //hotelTotalCostTextBox.Text = String.Join(Environment.NewLine, hotelTotalCost);
+
+                hotelNameTextBox.Text = hotelName;
+                hotelLocationTextBox.Text = hotelLocation;
+                hotelDateAvbTextBox.Text = hotelDateAvb;
+                hotelAmountOfRoomsTextBox.Text = hotelAmount.ToString();  
+                hotelTotalCostTextBox.Text = hotelTotalCost.ToString();
+
 
             }
 

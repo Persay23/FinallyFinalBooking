@@ -14,7 +14,6 @@ namespace FinallyFinalBoocking
         private string _dateAvb;
         private int _amountOfRooms;
         private int _costForNight;
-        
 
         public Room(int hotelId, string hotelName, string hotelLocation, string hotelDateAvb, 
             int hotelAmountOfRooms, int hotelCostForNight)

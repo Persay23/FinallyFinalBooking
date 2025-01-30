@@ -39,11 +39,25 @@ namespace FinallyFinalBoocking
 
         private bool ValidationIsTrue(string username, string password)
         {
-            if (!File.Exists(userFilePath))
+
+            string path1 = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
+            string path2 = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
+            string selectedPath = null;
+
+            if (File.Exists(path1))
+            {
+                selectedPath = path1;
+            }
+            else if (File.Exists(path2))
+            {
+                selectedPath = path2;
+            }
+            else
             {
                 MessageBox.Show("User data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+
 
             var lines = File.ReadAllLines(userFilePath);
             return lines.Any(line =>

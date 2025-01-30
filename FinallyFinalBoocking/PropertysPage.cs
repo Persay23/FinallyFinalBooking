@@ -78,7 +78,10 @@ namespace FinallyFinalBoocking
 
         private void contactBtn_Click(object sender, EventArgs e)
         {
-            // This should pop up new window with social media info
+            MessageBox.Show("Phone: +1 (123) 456-7890\nEmail: contact@hotel.com\nInstagram: @hotel_official",
+                            "Hotel Contact Information",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -88,7 +91,7 @@ namespace FinallyFinalBoocking
 
         private void submitBtn_Click(object sender, EventArgs e)
         {
-            //submiting the comment
+            //submiting the reviwe
         }
 
         private void personalpictureBox_Click(object sender, EventArgs e)
