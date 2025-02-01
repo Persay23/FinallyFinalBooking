@@ -14,8 +14,8 @@ namespace FinallyFinalBoocking
 
         public RoomsInfo(int hotelId, string hotelName, string hotelLocation, string hotelDateAvb,
                          int hotelAmountOfRooms, int hotelCostForNight,
-                         string hotelPhone, string hotelEmail, string hotelInst)
-            : base(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmountOfRooms, hotelCostForNight)
+                         string hotelPhone, string hotelEmail, string hotelInst, bool reservedOrNot)
+            : base(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmountOfRooms, hotelCostForNight, reservedOrNot)
         {
             _hotelPhone = hotelPhone;
             _hotelEmail = hotelEmail;
