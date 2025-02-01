@@ -16,10 +16,13 @@ namespace FinallyFinalBoocking
 {
     public partial class PropertysPage : Form
     {
-        public PropertysPage()
+        public PropertysPage(Room selectedRoom)
         {
             InitializeComponent();
+            _selectedRoom = selectedRoom;
         }
+
+        private Room _selectedRoom;
 
         private void descriptionTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -34,10 +37,20 @@ namespace FinallyFinalBoocking
         }
         private void reload2_Click(object sender, EventArgs e)
         {
-            string filePath = @"C:\Users\Orest\source\repos\FinallyFinalBoocking - Copy\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+            string filePath = null;
 
-            if (!File.Exists(filePath))
+
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
             {
+                filePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+            }
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
+            {
+                filePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+            }
+            else
+            { 
+            
                 MessageBox.Show("The file does not exist!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -66,16 +79,64 @@ namespace FinallyFinalBoocking
 
         private void buyBtn_Click(object sender, EventArgs e)
         {
-            var newAccountPage = new AccountPage();
-            newAccountPage.Show();
-            this.Hide();
+            string roomsFilePath = null;
 
-            // it also has to hide this advertisment from main page
+
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
+            {
+                roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            }
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
+            {
+                roomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            }
+            else
+            {
+                MessageBox.Show("Hotel rooms list file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string userRoomsFilePath = null;
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt"))
+            {
+                userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+            }
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt"))
+            {
+                userRoomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+            }
+            else
+            {
+                MessageBox.Show("User reservation data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var allRooms = File.ReadAllLines(roomsFilePath).ToList();
+            string selectedRoomText = $"{_selectedRoom.HotelId};{_selectedRoom.HotelName};{_selectedRoom.HotelLocation};{_selectedRoom.HotelDateAvb};{_selectedRoom.HotelAmountOfRooms};{_selectedRoom.HotelCostForNight}";
+
+
+            allRooms.RemoveAll(line => line.Trim() == selectedRoomText);
+
+            File.WriteAllLines(roomsFilePath, allRooms);
+            File.AppendAllText(userRoomsFilePath, selectedRoomText + Environment.NewLine);
+
+            MessageBox.Show("Room successfully booked!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            var accountPage = new AccountPage(this);
+            accountPage.Show();
+            this.Hide();
         }
+
+
+
+
 
         private void contactBtn_Click(object sender, EventArgs e)
         {
-            // This should pop up new window with social media info
+            MessageBox.Show("Phone: +1 (123) 456-7890\nEmail: contact@hotel.com\nInstagram: @hotel_official",
+                            "Hotel Contact Information",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -85,7 +146,7 @@ namespace FinallyFinalBoocking
 
         private void submitBtn_Click(object sender, EventArgs e)
         {
-            //submiting the comment
+            //submiting the reviwe
         }
 
         private void personalpictureBox_Click(object sender, EventArgs e)

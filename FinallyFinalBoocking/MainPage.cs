@@ -24,30 +24,27 @@ namespace FinallyFinalBoocking
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // this shold open new window with personal data
+            var accountPage = new AccountPage(this);
+            accountPage.Show();
+            this.Hide();
         }
 
 
         private void openbtn_Click(object sender, EventArgs e)
         {
 
-
-            string path1 = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
-            string path2 = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
             string selectedPath = null;
-
-
-            if (File.Exists(path1))
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
             {
-                selectedPath = path1;
+                selectedPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
             }
-            else if (File.Exists(path2))
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
             {
-                selectedPath = path2;
+                selectedPath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
             }
             else
             {
-                MessageBox.Show("User data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Hotel rooms list not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -67,15 +64,8 @@ namespace FinallyFinalBoocking
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
 
-                var room = new Room(hotelId, hotelName, hotelName, hotelDateAvb, hotelAmount, hotelTotalCost);
+                var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost);
                 _rooms.Add(room);
-
-                hotelNameTextBox.Text = String.Join(Environment.NewLine, hotelName);
-                hotelLocationTextBox.Text = String.Join(Environment.NewLine, hotelLocation);
-                hotelDateAvbTextBox.Text = String.Join(Environment.NewLine, hotelDateAvb);
-                hotelAmountOfRoomsTextBox.Text = String.Join(Environment.NewLine, hotelAmount);
-                hotelTotalCostTextBox.Text = String.Join(Environment.NewLine, hotelTotalCost);
-
             }
 
             hotelsScrollMenu(_rooms);
@@ -99,33 +89,7 @@ namespace FinallyFinalBoocking
         }
 
 
-
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
-        {
-        }
-
-        private void PictureBox_Load(object sender, EventArgs e)
-        {
-            string logoPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
-
-            if (File.Exists(logoPath))
-            {
-                pictureBox1.Image = Image.FromFile(logoPath);
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
-            else
-            {
-                MessageBox.Show("Image file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
-        private void showRoomsBtn_Click_1(object sender, EventArgs e)
-        {
-            var newPropertyPage = new PropertysPage();
-            newPropertyPage.Show();
-            this.Hide();
-        }
+        
 
         private void hotelsScrollMenu(List<Room> rooms)
         {
@@ -172,29 +136,47 @@ namespace FinallyFinalBoocking
                     Location = new Point(10, 80),
                     AutoSize = true
                 };
-                // this button should open the property page
-                //Button button = new Button
-                //{
-                //    Text = "Show",
-                //    Location = new Point(10, groupBox.Height - 40),
-                //    AutoSize = true,
-                //};
 
-                //PictureBox pictureBox = new PictureBox
-                //{
-                //    Size = new Size(200, 200),
-                //    Location = new Point(10, 10),
-                //    BorderStyle = BorderStyle.Fixed3D
-                //};
+                Button button = new Button
+                {
+                    Text = "Show",
+                    Location = new Point(10, 100),
+                    AutoSize = true,
+                    Tag = room
+                };
+                button.Click += ShowPropertyPage;
 
-                //pictureBox.ImageLocation = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+
+                PictureBox pictureBox = new PictureBox
+                {
+                    Size = new Size(200, 110),
+                    Location = new Point(320, 20),
+                    BorderStyle = BorderStyle.Fixed3D,
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+
+                string imagePath = null;
+                if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png"))
+                {
+                    imagePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+                }
+                else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png"))
+                {
+                    imagePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+                }
+                else
+                {
+                    MessageBox.Show("Hotel photo not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                pictureBox.ImageLocation = imagePath;
 
                 groupBox.Controls.Add(locationLabel);
                 groupBox.Controls.Add(datesLabel);
                 groupBox.Controls.Add(roomsLabel);
                 groupBox.Controls.Add(priceLabel);
-                //groupBox.Controls.Add(button);
-                //groupBox.Controls.Add(pictureBox);
+                groupBox.Controls.Add(button);
+                groupBox.Controls.Add(pictureBox);
 
                 scrollablePanel.Controls.Add(groupBox);
 
@@ -203,10 +185,38 @@ namespace FinallyFinalBoocking
             }
         }
 
+       
+        private void ShowPropertyPage(object sender, EventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            if (clickedButton.Tag is Room selectedRoom)
+            {
+                SetSelectedRoom(selectedRoom);
+
+                var newPropertyPage = new PropertysPage(selectedRoom);
+                newPropertyPage.Show();
+                this.Hide();
+            }
+        }
+
+
+        public Room SelectedRoom { get; private set; }
+
+        public void SetSelectedRoom(Room room)
+        {
+            SelectedRoom = room;
+        }
+
         private void MainPage_Load(object sender, EventArgs e)
         {
-            
-            
+            RefreshHotelList();
+        }
+
+        public void RefreshHotelList()
+        {
+            _rooms.Clear();
+            scrollablePanel.Controls.Clear();
+            openbtn_Click(null, null); // Reloads hotel data
         }
     }
 }
