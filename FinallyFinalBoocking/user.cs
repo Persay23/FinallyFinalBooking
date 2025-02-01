@@ -34,20 +34,3 @@ namespace FinallyFinalBoocking
         public List<Room> BookedRooms => _bookedRooms;
     }
 }
-
-//public void AddBooking(Room room)
-//{
-//    _bookedRooms.Add(room);
-//}
-
-//// Method to remove a room from the booked rooms list
-//public bool RemoveBooking(Room room)
-//{
-//    return _bookedRooms.Remove(room);
-//}
-
-//// Override ToString to display user details easily
-//public override string ToString()
-//{
-//    return $"{_userName} ({_email})";
-//}
