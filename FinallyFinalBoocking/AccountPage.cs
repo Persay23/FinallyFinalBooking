@@ -14,11 +14,8 @@ namespace FinallyFinalBoocking
     [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
     public partial class AccountPage : Form
     {
-        //public AccountPage()
-        //{
-        //    InitializeComponent();
-        //}
 
+        private List<Room> _rooms = new List<Room>();
         private void accountNameTextBOx_TextChanged(object sender, EventArgs e)
         {
             // This will display your username and you can cange it
@@ -32,7 +29,6 @@ namespace FinallyFinalBoocking
             _propertyPage = propertyPage;
         }
 
-        //public static Room SelectedRoom { get; set; }
 
         private void exit3_Click(object sender, EventArgs e)
         {
@@ -77,80 +73,100 @@ namespace FinallyFinalBoocking
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            //    panel1.Controls.Clear();
 
-            //    int groupBoxHeight = 150;
-            //    int spacing = 10;
-            //    int currentY = 10;
+            int groupBoxHeight = 150;
+            int spacing = 10;
+            int currentY = 10;
 
-            //    //var reservedRooms = new List<int>();
+            var userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
 
-            //    foreach (var room in reservedRooms) // add to room one more bool reserved or not, which will change with button
-            //    {
+            var ReservedHotelLines = File.ReadLines(userRoomsFilePath);
 
-            //        GroupBox groupBox = new GroupBox
-            //        {
-            //            Text = room.HotelName,
-            //            AutoSize = true,
-            //            Location = new Point((panel1.Width - 500) / 2, currentY),
-            //        };
+            foreach (var line in ReservedHotelLines)
+            {
+                var split = line.Split(";");
 
-            //        Label locationLabel = new Label
-            //        {
-            //            Text = $"Location: {room.HotelLocation}",
-            //            Location = new Point(10, 20),
-            //            AutoSize = true
-            //        };
+                var hotelId = int.Parse(split[0]);
+                var hotelName = split[1];
+                var hotelLocation = split[2];
+                var hotelDateAvb = split[3];
+                var hotelAmount = int.Parse(split[4]);
+                var hotelTotalCost = int.Parse(split[5]);
 
-            //        Label datesLabel = new Label
-            //        {
-            //            Text = $"Available Dates: {room.HotelDateAvb}",
-            //            Location = new Point(10, 40),
-            //            AutoSize = true
-            //        };
+                var reservedroom = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost);
+                _rooms.Add(reservedroom);
+            }
 
-            //        Label roomsLabel = new Label
-            //        {
-            //            Text = $"Rooms: {room.HotelAmountOfRooms}",
-            //            Location = new Point(10, 60),
-            //            AutoSize = true
-            //        };
 
-            //        Label priceLabel = new Label
-            //        {
-            //            Text = $"Price: {room.HotelCostForNight} USD/night",
-            //            Location = new Point(10, 80),
-            //            AutoSize = true
-            //        };
-            //        // this button should open the property page
-            //        //Button button = new Button
-            //        //{
-            //        //    Text = "Show",
-            //        //    Location = new Point(10, groupBox.Height - 40),
-            //        //    AutoSize = true,
-            //        //};
+            foreach (var reservedroom in _rooms)
+            {
 
-            //        //PictureBox pictureBox = new PictureBox
-            //        //{
-            //        //    Size = new Size(200, 200),
-            //        //    Location = new Point(10, 10),
-            //        //    BorderStyle = BorderStyle.Fixed3D
-            //        //};
+                GroupBox groupBox = new GroupBox
+                {
+                    Text = reservedroom.HotelName,
+                    AutoSize = true,
+                    Location = new Point((panel1.Width - 500) / 2, currentY),
+                };
 
-            //        //pictureBox.ImageLocation = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+                Label locationLabel = new Label
+                {
+                    Text = $"Location: {reservedroom.HotelLocation}",
+                    Location = new Point(10, 20),
+                    AutoSize = true
+                };
 
-            //        groupBox.Controls.Add(locationLabel);
-            //        groupBox.Controls.Add(datesLabel);
-            //        groupBox.Controls.Add(roomsLabel);
-            //        groupBox.Controls.Add(priceLabel);
-            //        //groupBox.Controls.Add(button);
-            //        //groupBox.Controls.Add(pictureBox);
+                Label datesLabel = new Label
+                {
+                    Text = $"Available Dates: {reservedroom.HotelDateAvb}",
+                    Location = new Point(10, 40),
+                    AutoSize = true
+                };
 
-            //        panel1.Controls.Add(groupBox);
+                Label roomsLabel = new Label
+                {
+                    Text = $"Rooms: {reservedroom.HotelAmountOfRooms}",
+                    Location = new Point(10, 60),
+                    AutoSize = true
+                };
 
-            //        currentY += groupBoxHeight + spacing;
+                Label priceLabel = new Label
+                {
+                    Text = $"Price: {reservedroom.HotelCostForNight} USD/night",
+                    Location = new Point(10, 80),
+                    AutoSize = true
+                };
 
-            //    }
+                Button button = new Button
+                {
+                    Text = "Show",
+                    Location = new Point(10, 100),
+                    AutoSize = true,
+                    Tag = reservedroom
+                };
+                //button.Click += MessageBox.Show("");
+
+
+                PictureBox pictureBox = new PictureBox
+                {
+                    Size = new Size(200, 110),
+                    Location = new Point(320, 20),
+                    BorderStyle = BorderStyle.Fixed3D,
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+
+                pictureBox.ImageLocation = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+
+                groupBox.Controls.Add(locationLabel);
+                groupBox.Controls.Add(datesLabel);
+                groupBox.Controls.Add(roomsLabel);
+                groupBox.Controls.Add(priceLabel);
+                groupBox.Controls.Add(button);
+                groupBox.Controls.Add(pictureBox);
+
+                panel1.Controls.Add(groupBox);
+
+                currentY += groupBoxHeight + spacing;
+            }
         }
     }
 }

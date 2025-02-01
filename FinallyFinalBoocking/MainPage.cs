@@ -24,7 +24,10 @@ namespace FinallyFinalBoocking
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // this shold open new window with personal data
+            MessageBox.Show("account",
+                            "Info",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
         }
 
 
@@ -67,17 +70,8 @@ namespace FinallyFinalBoocking
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
 
-                var room = new Room(hotelId, hotelName, hotelName, hotelDateAvb, hotelAmount, hotelTotalCost);
+                var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost);
                 _rooms.Add(room);
-
-
-                hotelNameTextBox.Text = hotelName;
-                hotelLocationTextBox.Text = hotelLocation;
-                hotelDateAvbTextBox.Text = hotelDateAvb;
-                hotelAmountOfRoomsTextBox.Text = hotelAmount.ToString();  
-                hotelTotalCostTextBox.Text = hotelTotalCost.ToString();
-
-
             }
 
             hotelsScrollMenu(_rooms);
@@ -101,28 +95,7 @@ namespace FinallyFinalBoocking
         }
 
 
-        private void PictureBox_Load(object sender, EventArgs e)
-        {
-            string logoPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
-
-            if (File.Exists(logoPath))
-            {
-                //pictureBox1.Image = Image.FromFile(logoPath);
-                //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
-            else
-            {
-                MessageBox.Show("Image file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
-        //private void showRoomsBtn_Click_1(object sender, EventArgs e)
-        //{
-        //    var newPropertyPage = new PropertysPage();
-        //    newPropertyPage.Show();
-        //    this.Hide();
-        //}
+        
 
         private void hotelsScrollMenu(List<Room> rooms)
         {
@@ -182,8 +155,8 @@ namespace FinallyFinalBoocking
 
                 PictureBox pictureBox = new PictureBox
                 {
-                    Size = new Size(200, 150),
-                    Location = new Point(10, 20),
+                    Size = new Size(200, 110),
+                    Location = new Point(320, 20),
                     BorderStyle = BorderStyle.Fixed3D,
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
@@ -228,7 +201,14 @@ namespace FinallyFinalBoocking
 
         private void MainPage_Load(object sender, EventArgs e)
         {
-            
+            RefreshHotelList();
+        }
+
+        public void RefreshHotelList()
+        {
+            _rooms.Clear();
+            scrollablePanel.Controls.Clear();
+            openbtn_Click(null, null); // Reloads hotel data
         }
     }
 }

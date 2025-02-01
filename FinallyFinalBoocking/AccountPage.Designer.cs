@@ -94,7 +94,7 @@
             groupBox3.Controls.Add(exit3);
             groupBox3.Controls.Add(cancelBtn);
             groupBox3.Controls.Add(statusTextBox);
-            groupBox3.Location = new Point(648, 56);
+            groupBox3.Location = new Point(726, 56);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(140, 135);
             groupBox3.TabIndex = 1;
@@ -144,7 +144,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(377, 16);
+            label2.Location = new Point(413, 16);
             label2.Name = "label2";
             label2.Size = new Size(52, 21);
             label2.TabIndex = 3;
@@ -153,7 +153,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(694, 16);
+            label3.Location = new Point(772, 16);
             label3.Name = "label3";
             label3.Size = new Size(52, 21);
             label3.TabIndex = 4;
@@ -164,7 +164,7 @@
             panel1.AutoScroll = true;
             panel1.Location = new Point(158, 56);
             panel1.Name = "panel1";
-            panel1.Size = new Size(484, 382);
+            panel1.Size = new Size(562, 382);
             panel1.TabIndex = 7;
             panel1.Paint += panel1_Paint;
             // 
@@ -172,7 +172,7 @@
             // 
             AutoScaleDimensions = new SizeF(9F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(886, 528);
             Controls.Add(panel1);
             Controls.Add(label3);
             Controls.Add(label2);

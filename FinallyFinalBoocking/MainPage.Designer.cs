@@ -41,16 +41,16 @@
             // 
             // searchTextBox
             // 
-            searchTextBox.Location = new Point(171, 54);
+            searchTextBox.Location = new Point(164, 55);
             searchTextBox.Name = "searchTextBox";
             searchTextBox.PlaceholderText = "Search";
-            searchTextBox.Size = new Size(673, 29);
+            searchTextBox.Size = new Size(566, 29);
             searchTextBox.TabIndex = 0;
             searchTextBox.TextChanged += searchTextBox_TextChanged;
             // 
             // accountInfo
             // 
-            accountInfo.Location = new Point(41, 19);
+            accountInfo.Location = new Point(34, 20);
             accountInfo.Name = "accountInfo";
             accountInfo.Size = new Size(102, 29);
             accountInfo.TabIndex = 1;
@@ -61,7 +61,7 @@
             // comboBoxFilter
             // 
             comboBoxFilter.FormattingEnabled = true;
-            comboBoxFilter.Location = new Point(870, 54);
+            comboBoxFilter.Location = new Point(754, 55);
             comboBoxFilter.Name = "comboBoxFilter";
             comboBoxFilter.Size = new Size(164, 29);
             comboBoxFilter.TabIndex = 2;
@@ -75,16 +75,16 @@
             groupBox1.Controls.Add(accountInfo);
             groupBox1.Controls.Add(comboBoxFilter);
             groupBox1.Controls.Add(searchTextBox);
-            groupBox1.Location = new Point(13, 16);
+            groupBox1.Location = new Point(95, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1062, 135);
+            groupBox1.Size = new Size(952, 135);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Account details";
             // 
             // Exitbtn2
             // 
-            Exitbtn2.Location = new Point(41, 91);
+            Exitbtn2.Location = new Point(34, 92);
             Exitbtn2.Name = "Exitbtn2";
             Exitbtn2.Size = new Size(102, 31);
             Exitbtn2.TabIndex = 6;
@@ -94,7 +94,7 @@
             // 
             // openbtn
             // 
-            openbtn.Location = new Point(41, 54);
+            openbtn.Location = new Point(34, 55);
             openbtn.Name = "openbtn";
             openbtn.Size = new Size(102, 31);
             openbtn.TabIndex = 5;
@@ -109,9 +109,9 @@
             // scrollablePanel
             // 
             scrollablePanel.AutoScroll = true;
-            scrollablePanel.Location = new Point(95, 159);
+            scrollablePanel.Location = new Point(95, 188);
             scrollablePanel.Name = "scrollablePanel";
-            scrollablePanel.Size = new Size(952, 506);
+            scrollablePanel.Size = new Size(952, 477);
             scrollablePanel.TabIndex = 14;
             // 
             // MainPage

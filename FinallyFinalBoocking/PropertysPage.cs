@@ -69,12 +69,28 @@ namespace FinallyFinalBoocking
 
         private void buyBtn_Click(object sender, EventArgs e)
         {
+            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            string userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+
+            var allRooms = File.ReadAllLines(roomsFilePath).ToList();
+            string selectedRoomText = $"{_selectedRoom.HotelId};{_selectedRoom.HotelName};{_selectedRoom.HotelLocation};{_selectedRoom.HotelDateAvb};{_selectedRoom.HotelAmountOfRooms};{_selectedRoom.HotelCostForNight}";
+
+
+            allRooms.RemoveAll(line => line.Trim() == selectedRoomText);
+
+            File.WriteAllLines(roomsFilePath, allRooms);
+            File.AppendAllText(userRoomsFilePath, selectedRoomText + Environment.NewLine);
+
+            MessageBox.Show("Room successfully booked!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             var accountPage = new AccountPage(this);
             accountPage.Show();
             this.Hide();
-
-            // it also has to hide this advertisment from main page
         }
+
+
+
+
 
         private void contactBtn_Click(object sender, EventArgs e)
         {
