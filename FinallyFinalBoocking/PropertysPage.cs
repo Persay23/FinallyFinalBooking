@@ -38,43 +38,43 @@ namespace FinallyFinalBoocking
         }
         private void reload2_Click(object sender, EventArgs e)
         {
-            string filePath = null;
-
+            string reviewsFilePath = null;
 
             if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
             {
-                filePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+                reviewsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
             }
             else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
             {
-                filePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+                reviewsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
             }
             else
-            { 
-            
-                MessageBox.Show("The file does not exist!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                MessageBox.Show("Reviews file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             try
             {
-                var lines = File.ReadAllLines(filePath);
-
+                var lines = File.ReadAllLines(reviewsFilePath);
                 descriptionPoloniaTextBox.Clear();
 
                 foreach (string line in lines)
                 {
-                    var splitTheDescription = line.Split('/');
+                    var parts = line.Split(';');
 
-                    var description = splitTheDescription[0];
+                    int reviewHotelId = int.Parse(parts[0].Trim());
 
-                    descriptionPoloniaTextBox.AppendText(description + Environment.NewLine);
+                    if (reviewHotelId == _selectedRoom.HotelId)
+                    {
+                        string reviewText = parts[1].Trim();
+                        descriptionPoloniaTextBox.AppendText(reviewText + Environment.NewLine + Environment.NewLine);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while reading the file: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred while reading the reviews file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -197,12 +197,54 @@ namespace FinallyFinalBoocking
 
         private void submitBtn_Click(object sender, EventArgs e)
         {
-            //submiting the reviwe
+            string reviewText = textBox2.Text.Trim();
+
+            if (string.IsNullOrEmpty(reviewText))
+            {
+                MessageBox.Show("Please enter a review before submitting.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string reviewsFilePath = null;
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
+            {
+                reviewsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+            }
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
+            {
+                reviewsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+            }
+            else
+            {
+                MessageBox.Show("Review file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            string reviewEntry = $"{_selectedRoom.HotelId}; {reviewText}";
+
+            try
+            {
+                using (StreamWriter writer = new StreamWriter(reviewsFilePath, true))
+                {
+                    writer.WriteLine(reviewEntry);
+                }
+                MessageBox.Show("Review submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                textBox2.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error while submitting review: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         private void personalpictureBox_Click(object sender, EventArgs e)
         {
             // a picture of the hotel
+        }
+
+        private void PropertysPage_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

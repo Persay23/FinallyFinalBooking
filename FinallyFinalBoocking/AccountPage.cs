@@ -185,6 +185,7 @@ namespace FinallyFinalBoocking
 
         private void LoadUserData()
         {
+
             string currentUserFilePath = GetCurrentUserInfoFilePath();
 
             if (File.Exists(currentUserFilePath))
