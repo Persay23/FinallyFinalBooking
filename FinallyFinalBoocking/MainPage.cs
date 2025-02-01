@@ -15,14 +15,23 @@ namespace FinallyFinalBoocking
     public partial class MainPage : Form
     {
         private List<Room> _rooms = new List<Room>();
-
-
+        private bool roomsLoaded = false;
+        public Room SelectedRoom { get; private set; }
         public MainPage()
         {
             InitializeComponent();
             DisplayAvailableRooms();
         }
-
+        private void MainPage_Load(object sender, EventArgs e)
+        {
+            RefreshHotelList();
+            comboBoxFilter.Items.Add("By Name ↓");
+            comboBoxFilter.Items.Add("By Name ↑");
+            comboBoxFilter.Items.Add("By Price ↓");
+            comboBoxFilter.Items.Add("By Price ↑");
+            comboBoxFilter.Items.Add("By Rooms ↓");
+            comboBoxFilter.Items.Add("By Rooms ↑");
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             var accountPage = new AccountPage(this);
@@ -33,6 +42,7 @@ namespace FinallyFinalBoocking
 
         private void openbtn_Click(object sender, EventArgs e)
         {
+            if (roomsLoaded) return;
 
             string selectedPath = null;
             if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
@@ -49,10 +59,7 @@ namespace FinallyFinalBoocking
                 return;
             }
 
-
             var lines = File.ReadLines(selectedPath);
-
-
 
             foreach (var line in lines)
             {
@@ -69,6 +76,7 @@ namespace FinallyFinalBoocking
                 _rooms.Add(room);
             }
 
+            roomsLoaded = true;
             hotelsScrollMenu(_rooms);
         }
 
@@ -81,12 +89,50 @@ namespace FinallyFinalBoocking
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            // this should work as a search
+            string searchTerm = searchTextBox.Text.ToLower();
+
+            var filteredRooms = _rooms.Where(room => room.HotelName.ToLower().Contains(searchTerm)).ToList();
+
+            hotelsScrollMenu(filteredRooms);
         }
 
         private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //this should work as a filter
+            string selectedFilter = comboBoxFilter.SelectedItem.ToString();
+
+            List<Room> sortedRooms = new List<Room>();
+
+            switch (selectedFilter)
+            {
+                case "By Name ↓":
+                    sortedRooms = _rooms.OrderBy(room => room.HotelName).ToList();
+                    break;
+
+                case "By Name ↑":
+                    sortedRooms = _rooms.OrderByDescending(room => room.HotelName).ToList();
+                    break;
+
+                case "By Price ↓":
+                    sortedRooms = _rooms.OrderBy(room => room.HotelCostForNight).ToList();
+                    break;
+
+                case "By Price ↑":
+                    sortedRooms = _rooms.OrderByDescending(room => room.HotelCostForNight).ToList();
+                    break;
+
+                case "By Rooms ↓":
+                    sortedRooms = _rooms.OrderBy(room => room.HotelAmountOfRooms).ToList();
+                    break;
+
+                case "By Rooms ↑":
+                    sortedRooms = _rooms.OrderByDescending(room => room.HotelAmountOfRooms).ToList();
+                    break;
+
+                default:
+                    sortedRooms = _rooms;
+                    break;
+            }
+            hotelsScrollMenu(sortedRooms);
         }
 
         public void DisplayAvailableRooms()
@@ -203,7 +249,6 @@ namespace FinallyFinalBoocking
             }
         }
 
-
         private void ShowPropertyPage(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
@@ -217,17 +262,9 @@ namespace FinallyFinalBoocking
             }
         }
 
-
-        public Room SelectedRoom { get; private set; }
-
         public void SetSelectedRoom(Room room)
         {
             SelectedRoom = room;
-        }
-
-        private void MainPage_Load(object sender, EventArgs e)
-        {
-            RefreshHotelList();
         }
 
         public void RefreshHotelList()

@@ -69,16 +69,6 @@ namespace FinallyFinalBoocking
             // This will display your password and you can cange it
         }
 
-        private void theBookedOneTextBox_TextChanged(object sender, EventArgs e)
-        {
-            // Here will be short info about your bookings, the same as on the main page
-        }
-
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
-        {
-
-        }
-
         private string GetDebuggerDisplay()
         {
             return ToString();
@@ -171,14 +161,22 @@ namespace FinallyFinalBoocking
                     AutoSize = true
                 };
 
-                Button button = new Button
+                Button canclebutton = new Button
                 {
-                    Text = "Show",
+                    Text = "Cancle",
                     Location = new Point(10, 100),
                     AutoSize = true,
                     Tag = reservedroom
                 };
 
+                Button showpropbutton = new Button
+                {
+                    Text = "Open Hotel",
+                    Location = new Point(100, 100),
+                    AutoSize = true,
+                    Tag = reservedroom
+                };
+                showpropbutton.Click += ShowPropertyPage;
 
                 PictureBox pictureBox = new PictureBox
                 {
@@ -208,7 +206,8 @@ namespace FinallyFinalBoocking
                 groupBox.Controls.Add(datesLabel);
                 groupBox.Controls.Add(roomsLabel);
                 groupBox.Controls.Add(priceLabel);
-                groupBox.Controls.Add(button);
+                groupBox.Controls.Add(canclebutton);
+                groupBox.Controls.Add(showpropbutton);
                 groupBox.Controls.Add(pictureBox);
 
                 panel1.Controls.Add(groupBox);
@@ -219,15 +218,23 @@ namespace FinallyFinalBoocking
 
         private void LoadUserData()
         {
-            string userRoomsFilePath = @"C:\Path\To\UserData.txt"; // Adjust the path
+            string userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
 
             if (File.Exists(userRoomsFilePath))
             {
-                var userData = File.ReadAllLines(userRoomsFilePath);
-                accountNameTextBOx.Text = userData[0];  // Username
-                accountPasswordTextBox.Text = userData[1]; // Password
-                statusTextBox.Text = userData[2];  // Status
-                bookingCounterTextBox.Text = userData[3]; // Bookings count
+                var userData = File.ReadAllText(userRoomsFilePath).Split(';');
+
+                if (userData.Length >= 4)
+                {
+                    accountNameTextBOx.Text = userData[0].Trim();
+                    accountPasswordTextBox.Text = userData[1].Trim();
+                    statusTextBox.Text = userData[2].Trim();
+                    bookingCounterTextBox.Text = userData[3].Trim();
+                }
+                else
+                {
+                    MessageBox.Show("User data file is incomplete. Please check the file contents.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
@@ -236,7 +243,27 @@ namespace FinallyFinalBoocking
         }
         private void DisplayBookings()
         {
-            panel1_Paint(null, null); // Reuse your existing code to load booking data
+            panel1_Paint(null, null);
+        }
+
+        private void ShowPropertyPage(object sender, EventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            if (clickedButton.Tag is Room selectedRoom)
+            {
+                SetSelectedRoom(selectedRoom);
+
+                var newPropertyPage = new PropertysPage(selectedRoom);
+                newPropertyPage.Show();
+                this.Hide();
+            }
+        }
+
+        public Room SelectedRoom { get; private set; }
+
+        public void SetSelectedRoom(Room room)
+        {
+            SelectedRoom = room;
         }
     }
 }
