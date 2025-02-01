@@ -97,13 +97,13 @@ namespace FinallyFinalBoocking
             }
 
             string userRoomsFilePath = null;
-            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt"))
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt"))
             {
-                userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+                userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt";
             }
-            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt"))
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt"))
             {
-                userRoomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+                userRoomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt";
             }
             else
             {
@@ -146,10 +146,47 @@ namespace FinallyFinalBoocking
 
         private void contactBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Phone: +1 (123) 456-7890\nEmail: contact@hotel.com\nInstagram: @hotel_official",
-                            "Hotel Contact Information",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+            string contactFilePath = null;
+
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\ContactInfo_rooms.txt"))
+            {
+                contactFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\ContactInfo_rooms.txt";
+            }
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\ContactInfo_rooms.txt"))
+            {
+                contactFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\ContactInfo_rooms.txt";
+            }
+            else
+            {
+                MessageBox.Show("Contact information file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string hotelPhone = string.Empty;
+            string hotelEmail = string.Empty;
+            string hotelInst = string.Empty;
+
+            foreach (var line in File.ReadLines(contactFilePath))
+            {
+                var parts = line.Split(';');
+
+                int currentHotelId = int.Parse(parts[0].Trim());
+
+                if (currentHotelId == _selectedRoom.HotelId)
+                {
+                    hotelPhone = parts[1].Trim();
+                    hotelEmail = parts[2].Trim();
+                    hotelInst = parts[3].Trim();
+                    break;
+                }
+            }
+
+            MessageBox.Show(
+                $"Phone: {hotelPhone}\nEmail: {hotelEmail}\nInstagram: {hotelInst}",
+                "Hotel Contact Information",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

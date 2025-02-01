@@ -137,7 +137,7 @@ namespace FinallyFinalBoocking
 
         public void DisplayAvailableRooms()
         {
-            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            string roomsFilePath = GetFilePath() /*@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"*/;
 
             var allRooms = File.ReadAllLines(roomsFilePath).ToList();
             var availableRooms = allRooms
@@ -155,6 +155,23 @@ namespace FinallyFinalBoocking
                 .ToList();
 
             hotelsScrollMenu(availableRooms);
+        }
+        private string GetFilePath()
+        {
+            string[] possiblePaths = {
+                @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt",
+                @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"
+            };
+
+            foreach (var path in possiblePaths)
+            {
+                if (File.Exists(path))
+                {
+                    return path;
+                }
+            }
+
+            return null;
         }
 
 
