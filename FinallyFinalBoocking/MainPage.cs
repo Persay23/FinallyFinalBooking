@@ -137,7 +137,7 @@ namespace FinallyFinalBoocking
 
         public void DisplayAvailableRooms()
         {
-            string roomsFilePath = GetFilePath() /*@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"*/;
+            string roomsFilePath = GetFilePath();
 
             var allRooms = File.ReadAllLines(roomsFilePath).ToList();
             var availableRooms = allRooms

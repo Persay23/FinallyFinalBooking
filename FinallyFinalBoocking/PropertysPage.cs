@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FinallyFinalBoocking.DumbStaffDB.users;
 using Microsoft.VisualBasic.ApplicationServices;
 using static System.Windows.Forms.LinkLabel;
 
@@ -97,13 +98,13 @@ namespace FinallyFinalBoocking
             }
 
             string userRoomsFilePath = null;
-            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt"))
+            if (File.Exists($@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt"))
             {
-                userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt";
+                userRoomsFilePath = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt";
             }
-            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt"))
+            else if (File.Exists($@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt"))
             {
-                userRoomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt";
+                userRoomsFilePath = $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt";
             }
             else
             {
