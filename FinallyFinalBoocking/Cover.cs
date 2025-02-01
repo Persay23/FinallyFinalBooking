@@ -9,6 +9,7 @@ namespace FinallyFinalBoocking
     {
         private readonly string userFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
 
+            
         public Cover()
         {
             InitializeComponent();
@@ -39,27 +40,24 @@ namespace FinallyFinalBoocking
 
         private bool ValidationIsTrue(string username, string password)
         {
-
-            string path1 = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
-            string path2 = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
             string selectedPath = null;
 
-            if (File.Exists(path1))
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt"))
             {
-                selectedPath = path1;
+                selectedPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
             }
-            else if (File.Exists(path2))
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt"))
             {
-                selectedPath = path2;
+                selectedPath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
             }
             else
             {
-                MessageBox.Show("User data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("User log in data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
 
-            var lines = File.ReadAllLines(userFilePath);
+            var lines = File.ReadAllLines(selectedPath);
             return lines.Any(line =>
             {
                 var parts = line.Split(';');

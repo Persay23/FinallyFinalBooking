@@ -24,33 +24,27 @@ namespace FinallyFinalBoocking
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("account",
-                            "Info",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+            var accountPage = new AccountPage(this);
+            accountPage.Show();
+            this.Hide();
         }
 
 
         private void openbtn_Click(object sender, EventArgs e)
         {
 
-
-            string path1 = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
-            string path2 = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
             string selectedPath = null;
-
-
-            if (File.Exists(path1))
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
             {
-                selectedPath = path1;
+                selectedPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
             }
-            else if (File.Exists(path2))
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
             {
-                selectedPath = path2;
+                selectedPath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
             }
             else
             {
-                MessageBox.Show("User data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Hotel rooms list not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -161,7 +155,21 @@ namespace FinallyFinalBoocking
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
 
-                pictureBox.ImageLocation = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+                string imagePath = null;
+                if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png"))
+                {
+                    imagePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+                }
+                else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png"))
+                {
+                    imagePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+                }
+                else
+                {
+                    MessageBox.Show("Hotel photo not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                pictureBox.ImageLocation = imagePath;
 
                 groupBox.Controls.Add(locationLabel);
                 groupBox.Controls.Add(datesLabel);

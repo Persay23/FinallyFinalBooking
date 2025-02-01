@@ -37,10 +37,20 @@ namespace FinallyFinalBoocking
         }
         private void reload2_Click(object sender, EventArgs e)
         {
-            string filePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+            string filePath = null;
 
-            if (!File.Exists(filePath))
+
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
             {
+                filePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+            }
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
+            {
+                filePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+            }
+            else
+            { 
+            
                 MessageBox.Show("The file does not exist!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -69,8 +79,37 @@ namespace FinallyFinalBoocking
 
         private void buyBtn_Click(object sender, EventArgs e)
         {
-            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
-            string userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+            string roomsFilePath = null;
+
+
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
+            {
+                roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            }
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
+            {
+                roomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            }
+            else
+            {
+                MessageBox.Show("Hotel rooms list file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string userRoomsFilePath = null;
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt"))
+            {
+                userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+            }
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt"))
+            {
+                userRoomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+            }
+            else
+            {
+                MessageBox.Show("User reservation data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             var allRooms = File.ReadAllLines(roomsFilePath).ToList();
             string selectedRoomText = $"{_selectedRoom.HotelId};{_selectedRoom.HotelName};{_selectedRoom.HotelLocation};{_selectedRoom.HotelDateAvb};{_selectedRoom.HotelAmountOfRooms};{_selectedRoom.HotelCostForNight}";

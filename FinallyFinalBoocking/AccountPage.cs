@@ -25,20 +25,36 @@ namespace FinallyFinalBoocking
 
         public AccountPage(PropertysPage propertyPage)
         {
-            InitializeComponent();
             _propertyPage = propertyPage;
+            InitializeComponent();
+        }
+
+        private MainPage _mainPage;
+
+        public AccountPage(MainPage mainPage)
+        {
+            _mainPage = mainPage;
+            InitializeComponent();
         }
 
 
         private void exit3_Click(object sender, EventArgs e)
         {
-            _propertyPage.Show();
+            if (_propertyPage != null)
+            {
+                _propertyPage.Show();
+            }
+            else
+            {
+                _mainPage.Show();
+            }
             this.Close();
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
-            //this should return the hotel to the main page
+            _mainPage.Show();
+            this.Close();
         }
 
         private void statusTextBox_TextChanged(object sender, EventArgs e)
@@ -58,7 +74,7 @@ namespace FinallyFinalBoocking
 
         private void theBookedOneTextBox_TextChanged(object sender, EventArgs e)
         {
-            // Here will be short info about your books, the same as on the main page
+            // Here will be short info about your bookings, the same as on the main page
         }
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
@@ -78,7 +94,22 @@ namespace FinallyFinalBoocking
             int spacing = 10;
             int currentY = 10;
 
-            var userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+            string userRoomsFilePath = null;
+            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt"))
+            {
+                userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+            }
+            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt"))
+            {
+                userRoomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt";
+            }
+            else
+            {
+                MessageBox.Show("User reservation data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            _rooms.Clear();
 
             var ReservedHotelLines = File.ReadLines(userRoomsFilePath);
 
@@ -100,6 +131,12 @@ namespace FinallyFinalBoocking
 
             foreach (var reservedroom in _rooms)
             {
+
+                var existingGroupBox = panel1.Controls.OfType<GroupBox>().FirstOrDefault(g => g.Text == reservedroom.HotelName);
+                if (existingGroupBox != null)
+                {
+                    continue; // Skip adding this room if it already exists
+                }
 
                 GroupBox groupBox = new GroupBox
                 {
@@ -143,7 +180,6 @@ namespace FinallyFinalBoocking
                     AutoSize = true,
                     Tag = reservedroom
                 };
-                //button.Click += MessageBox.Show("");
 
 
                 PictureBox pictureBox = new PictureBox
@@ -154,7 +190,21 @@ namespace FinallyFinalBoocking
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
 
-                pictureBox.ImageLocation = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+                string imagePath = null;
+                if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png"))
+                {
+                    imagePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+                }
+                else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png"))
+                {
+                    imagePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
+                }
+                else
+                {
+                    MessageBox.Show("Image file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                pictureBox.ImageLocation = imagePath;
 
                 groupBox.Controls.Add(locationLabel);
                 groupBox.Controls.Add(datesLabel);
