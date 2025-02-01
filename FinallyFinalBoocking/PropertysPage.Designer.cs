@@ -44,9 +44,9 @@
             // 
             // personalpictureBox
             // 
-            personalpictureBox.Location = new Point(12, 87);
+            personalpictureBox.Location = new Point(11, 83);
             personalpictureBox.Name = "personalpictureBox";
-            personalpictureBox.Size = new Size(926, 247);
+            personalpictureBox.Size = new Size(823, 235);
             personalpictureBox.TabIndex = 0;
             personalpictureBox.TabStop = false;
             personalpictureBox.Click += personalpictureBox_Click;
@@ -55,27 +55,27 @@
             // 
             descriptionPoloniaTextBox.BackColor = SystemColors.HighlightText;
             descriptionPoloniaTextBox.Enabled = false;
-            descriptionPoloniaTextBox.Location = new Point(12, 362);
+            descriptionPoloniaTextBox.Location = new Point(11, 345);
             descriptionPoloniaTextBox.Multiline = true;
             descriptionPoloniaTextBox.Name = "descriptionPoloniaTextBox";
-            descriptionPoloniaTextBox.Size = new Size(926, 160);
+            descriptionPoloniaTextBox.Size = new Size(824, 153);
             descriptionPoloniaTextBox.TabIndex = 1;
             descriptionPoloniaTextBox.TextChanged += descriptionTextBox_TextChanged;
             // 
             // reserveBtn
             // 
-            reserveBtn.Location = new Point(76, 556);
+            reserveBtn.Location = new Point(68, 530);
             reserveBtn.Name = "reserveBtn";
-            reserveBtn.Size = new Size(163, 43);
+            reserveBtn.Size = new Size(145, 41);
             reserveBtn.TabIndex = 2;
             reserveBtn.Text = "Reserve";
             reserveBtn.UseVisualStyleBackColor = true;
             // 
             // contactBtn
             // 
-            contactBtn.Location = new Point(76, 624);
+            contactBtn.Location = new Point(68, 594);
             contactBtn.Name = "contactBtn";
-            contactBtn.Size = new Size(163, 43);
+            contactBtn.Size = new Size(145, 41);
             contactBtn.TabIndex = 3;
             contactBtn.Text = "Contact US";
             contactBtn.UseVisualStyleBackColor = true;
@@ -83,18 +83,18 @@
             // 
             // commentBtn
             // 
-            commentBtn.Location = new Point(710, 624);
+            commentBtn.Location = new Point(631, 594);
             commentBtn.Name = "commentBtn";
-            commentBtn.Size = new Size(163, 43);
+            commentBtn.Size = new Size(145, 41);
             commentBtn.TabIndex = 4;
             commentBtn.Text = "Leave a comment";
             commentBtn.UseVisualStyleBackColor = true;
             // 
             // buyBtn
             // 
-            buyBtn.Location = new Point(710, 556);
+            buyBtn.Location = new Point(631, 530);
             buyBtn.Name = "buyBtn";
-            buyBtn.Size = new Size(163, 43);
+            buyBtn.Size = new Size(145, 41);
             buyBtn.TabIndex = 5;
             buyBtn.Text = "Go to checkout";
             buyBtn.UseVisualStyleBackColor = true;
@@ -102,27 +102,27 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(76, 724);
+            textBox2.Location = new Point(68, 690);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(797, 114);
+            textBox2.Size = new Size(709, 109);
             textBox2.TabIndex = 6;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
             // hotelNameLabel
             // 
             hotelNameLabel.AutoSize = true;
-            hotelNameLabel.Location = new Point(411, 16);
+            hotelNameLabel.Location = new Point(365, 15);
             hotelNameLabel.Name = "hotelNameLabel";
-            hotelNameLabel.Size = new Size(135, 21);
+            hotelNameLabel.Size = new Size(130, 20);
             hotelNameLabel.TabIndex = 7;
             hotelNameLabel.Text = "Name of the hotel";
             // 
             // submitBtn
             // 
-            submitBtn.Location = new Point(411, 857);
+            submitBtn.Location = new Point(365, 816);
             submitBtn.Name = "submitBtn";
-            submitBtn.Size = new Size(135, 31);
+            submitBtn.Size = new Size(120, 30);
             submitBtn.TabIndex = 8;
             submitBtn.Text = "Submit";
             submitBtn.UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@
             // 
             // reload2
             // 
-            reload2.Location = new Point(104, 857);
+            reload2.Location = new Point(92, 816);
             reload2.Name = "reload2";
-            reload2.Size = new Size(135, 31);
+            reload2.Size = new Size(120, 30);
             reload2.TabIndex = 9;
             reload2.Text = "Reload";
             reload2.UseVisualStyleBackColor = true;
@@ -140,9 +140,9 @@
             // 
             // exit2
             // 
-            exit2.Location = new Point(738, 857);
+            exit2.Location = new Point(656, 816);
             exit2.Name = "exit2";
-            exit2.Size = new Size(135, 31);
+            exit2.Size = new Size(120, 30);
             exit2.TabIndex = 10;
             exit2.Text = "Exit";
             exit2.UseVisualStyleBackColor = true;
@@ -150,9 +150,9 @@
             // 
             // PropertysPage
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(953, 921);
+            ClientSize = new Size(847, 877);
             Controls.Add(exit2);
             Controls.Add(reload2);
             Controls.Add(submitBtn);
@@ -166,6 +166,7 @@
             Controls.Add(personalpictureBox);
             Name = "PropertysPage";
             Text = "Property";
+            Load += PropertysPage_Load;
             ((System.ComponentModel.ISupportInitialize)personalpictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();

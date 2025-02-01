@@ -218,7 +218,7 @@ namespace FinallyFinalBoocking
 
         private void LoadUserData()
         {
-            string userRoomsFilePath = GetFilePath() /*@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt"*/;
+            string userRoomsFilePath = GetFilePath();
 
             if (File.Exists(userRoomsFilePath))
             {
