@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            accountNameTextBOx = new TextBox();
-            bookingCounterTextBox = new TextBox();
-            accountPasswordTextBox = new TextBox();
+            textBox4 = new TextBox();
+            textBox3 = new TextBox();
+            textBox2 = new TextBox();
+            textBox1 = new TextBox();
             groupBox3 = new GroupBox();
             exit3 = new Button();
             cancelBtn = new Button();
-            statusTextBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -46,54 +46,61 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(accountNameTextBOx);
-            groupBox1.Controls.Add(bookingCounterTextBox);
-            groupBox1.Controls.Add(accountPasswordTextBox);
+            groupBox1.Controls.Add(textBox4);
+            groupBox1.Controls.Add(textBox3);
+            groupBox1.Controls.Add(textBox2);
+            groupBox1.Controls.Add(textBox1);
             groupBox1.Location = new Point(12, 56);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(140, 135);
+            groupBox1.Size = new Size(191, 175);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
             // 
-            // accountNameTextBOx
+            // textBox4
             // 
-            accountNameTextBOx.Enabled = false;
-            accountNameTextBOx.Location = new Point(6, 28);
-            accountNameTextBOx.Multiline = true;
-            accountNameTextBOx.Name = "accountNameTextBOx";
-            accountNameTextBOx.ReadOnly = true;
-            accountNameTextBOx.Size = new Size(128, 31);
-            accountNameTextBOx.TabIndex = 6;
-            accountNameTextBOx.TextChanged += accountNameTextBOx_TextChanged;
+            textBox4.Enabled = false;
+            textBox4.Location = new Point(6, 133);
+            textBox4.Name = "textBox4";
+            textBox4.ReadOnly = true;
+            textBox4.Size = new Size(179, 29);
+            textBox4.TabIndex = 3;
+            textBox4.TextChanged += textBox4_TextChanged;
             // 
-            // bookingCounterTextBox
+            // textBox3
             // 
-            bookingCounterTextBox.Enabled = false;
-            bookingCounterTextBox.Location = new Point(6, 98);
-            bookingCounterTextBox.Multiline = true;
-            bookingCounterTextBox.Name = "bookingCounterTextBox";
-            bookingCounterTextBox.ReadOnly = true;
-            bookingCounterTextBox.Size = new Size(128, 31);
-            bookingCounterTextBox.TabIndex = 5;
-            bookingCounterTextBox.TextChanged += bookingCounterTextBox_TextChanged;
+            textBox3.Enabled = false;
+            textBox3.Location = new Point(6, 98);
+            textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
+            textBox3.Size = new Size(179, 29);
+            textBox3.TabIndex = 2;
+            textBox3.TextChanged += textBox3_TextChanged;
             // 
-            // accountPasswordTextBox
+            // textBox2
             // 
-            accountPasswordTextBox.Enabled = false;
-            accountPasswordTextBox.Location = new Point(6, 65);
-            accountPasswordTextBox.Multiline = true;
-            accountPasswordTextBox.Name = "accountPasswordTextBox";
-            accountPasswordTextBox.ReadOnly = true;
-            accountPasswordTextBox.Size = new Size(128, 31);
-            accountPasswordTextBox.TabIndex = 4;
-            accountPasswordTextBox.TextChanged += accountPasswordTextBox_TextChanged;
+            textBox2.Enabled = false;
+            textBox2.Location = new Point(6, 63);
+            textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(179, 29);
+            textBox2.TabIndex = 1;
+            textBox2.TextChanged += textBox2_TextChanged;
+            // 
+            // textBox1
+            // 
+            textBox1.Enabled = false;
+            textBox1.Location = new Point(6, 28);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(179, 29);
+            textBox1.TabIndex = 0;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // groupBox3
             // 
             groupBox3.Controls.Add(exit3);
             groupBox3.Controls.Add(cancelBtn);
-            groupBox3.Controls.Add(statusTextBox);
             groupBox3.Location = new Point(857, 56);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(140, 135);
@@ -120,17 +127,6 @@
             cancelBtn.Text = "Cancel";
             cancelBtn.UseVisualStyleBackColor = true;
             cancelBtn.Click += cancelBtn_Click;
-            // 
-            // statusTextBox
-            // 
-            statusTextBox.Enabled = false;
-            statusTextBox.Location = new Point(6, 28);
-            statusTextBox.Multiline = true;
-            statusTextBox.Name = "statusTextBox";
-            statusTextBox.ReadOnly = true;
-            statusTextBox.Size = new Size(128, 31);
-            statusTextBox.TabIndex = 2;
-            statusTextBox.TextChanged += statusTextBox_TextChanged;
             // 
             // label1
             // 
@@ -162,9 +158,9 @@
             // panel1
             // 
             panel1.AutoScroll = true;
-            panel1.Location = new Point(158, 56);
+            panel1.Location = new Point(218, 56);
             panel1.Name = "panel1";
-            panel1.Size = new Size(693, 487);
+            panel1.Size = new Size(633, 487);
             panel1.TabIndex = 7;
             panel1.Paint += panel1_Paint;
             // 
@@ -181,10 +177,10 @@
             Controls.Add(groupBox1);
             Name = "AccountPage";
             Text = "AccountPage";
+            Load += AccountPage_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox3.ResumeLayout(false);
-            groupBox3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -193,15 +189,15 @@
 
         private GroupBox groupBox1;
         private GroupBox groupBox3;
-        private TextBox statusTextBox;
-        private TextBox bookingCounterTextBox;
-        private TextBox accountPasswordTextBox;
         private Label label1;
         private Label label2;
         private Label label3;
         private Button exit3;
         private Button cancelBtn;
-        private TextBox accountNameTextBOx;
         private Panel panel1;
+        private TextBox textBox4;
+        private TextBox textBox3;
+        private TextBox textBox2;
+        private TextBox textBox1;
     }
 }
