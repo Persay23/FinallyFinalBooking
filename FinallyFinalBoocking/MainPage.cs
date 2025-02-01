@@ -15,13 +15,23 @@ namespace FinallyFinalBoocking
     public partial class MainPage : Form
     {
         private List<Room> _rooms = new List<Room>();
-
-
+        private bool roomsLoaded = false;
+        public Room SelectedRoom { get; private set; }
         public MainPage()
         {
             InitializeComponent();
+            DisplayAvailableRooms();
         }
-
+        private void MainPage_Load(object sender, EventArgs e)
+        {
+            RefreshHotelList();
+            comboBoxFilter.Items.Add("By Name ↓");
+            comboBoxFilter.Items.Add("By Name ↑");
+            comboBoxFilter.Items.Add("By Price ↓");
+            comboBoxFilter.Items.Add("By Price ↑");
+            comboBoxFilter.Items.Add("By Rooms ↓");
+            comboBoxFilter.Items.Add("By Rooms ↑");
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             var accountPage = new AccountPage(this);
@@ -32,6 +42,7 @@ namespace FinallyFinalBoocking
 
         private void openbtn_Click(object sender, EventArgs e)
         {
+            if (roomsLoaded) return;
 
             string selectedPath = null;
             if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
@@ -48,10 +59,7 @@ namespace FinallyFinalBoocking
                 return;
             }
 
-
             var lines = File.ReadLines(selectedPath);
-
-
 
             foreach (var line in lines)
             {
@@ -63,11 +71,12 @@ namespace FinallyFinalBoocking
                 var hotelDateAvb = split[3];
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
-
-                var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost);
+                var reservedOrNot = bool.Parse(split[6]);
+                var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
                 _rooms.Add(room);
             }
 
+            roomsLoaded = true;
             hotelsScrollMenu(_rooms);
         }
 
@@ -80,16 +89,91 @@ namespace FinallyFinalBoocking
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
-            // this should work as a search
+            string searchTerm = searchTextBox.Text.ToLower();
+
+            var filteredRooms = _rooms.Where(room => room.HotelName.ToLower().Contains(searchTerm)).ToList();
+
+            hotelsScrollMenu(filteredRooms);
         }
 
         private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //this should work as a filter
+            string selectedFilter = comboBoxFilter.SelectedItem.ToString();
+
+            List<Room> sortedRooms = new List<Room>();
+
+            switch (selectedFilter)
+            {
+                case "By Name ↓":
+                    sortedRooms = _rooms.OrderBy(room => room.HotelName).ToList();
+                    break;
+
+                case "By Name ↑":
+                    sortedRooms = _rooms.OrderByDescending(room => room.HotelName).ToList();
+                    break;
+
+                case "By Price ↓":
+                    sortedRooms = _rooms.OrderBy(room => room.HotelCostForNight).ToList();
+                    break;
+
+                case "By Price ↑":
+                    sortedRooms = _rooms.OrderByDescending(room => room.HotelCostForNight).ToList();
+                    break;
+
+                case "By Rooms ↓":
+                    sortedRooms = _rooms.OrderBy(room => room.HotelAmountOfRooms).ToList();
+                    break;
+
+                case "By Rooms ↑":
+                    sortedRooms = _rooms.OrderByDescending(room => room.HotelAmountOfRooms).ToList();
+                    break;
+
+                default:
+                    sortedRooms = _rooms;
+                    break;
+            }
+            hotelsScrollMenu(sortedRooms);
         }
 
+        public void DisplayAvailableRooms()
+        {
+            string roomsFilePath = GetFilePath() /*@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"*/;
 
-        
+            var allRooms = File.ReadAllLines(roomsFilePath).ToList();
+            var availableRooms = allRooms
+                .Select(line => line.Split(';'))
+                .Select(parts => new Room(
+                    int.Parse(parts[0]),
+                    parts[1],
+                    parts[2],
+                    parts[3],
+                    int.Parse(parts[4]),
+                    int.Parse(parts[5]),
+                    bool.Parse(parts[6])
+                ))
+                .Where(room => !room.ReservedOrNot)
+                .ToList();
+
+            hotelsScrollMenu(availableRooms);
+        }
+        private string GetFilePath()
+        {
+            string[] possiblePaths = {
+                @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt",
+                @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"
+            };
+
+            foreach (var path in possiblePaths)
+            {
+                if (File.Exists(path))
+                {
+                    return path;
+                }
+            }
+
+            return null;
+        }
+
 
         private void hotelsScrollMenu(List<Room> rooms)
         {
@@ -101,7 +185,6 @@ namespace FinallyFinalBoocking
 
             foreach (var room in rooms)
             {
-
                 GroupBox groupBox = new GroupBox
                 {
                     Text = room.HotelName,
@@ -146,7 +229,6 @@ namespace FinallyFinalBoocking
                 };
                 button.Click += ShowPropertyPage;
 
-
                 PictureBox pictureBox = new PictureBox
                 {
                     Size = new Size(200, 110),
@@ -181,11 +263,9 @@ namespace FinallyFinalBoocking
                 scrollablePanel.Controls.Add(groupBox);
 
                 currentY += groupBoxHeight + spacing;
-
             }
         }
 
-       
         private void ShowPropertyPage(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
@@ -199,24 +279,16 @@ namespace FinallyFinalBoocking
             }
         }
 
-
-        public Room SelectedRoom { get; private set; }
-
         public void SetSelectedRoom(Room room)
         {
             SelectedRoom = room;
-        }
-
-        private void MainPage_Load(object sender, EventArgs e)
-        {
-            RefreshHotelList();
         }
 
         public void RefreshHotelList()
         {
             _rooms.Clear();
             scrollablePanel.Controls.Clear();
-            openbtn_Click(null, null); // Reloads hotel data
+            openbtn_Click(null, null);
         }
     }
 }

@@ -1,15 +1,16 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 
 namespace FinallyFinalBoocking
 {
     public partial class Cover : Form
     {
-        private readonly string userFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
+        private readonly string userFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
 
-            
         public Cover()
         {
             InitializeComponent();
@@ -40,29 +41,40 @@ namespace FinallyFinalBoocking
 
         private bool ValidationIsTrue(string username, string password)
         {
-            string selectedPath = null;
+            string selectedPath = GetFilePath();
 
-            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt"))
-            {
-                selectedPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
-            }
-            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt"))
-            {
-                selectedPath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
-            }
-            else
+            if (selectedPath == null)
             {
                 MessageBox.Show("User log in data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
-
             var lines = File.ReadAllLines(selectedPath);
+            string hashedPassword = HashPassword(password);
+
             return lines.Any(line =>
             {
                 var parts = line.Split(';');
-                return parts.Length == 2 && parts[0] == username && parts[1] == password;
+                return parts.Length == 2 && parts[0] == username && parts[1] == hashedPassword;
             });
+        }
+
+        private string GetFilePath()
+        {
+            string[] possiblePaths = {
+                @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt",
+                @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt"
+            };
+
+            foreach (var path in possiblePaths)
+            {
+                if (File.Exists(path))
+                {
+                    return path;
+                }
+            }
+
+            return null;
         }
 
         private void singInbtn_Click(object sender, EventArgs e)
@@ -88,24 +100,23 @@ namespace FinallyFinalBoocking
                 return;
             }
 
+            string hashedPassword = HashPassword(passwordInput);
+
             using (StreamWriter sw = File.AppendText(userFilePath))
             {
-                sw.WriteLine($"{usernameInput};{passwordInput}");
+                sw.WriteLine($"{usernameInput};{hashedPassword}");
             }
 
             MessageBox.Show("Account successfully created! You can now log in.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-    
 
-
-        private void UsernameInputTextBox_TextChanged(object sender, EventArgs e)
+        private string HashPassword(string password)
         {
-
-        }
-
-        private void PasswordInputTextBox_TextChanged(object sender, EventArgs e)
-        {
-
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+            }
         }
 
         private void exitbtn_Click(object sender, EventArgs e)
