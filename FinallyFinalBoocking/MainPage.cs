@@ -20,6 +20,7 @@ namespace FinallyFinalBoocking
         public MainPage()
         {
             InitializeComponent();
+            DisplayAvailableRooms();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,8 +64,8 @@ namespace FinallyFinalBoocking
                 var hotelDateAvb = split[3];
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
-
-                var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost);
+                var reservedOrNot = bool.Parse(split[6]);
+                var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
                 _rooms.Add(room);
             }
 
@@ -88,8 +89,28 @@ namespace FinallyFinalBoocking
             //this should work as a filter
         }
 
+        public void DisplayAvailableRooms()
+        {
+            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
 
-        
+            var allRooms = File.ReadAllLines(roomsFilePath).ToList();
+            var availableRooms = allRooms
+                .Select(line => line.Split(';'))
+                .Select(parts => new Room(
+                    int.Parse(parts[0]),
+                    parts[1],
+                    parts[2],
+                    parts[3],
+                    int.Parse(parts[4]),
+                    int.Parse(parts[5]),
+                    bool.Parse(parts[6])
+                ))
+                .Where(room => !room.ReservedOrNot)
+                .ToList();
+
+            hotelsScrollMenu(availableRooms);
+        }
+
 
         private void hotelsScrollMenu(List<Room> rooms)
         {
@@ -101,7 +122,6 @@ namespace FinallyFinalBoocking
 
             foreach (var room in rooms)
             {
-
                 GroupBox groupBox = new GroupBox
                 {
                     Text = room.HotelName,
@@ -146,7 +166,6 @@ namespace FinallyFinalBoocking
                 };
                 button.Click += ShowPropertyPage;
 
-
                 PictureBox pictureBox = new PictureBox
                 {
                     Size = new Size(200, 110),
@@ -181,11 +200,10 @@ namespace FinallyFinalBoocking
                 scrollablePanel.Controls.Add(groupBox);
 
                 currentY += groupBoxHeight + spacing;
-
             }
         }
 
-       
+
         private void ShowPropertyPage(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
@@ -216,7 +234,7 @@ namespace FinallyFinalBoocking
         {
             _rooms.Clear();
             scrollablePanel.Controls.Clear();
-            openbtn_Click(null, null); // Reloads hotel data
+            openbtn_Click(null, null);
         }
     }
 }

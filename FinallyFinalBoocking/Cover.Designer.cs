@@ -35,6 +35,8 @@
             label1 = new Label();
             exitbtn = new Button();
             SuspendLayout();
+            this.UsernameInputTextBox = new System.Windows.Forms.TextBox();
+            this.PasswordInputTextBox = new System.Windows.Forms.TextBox();
             // 
             // singInbtn
             // 
@@ -64,7 +66,7 @@
             UsernameInputTextBox.Size = new Size(321, 29);
             UsernameInputTextBox.TabIndex = 2;
             UsernameInputTextBox.Text = "user_1";
-            UsernameInputTextBox.TextChanged += UsernameInputTextBox_TextChanged;
+            //UsernameInputTextBox.TextChanged += UsernameInputTextBox_TextChanged;
             // 
             // PasswordInputTextBox
             // 
@@ -75,7 +77,7 @@
             PasswordInputTextBox.Size = new Size(321, 29);
             PasswordInputTextBox.TabIndex = 3;
             PasswordInputTextBox.Text = "password1";
-            PasswordInputTextBox.TextChanged += PasswordInputTextBox_TextChanged;
+            //PasswordInputTextBox.TextChanged += PasswordInputTextBox_TextChanged;
             // 
             // label1
             // 
@@ -111,6 +113,8 @@
             Text = "CoverPage";
             ResumeLayout(false);
             PerformLayout();
+            this.Controls.Add(this.UsernameInputTextBox);
+            this.Controls.Add(this.PasswordInputTextBox);
         }
 
         #endregion

@@ -22,21 +22,18 @@ namespace FinallyFinalBoocking
         }
 
         private PropertysPage _propertyPage;
-
-        public AccountPage(PropertysPage propertyPage)
+        private MainPage _mainPage;
+        private string userRoomsFilePath;
+        public AccountPage(MainPage mainPage, PropertysPage propertyPage = null, string filePath = null)
         {
+            
+            _mainPage = mainPage;
             _propertyPage = propertyPage;
             InitializeComponent();
+            userRoomsFilePath = filePath;
+            LoadUserData();
+            DisplayBookings();
         }
-
-        private MainPage _mainPage;
-
-        public AccountPage(MainPage mainPage)
-        {
-            _mainPage = mainPage;
-            InitializeComponent();
-        }
-
 
         private void exit3_Click(object sender, EventArgs e)
         {
@@ -123,8 +120,9 @@ namespace FinallyFinalBoocking
                 var hotelDateAvb = split[3];
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
+                var reservedOrNot = true;
 
-                var reservedroom = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost);
+                var reservedroom = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
                 _rooms.Add(reservedroom);
             }
 
@@ -135,7 +133,7 @@ namespace FinallyFinalBoocking
                 var existingGroupBox = panel1.Controls.OfType<GroupBox>().FirstOrDefault(g => g.Text == reservedroom.HotelName);
                 if (existingGroupBox != null)
                 {
-                    continue; // Skip adding this room if it already exists
+                    continue;
                 }
 
                 GroupBox groupBox = new GroupBox
@@ -217,6 +215,28 @@ namespace FinallyFinalBoocking
 
                 currentY += groupBoxHeight + spacing;
             }
+        }
+
+        private void LoadUserData()
+        {
+            string userRoomsFilePath = @"C:\Path\To\UserData.txt"; // Adjust the path
+
+            if (File.Exists(userRoomsFilePath))
+            {
+                var userData = File.ReadAllLines(userRoomsFilePath);
+                accountNameTextBOx.Text = userData[0];  // Username
+                accountPasswordTextBox.Text = userData[1]; // Password
+                statusTextBox.Text = userData[2];  // Status
+                bookingCounterTextBox.Text = userData[3]; // Bookings count
+            }
+            else
+            {
+                MessageBox.Show("User data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void DisplayBookings()
+        {
+            panel1_Paint(null, null); // Reuse your existing code to load booking data
         }
     }
 }
