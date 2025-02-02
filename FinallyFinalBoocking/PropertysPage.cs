@@ -111,7 +111,8 @@ namespace FinallyFinalBoocking
             string selectedRoomText = $"{_selectedRoom.HotelId};{_selectedRoom.HotelName};{_selectedRoom.HotelLocation};{_selectedRoom.HotelDateAvb};{_selectedRoom.HotelAmountOfRooms};{_selectedRoom.HotelCostForNight}";
 
             File.WriteAllLines(roomsFilePath, allRooms);
-            File.AppendAllText(userRoomsFilePath, selectedRoomText + Environment.NewLine);  
+            File.AppendAllText(userRoomsFilePath, selectedRoomText + Environment.NewLine);
+            RemoveLine();
 
             MessageBox.Show("Hotel is booked!");
 
@@ -120,6 +121,25 @@ namespace FinallyFinalBoocking
             new AccountPage(mainPage).Show();
             Hide();
         }
+        private void RemoveLine()
+        {
+            string roomsFilePath = GetDatabaseFilePath("Rooms.txt");
+            if (roomsFilePath == null || !File.Exists(roomsFilePath))
+                return;
+
+            string selectedRoomText = $"{_selectedRoom.HotelId}; {_selectedRoom.HotelName}; {_selectedRoom.HotelLocation}; {_selectedRoom.HotelDateAvb}; {_selectedRoom.HotelAmountOfRooms}; {_selectedRoom.HotelCostForNight}";
+
+            var tempFile = Path.GetTempFileName();
+
+            var linesToKeep = File.ReadLines(roomsFilePath)
+                                  .Where(line => !line.Trim().StartsWith($"{_selectedRoom.HotelId};"))
+                                  .ToList();
+
+            File.WriteAllLines(tempFile, linesToKeep);
+            File.Delete(roomsFilePath);
+            File.Move(tempFile, roomsFilePath);
+        }
+
 
         private void contactBtn_Click(object sender, EventArgs e)
         {

@@ -1,20 +1,18 @@
-1; Polonia; Rzeszow; 20.12.2024 - 25.12.2024; 2; 200; true
-2; Grand Palace; Krakow; 15.02.2025 - 20.02.2025; 5; 450; true 
-3; Ocean Breeze; Gdansk; 01.07.2024 - 10.07.2024; 8; 600; true  
-4; Mountain Retreat; Zakopane; 10.03.2024 - 17.03.2024; 10; 300; true  
-5; Urban Comfort; Warsaw; 05.06.2024 - 12.06.2024; 15; 350; true  
-6; Royal Vista; Wroclaw; 18.08.2024 - 25.08.2024; 12; 500; true  
-7; Sunset Inn; Sopot; 22.04.2024 - 28.04.2024; 4; 280; true  
-8; Lakeside Resort; Olsztyn; 01.05.2024 - 07.05.2024; 6; 320; true  
-9; Golden Bay; Szczecin; 10.09.2024 - 18.09.2024; 7; 420; true  
-10; Hilltop Haven; Karpacz; 15.11.2024 - 22.11.2024; 3; 260; true  
-11; City Lights; Lodz; 25.03.2024 - 30.03.2024; 20; 400; true  
-12; Pearl Coast; Gdynia; 05.10.2024 - 12.10.2024; 9; 370; true  
-13; Alpine Lodge; Bielsko-Biala; 01.12.2024 - 08.12.2024; 8; 340; true  
-14; Green Meadows; Lublin; 12.07.2024 - 18.07.2024; 5; 310; true  
-15; Forest Retreat; Katowice; 20.06.2024 - 27.06.2024; 4; 290; true  
-16; Horizon Suites; Poznan; 01.08.2024 - 07.08.2024; 10; 450; true  
-17; Serenity Stay; Torun; 15.04.2024 - 21.04.2024; 6; 330; true  
-18; Sapphire Shores; Kolobrzeg; 25.05.2024 - 31.05.2024; 7; 370; true  
-19; Cozy Corner; Zielona Gora; 10.03.2024 - 17.03.2024; 3; 250; true  
-20; Harbor Heights; Swinoujscie; 01.09.2024 - 08.09.2024; 12; 480; true 
+3; Ocean Breeze; Gdansk; 01.07.2024 - 10.07.2024; 8; 600;
+4; Mountain Retreat; Zakopane; 10.03.2024 - 17.03.2024; 10; 300;
+5; Urban Comfort; Warsaw; 05.06.2024 - 12.06.2024; 15; 350;
+6; Royal Vista; Wroclaw; 18.08.2024 - 25.08.2024; 12; 500;
+7; Sunset Inn; Sopot; 22.04.2024 - 28.04.2024; 4; 280;
+8; Lakeside Resort; Olsztyn; 01.05.2024 - 07.05.2024; 6; 320;
+9; Golden Bay; Szczecin; 10.09.2024 - 18.09.2024; 7; 420;
+10; Hilltop Haven; Karpacz; 15.11.2024 - 22.11.2024; 3; 260;
+11; City Lights; Lodz; 25.03.2024 - 30.03.2024; 20; 400;
+12; Pearl Coast; Gdynia; 05.10.2024 - 12.10.2024; 9; 370;
+13; Alpine Lodge; Bielsko-Biala; 01.12.2024 - 08.12.2024; 8; 340;
+14; Green Meadows; Lublin; 12.07.2024 - 18.07.2024; 5; 310;
+15; Forest Retreat; Katowice; 20.06.2024 - 27.06.2024; 4; 290;
+16; Horizon Suites; Poznan; 01.08.2024 - 07.08.2024; 10; 450;
+17; Serenity Stay; Torun; 15.04.2024 - 21.04.2024; 6; 330;
+18; Sapphire Shores; Kolobrzeg; 25.05.2024 - 31.05.2024; 7; 370;
+19; Cozy Corner; Zielona Gora; 10.03.2024 - 17.03.2024; 3; 250; 
+20; Harbor Heights; Swinoujscie; 01.09.2024 - 08.09.2024; 12; 480;

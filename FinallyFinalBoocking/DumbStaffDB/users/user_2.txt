@@ -1,2 +1,1 @@
-1; Polonia; Rzeszow; 20.12.2024 - 25.12.2024;2;200
-5; Urban Comfort; Warsaw; 05.06.2024 - 12.06.2024;15;350
+2; Grand Palace; Krakow; 15.02.2025 - 20.02.2025;5;450

@@ -11,11 +11,7 @@ namespace FinallyFinalBoocking
     public partial class Cover : Form
     {
         private readonly string userPasswdPath =
-            @"C:\\Users\\qwerd\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
-
-        private readonly string termsAcceptedPath =
-            @"C:\\Users\\qwerd\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\termsAccepted.txt";
-
+            @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
         public Cover()
         {
             InitializeComponent();
@@ -24,6 +20,8 @@ namespace FinallyFinalBoocking
 
         private void ShowTermsOfUseIfNeeded()
         {
+
+            var termsAcceptedPath = @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\termsAccepted.txt";
             if (!File.Exists(termsAcceptedPath) || File.ReadAllText(termsAcceptedPath).Trim() != "Accepted")
             {
                 using (var termsForm = new TermsOfUseForm(termsAcceptedPath))
