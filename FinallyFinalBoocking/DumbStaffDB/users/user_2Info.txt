@@ -1,4 +1,0 @@
-user_2
-password2
-user2@domain.com
-1

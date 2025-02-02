@@ -4,33 +4,29 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FinallyFinalBoocking.DumbStaffDB.users;
 
 namespace FinallyFinalBoocking
 {
     [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
     public partial class AccountPage : Form
     {
-
         private List<Room> _rooms = new List<Room>();
-        private void accountNameTextBOx_TextChanged(object sender, EventArgs e)
-        {
-            // This will display your username and you can cange it
-        }
-
         private PropertysPage _propertyPage;
         private MainPage _mainPage;
         private string userRoomsFilePath;
+
         public AccountPage(MainPage mainPage, PropertysPage propertyPage = null, string filePath = null)
         {
-            
             _mainPage = mainPage;
             _propertyPage = propertyPage;
             InitializeComponent();
-            userRoomsFilePath = filePath;
+            userRoomsFilePath = filePath ?? GetCurrentUserFilePath();
             LoadUserData();
             DisplayBookings();
         }
@@ -54,21 +50,6 @@ namespace FinallyFinalBoocking
             this.Close();
         }
 
-        private void statusTextBox_TextChanged(object sender, EventArgs e)
-        {
-            // The status of the property, confimed or not
-        }
-
-        private void bookingCounterTextBox_TextChanged(object sender, EventArgs e)
-        {
-            // How many stays are in your back
-        }
-
-        private void accountPasswordTextBox_TextChanged(object sender, EventArgs e)
-        {
-            // This will display your password and you can cange it
-        }
-
         private string GetDebuggerDisplay()
         {
             return ToString();
@@ -76,33 +57,25 @@ namespace FinallyFinalBoocking
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
             int groupBoxHeight = 150;
             int spacing = 10;
             int currentY = 10;
 
-            string userRoomsFilePath = null;
-            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt"))
-            {
-                userRoomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt";
-            }
-            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt"))
-            {
-                userRoomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt";
-            }
-            else
+            string currentUserFilePath = GetCurrentUserFilePath();
+            if (currentUserFilePath == null)
             {
                 MessageBox.Show("User reservation data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             _rooms.Clear();
+            var reservedHotelLines = File.ReadAllLines(currentUserFilePath);
 
-            var ReservedHotelLines = File.ReadLines(userRoomsFilePath);
-
-            foreach (var line in ReservedHotelLines)
+            foreach (var line in reservedHotelLines)
             {
-                var split = line.Split(";");
+                var split = line.Split(';');
+                if (split.Length < 6)
+                    continue;
 
                 var hotelId = int.Parse(split[0]);
                 var hotelName = split[1];
@@ -110,73 +83,69 @@ namespace FinallyFinalBoocking
                 var hotelDateAvb = split[3];
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
-                var reservedOrNot = true;
-
-                var reservedroom = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
-                _rooms.Add(reservedroom);
+                bool reservedOrNot = true;
+                var reservedRoom = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
+                _rooms.Add(reservedRoom);
             }
 
 
-            foreach (var reservedroom in _rooms)
+            foreach (var reservedRoom in _rooms)
             {
-
-                var existingGroupBox = panel1.Controls.OfType<GroupBox>().FirstOrDefault(g => g.Text == reservedroom.HotelName);
+                var existingGroupBox = panel1.Controls.OfType<GroupBox>().FirstOrDefault(g => g.Text == reservedRoom.HotelName);
                 if (existingGroupBox != null)
-                {
                     continue;
-                }
 
                 GroupBox groupBox = new GroupBox
                 {
-                    Text = reservedroom.HotelName,
+                    Text = reservedRoom.HotelName,
                     AutoSize = true,
                     Location = new Point((panel1.Width - 500) / 2, currentY),
                 };
 
                 Label locationLabel = new Label
                 {
-                    Text = $"Location: {reservedroom.HotelLocation}",
+                    Text = $"Location: {reservedRoom.HotelLocation}",
                     Location = new Point(10, 20),
                     AutoSize = true
                 };
 
                 Label datesLabel = new Label
                 {
-                    Text = $"Available Dates: {reservedroom.HotelDateAvb}",
+                    Text = $"Available Dates: {reservedRoom.HotelDateAvb}",
                     Location = new Point(10, 40),
                     AutoSize = true
                 };
 
                 Label roomsLabel = new Label
                 {
-                    Text = $"Rooms: {reservedroom.HotelAmountOfRooms}",
+                    Text = $"Rooms: {reservedRoom.HotelAmountOfRooms}",
                     Location = new Point(10, 60),
                     AutoSize = true
                 };
 
                 Label priceLabel = new Label
                 {
-                    Text = $"Price: {reservedroom.HotelCostForNight} USD/night",
+                    Text = $"Price: {reservedRoom.HotelCostForNight} USD/night",
                     Location = new Point(10, 80),
                     AutoSize = true
                 };
 
-                Button canclebutton = new Button
+                Button cancelButton = new Button
                 {
-                    Text = "Cancle",
+                    Text = "Cancel",
                     Location = new Point(10, 100),
                     AutoSize = true,
-                    Tag = reservedroom
+                    Tag = reservedRoom
                 };
 
-                Button showpropbutton = new Button
+                Button showPropButton = new Button
                 {
                     Text = "Open Hotel",
                     Location = new Point(100, 100),
                     AutoSize = true,
-                    Tag = reservedroom
+                    Tag = reservedRoom
                 };
-                showpropbutton.Click += ShowPropertyPage;
+                showPropButton.Click += ShowPropertyPage;
 
                 PictureBox pictureBox = new PictureBox
                 {
@@ -197,19 +166,17 @@ namespace FinallyFinalBoocking
                 }
                 else
                 {
-                    MessageBox.Show("Image file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Hotel photo not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
                 pictureBox.ImageLocation = imagePath;
-
                 groupBox.Controls.Add(locationLabel);
                 groupBox.Controls.Add(datesLabel);
                 groupBox.Controls.Add(roomsLabel);
                 groupBox.Controls.Add(priceLabel);
-                groupBox.Controls.Add(canclebutton);
-                groupBox.Controls.Add(showpropbutton);
+                groupBox.Controls.Add(cancelButton);
+                groupBox.Controls.Add(showPropButton);
                 groupBox.Controls.Add(pictureBox);
-
                 panel1.Controls.Add(groupBox);
 
                 currentY += groupBoxHeight + spacing;
@@ -218,22 +185,18 @@ namespace FinallyFinalBoocking
 
         private void LoadUserData()
         {
-            string userRoomsFilePath = GetFilePath() /*@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_1.txt"*/;
 
-            if (File.Exists(userRoomsFilePath))
+            string currentUserFilePath = GetCurrentUserInfoFilePath();
+
+            if (File.Exists(currentUserFilePath))
             {
-                var userData = File.ReadAllText(userRoomsFilePath).Split(';');
-
+                var userData = File.ReadAllText(currentUserFilePath).Split(';');
                 if (userData.Length >= 4)
                 {
-                    accountNameTextBOx.Text = userData[0].Trim();
-                    accountPasswordTextBox.Text = userData[1].Trim();
-                    statusTextBox.Text = userData[2].Trim();
-                    bookingCounterTextBox.Text = userData[3].Trim();
-                }
-                else
-                {
-                    MessageBox.Show("User data file is incomplete. Please check the file contents.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textBox1.Text = userData[0].Trim();
+                    textBox2.Text = userData[1].Trim();
+                    textBox3.Text = userData[2].Trim();
+                    textBox4.Text = userData[3].Trim();
                 }
             }
             else
@@ -242,20 +205,28 @@ namespace FinallyFinalBoocking
             }
         }
 
-        private string GetFilePath()
+        private string GetCurrentUserFilePath()
         {
-            string[] possiblePaths = {
-                @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt",
-                @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\user_2.txt"
-            };
+            string path1 = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt";
+            string path2 = $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt";
 
-            foreach (var path in possiblePaths)
-            {
-                if (File.Exists(path))
-                {
-                    return path;
-                }
-            }
+            if (File.Exists(path1))
+                return path1;
+            if (File.Exists(path2))
+                return path2;
+
+            return null;
+        }
+
+        private string GetCurrentUserInfoFilePath()
+        {
+            string path1 = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\usersInfo.txt";
+            string path2 = $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\usersInfo.txt";
+
+            if (File.Exists(path1))
+                return path1;
+            if (File.Exists(path2))
+                return path2;
 
             return null;
         }
@@ -283,6 +254,31 @@ namespace FinallyFinalBoocking
         public void SetSelectedRoom(Room room)
         {
             SelectedRoom = room;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AccountPage_Load(object sender, EventArgs e)
+        {
+            LoadUserData();
         }
     }
 }

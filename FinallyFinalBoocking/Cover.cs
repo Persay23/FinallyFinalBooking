@@ -4,12 +4,13 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using FinallyFinalBoocking.DumbStaffDB.users;
 
 namespace FinallyFinalBoocking
 {
     public partial class Cover : Form
     {
-        private readonly string userFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
+        private readonly string userPasswdPath = @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
 
         public Cover()
         {
@@ -18,63 +19,64 @@ namespace FinallyFinalBoocking
 
         private void logInbtn_Click(object sender, EventArgs e)
         {
-            string usernameInput = UsernameInputTextBox.Text;
+            string usernameInput = UsernameInputTextBox.Text.Trim();
             string passwordInput = PasswordInputTextBox.Text;
 
             if (string.IsNullOrEmpty(usernameInput) || string.IsNullOrEmpty(passwordInput))
             {
-                MessageBox.Show("Username and password cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Username and password cannot be empty.",
+                                "Validation Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                 return;
             }
 
-            if (ValidationIsTrue(usernameInput, passwordInput))
+            bool validUser = false;
+
+            if (File.Exists(userPasswdPath))
             {
+                foreach (var line in File.ReadAllLines(userPasswdPath))
+                {
+                    var parts = line.Split(';');
+                    if (parts.Length >= 2)
+                    {
+                        string fileUsername = parts[0].Trim();
+                        string filePassword = parts[1].Trim();
+                        string hashedInputPassword = HashPassword(passwordInput);
+
+                        if (fileUsername.Equals(usernameInput, StringComparison.OrdinalIgnoreCase) &&
+                            filePassword == hashedInputPassword)
+                        {
+                            validUser = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("User data file not found!",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                return;
+            }
+
+            if (validUser)
+            {
+                CurrentUser.Username = usernameInput;
+
                 var newMainPage = new MainPage();
                 newMainPage.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid username or password.",
+                                "Login Failed",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
             }
-        }
-
-        private bool ValidationIsTrue(string username, string password)
-        {
-            string selectedPath = GetFilePath();
-
-            if (selectedPath == null)
-            {
-                MessageBox.Show("User log in data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            var lines = File.ReadAllLines(selectedPath);
-            string hashedPassword = HashPassword(password);
-
-            return lines.Any(line =>
-            {
-                var parts = line.Split(';');
-                return parts.Length == 2 && parts[0] == username && parts[1] == hashedPassword;
-            });
-        }
-
-        private string GetFilePath()
-        {
-            string[] possiblePaths = {
-                @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt",
-                @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt"
-            };
-
-            foreach (var path in possiblePaths)
-            {
-                if (File.Exists(path))
-                {
-                    return path;
-                }
-            }
-
-            return null;
         }
 
         private void singInbtn_Click(object sender, EventArgs e)
@@ -88,21 +90,27 @@ namespace FinallyFinalBoocking
                 return;
             }
 
-            if (!File.Exists(userFilePath))
+            if (!File.Exists(userPasswdPath))
             {
-                File.Create(userFilePath).Close();
+                File.Create(userPasswdPath).Close();
             }
 
-            var lines = File.ReadAllLines(userFilePath);
-            if (lines.Any(line => line.Split(';')[0] == usernameInput))
+            var lines = File.ReadAllLines(userPasswdPath);
+            if (lines.Any(line => line.Split(';')[0].Equals(usernameInput, StringComparison.OrdinalIgnoreCase)))
             {
                 MessageBox.Show("Username already exists. Please choose a different one.", "Sign Up Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string hashedPassword = HashPassword(passwordInput);
+            string usersBookingFile = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
+            using (FileStream fs = File.Create(usersBookingFile))
+            {
 
-            using (StreamWriter sw = File.AppendText(userFilePath))
+            }
+
+                string hashedPassword = HashPassword(passwordInput);
+
+            using (StreamWriter sw = File.AppendText(userPasswdPath))
             {
                 sw.WriteLine($"{usernameInput};{hashedPassword}");
             }
@@ -125,3 +133,4 @@ namespace FinallyFinalBoocking
         }
     }
 }
+
