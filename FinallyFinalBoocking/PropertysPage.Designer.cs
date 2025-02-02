@@ -46,7 +46,7 @@
             // 
             personalpictureBox.Location = new Point(11, 83);
             personalpictureBox.Name = "personalpictureBox";
-            personalpictureBox.Size = new Size(823, 235);
+            personalpictureBox.Size = new Size(200, 200);
             personalpictureBox.TabIndex = 0;
             personalpictureBox.TabStop = false;
             personalpictureBox.Click += personalpictureBox_Click;
@@ -64,7 +64,7 @@
             // 
             // reserveBtn
             // 
-            reserveBtn.Location = new Point(68, 530);
+            reserveBtn.Location = new Point(631, 680);
             reserveBtn.Name = "reserveBtn";
             reserveBtn.Size = new Size(145, 41);
             reserveBtn.TabIndex = 2;
@@ -73,7 +73,7 @@
             // 
             // contactBtn
             // 
-            contactBtn.Location = new Point(68, 594);
+            contactBtn.Location = new Point(631, 755);
             contactBtn.Name = "contactBtn";
             contactBtn.Size = new Size(145, 41);
             contactBtn.TabIndex = 3;
@@ -83,7 +83,7 @@
             // 
             // commentBtn
             // 
-            commentBtn.Location = new Point(631, 594);
+            commentBtn.Location = new Point(631, 605);
             commentBtn.Name = "commentBtn";
             commentBtn.Size = new Size(145, 41);
             commentBtn.TabIndex = 4;
@@ -102,10 +102,10 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(68, 690);
+            textBox2.Location = new Point(11, 530);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(709, 109);
+            textBox2.Size = new Size(569, 266);
             textBox2.TabIndex = 6;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
@@ -120,9 +120,9 @@
             // 
             // submitBtn
             // 
-            submitBtn.Location = new Point(365, 816);
+            submitBtn.Location = new Point(304, 816);
             submitBtn.Name = "submitBtn";
-            submitBtn.Size = new Size(120, 30);
+            submitBtn.Size = new Size(276, 30);
             submitBtn.TabIndex = 8;
             submitBtn.Text = "Submit";
             submitBtn.UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@
             // 
             // reload2
             // 
-            reload2.Location = new Point(92, 816);
+            reload2.Location = new Point(11, 816);
             reload2.Name = "reload2";
-            reload2.Size = new Size(120, 30);
+            reload2.Size = new Size(276, 30);
             reload2.TabIndex = 9;
             reload2.Text = "Reload";
             reload2.UseVisualStyleBackColor = true;
@@ -140,9 +140,9 @@
             // 
             // exit2
             // 
-            exit2.Location = new Point(656, 816);
+            exit2.Location = new Point(631, 816);
             exit2.Name = "exit2";
-            exit2.Size = new Size(120, 30);
+            exit2.Size = new Size(145, 30);
             exit2.TabIndex = 10;
             exit2.Text = "Exit";
             exit2.UseVisualStyleBackColor = true;

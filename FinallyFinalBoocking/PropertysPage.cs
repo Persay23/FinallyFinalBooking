@@ -1,56 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using FinallyFinalBoocking.DumbStaffDB.users;
-using Microsoft.VisualBasic.ApplicationServices;
-using static System.Windows.Forms.LinkLabel;
 
 namespace FinallyFinalBoocking
 {
     public partial class PropertysPage : Form
     {
+        private Room _selectedRoom;
+
         public PropertysPage(Room selectedRoom)
         {
             InitializeComponent();
             _selectedRoom = selectedRoom;
+            LoadReviews();  
+            LoadHotelImage(); 
         }
 
-        private Room _selectedRoom;
-
-        private void descriptionTextBox_TextChanged(object sender, EventArgs e)
+        private string GetDatabaseFilePath(string fileName)
         {
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            DirectoryInfo dir = new DirectoryInfo(baseDir);
 
-        }
-
-        private void exit2_Click(object sender, EventArgs e)
-        {
-            var newMainPage = new MainPage();
-            newMainPage.Show();
-            this.Close();
-        }
-        private void reload2_Click(object sender, EventArgs e)
-        {
-            string reviewsFilePath = null;
-
-            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
+            while (dir != null && dir.Name != "FinallyFinalBoocking")
             {
-                reviewsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+                dir = dir.Parent;
             }
-            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
+
+            if (dir == null)
             {
-                reviewsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
+                MessageBox.Show("Error: Could not locate project directory!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
-            else
+
+            return Path.Combine(dir.FullName, "DumbStaffDB", fileName);
+        }
+
+        private void LoadHotelImage()
+        {
+            string imagesFolderPath = GetDatabaseFilePath("images");
+            if (imagesFolderPath == null) return;
+
+            string imagePath = Path.Combine(imagesFolderPath, $"{_selectedRoom.HotelId}.png");
+
+            if (File.Exists(imagePath))
             {
-                MessageBox.Show("Reviews file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                personalpictureBox.Image = Image.FromFile(imagePath);
+                personalpictureBox.SizeMode = PictureBoxSizeMode.StretchImage; 
+            }           
+        }
+
+        private void LoadReviews()
+        {
+            string reviewsFilePath = GetDatabaseFilePath("AllDescriptios.txt");
+            if (reviewsFilePath == null || !File.Exists(reviewsFilePath))
+            {
+                descriptionPoloniaTextBox.Text = "No reviews available.";
                 return;
             }
 
@@ -62,189 +70,127 @@ namespace FinallyFinalBoocking
                 foreach (string line in lines)
                 {
                     var parts = line.Split(';');
-
-                    int reviewHotelId = int.Parse(parts[0].Trim());
-
-                    if (reviewHotelId == _selectedRoom.HotelId)
+                    if (int.TryParse(parts[0].Trim(), out int reviewHotelId) && reviewHotelId == _selectedRoom.HotelId)
                     {
-                        string reviewText = parts[1].Trim();
-                        descriptionPoloniaTextBox.AppendText(reviewText + Environment.NewLine + Environment.NewLine);
+                        descriptionPoloniaTextBox.AppendText(parts[1].Trim() + Environment.NewLine + Environment.NewLine);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred while reading the reviews file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error reading reviews: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void exit2_Click(object sender, EventArgs e)
+        {
+            new MainPage().Show();
+            Close();
+        }
+
+        private void reload2_Click(object sender, EventArgs e)
+        {
+            LoadReviews();  
         }
 
         private void buyBtn_Click(object sender, EventArgs e)
         {
-            string roomsFilePath = null;
+            string roomsFilePath = GetDatabaseFilePath("Rooms.txt");
+            string userRoomsFilePath = GetDatabaseFilePath($"users\\{CurrentUser.Username}.txt");
 
-
-            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
-            {
-                roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
-            }
-            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
-            {
-                roomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
-            }
-            else
-            {
-                MessageBox.Show("Hotel rooms list file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (roomsFilePath == null || userRoomsFilePath == null)
                 return;
-            }
 
-            string userRoomsFilePath = null;
-            if (File.Exists($@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt"))
+            if (!File.Exists(roomsFilePath) || !File.Exists(userRoomsFilePath))
             {
-                userRoomsFilePath = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt";
-            }
-            else if (File.Exists($@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt"))
-            {
-                userRoomsFilePath = $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt";
-            }
-            else
-            {
-                MessageBox.Show("User reservation data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error: Required data files not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var allRooms = File.ReadAllLines(roomsFilePath).ToList();
             string selectedRoomText = $"{_selectedRoom.HotelId};{_selectedRoom.HotelName};{_selectedRoom.HotelLocation};{_selectedRoom.HotelDateAvb};{_selectedRoom.HotelAmountOfRooms};{_selectedRoom.HotelCostForNight}";
 
-            foreach (var line in allRooms)
-            {
-                var roomData = line.Split(';');
-                if (roomData[0] == _selectedRoom.HotelId.ToString())
-                {
-                    _selectedRoom.SetReserved(false);
-                    break;
-                }
-            }
-
             File.WriteAllLines(roomsFilePath, allRooms);
-
-            using (StreamWriter writer = new StreamWriter(userRoomsFilePath, true))
-            {
-                writer.WriteLine(selectedRoomText);
-            }
+            File.AppendAllText(userRoomsFilePath, selectedRoomText + Environment.NewLine);  
 
             MessageBox.Show("Hotel is booked!");
 
             MainPage mainPage = new MainPage();
             mainPage.DisplayAvailableRooms();
-            AccountPage accountPage = new AccountPage(mainPage);
-            accountPage.Show();
-            this.Hide();
+            new AccountPage(mainPage).Show();
+            Hide();
         }
-
-
-
-
 
         private void contactBtn_Click(object sender, EventArgs e)
         {
-            string contactFilePath = null;
-
-            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\ContactInfo_rooms.txt"))
+            string contactFilePath = GetDatabaseFilePath("ContactInfo_rooms.txt");
+            if (contactFilePath == null || !File.Exists(contactFilePath))
             {
-                contactFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\ContactInfo_rooms.txt";
-            }
-            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\ContactInfo_rooms.txt"))
-            {
-                contactFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\ContactInfo_rooms.txt";
-            }
-            else
-            {
-                MessageBox.Show("Contact information file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Contact information not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            string hotelPhone = string.Empty;
-            string hotelEmail = string.Empty;
-            string hotelInst = string.Empty;
-
-            foreach (var line in File.ReadLines(contactFilePath))
+            try
             {
-                var parts = line.Split(';');
-
-                int currentHotelId = int.Parse(parts[0].Trim());
-
-                if (currentHotelId == _selectedRoom.HotelId)
+                foreach (var line in File.ReadLines(contactFilePath))
                 {
-                    hotelPhone = parts[1].Trim();
-                    hotelEmail = parts[2].Trim();
-                    hotelInst = parts[3].Trim();
-                    break;
+                    var parts = line.Split(';');
+                    if (int.TryParse(parts[0].Trim(), out int currentHotelId) && currentHotelId == _selectedRoom.HotelId)
+                    {
+                        MessageBox.Show($"Phone: {parts[1].Trim()}\nEmail: {parts[2].Trim()}\nInstagram: {parts[3].Trim()}",
+                            "Hotel Contact Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
                 }
             }
-
-            MessageBox.Show(
-                $"Phone: {hotelPhone}\nEmail: {hotelEmail}\nInstagram: {hotelInst}",
-                "Hotel Contact Information",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            //here i should be able to add comment to the comment section
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error retrieving contact info: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void submitBtn_Click(object sender, EventArgs e)
         {
             string reviewText = textBox2.Text.Trim();
-
             if (string.IsNullOrEmpty(reviewText))
             {
                 MessageBox.Show("Please enter a review before submitting.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            string reviewsFilePath = null;
-            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
-            {
-                reviewsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
-            }
-            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt"))
-            {
-                reviewsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\AllDescriptios.txt";
-            }
-            else
-            {
-                MessageBox.Show("Review file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            string reviewsFilePath = GetDatabaseFilePath("AllDescriptios.txt");
+            if (reviewsFilePath == null)
                 return;
-            }
-            string reviewEntry = $"{_selectedRoom.HotelId}; {reviewText}";
 
             try
             {
-                using (StreamWriter writer = new StreamWriter(reviewsFilePath, true))
-                {
-                    writer.WriteLine(reviewEntry);
-                }
+                File.AppendAllText(reviewsFilePath, $"{_selectedRoom.HotelId}; {reviewText}{Environment.NewLine}");
                 MessageBox.Show("Review submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 textBox2.Clear();
+                LoadReviews();  
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error while submitting review: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error submitting review: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
         private void personalpictureBox_Click(object sender, EventArgs e)
         {
-            // a picture of the hotel
         }
 
         private void PropertysPage_Load(object sender, EventArgs e)
         {
-
         }
+
+        private void descriptionTextBox_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+        }
+
     }
 }
