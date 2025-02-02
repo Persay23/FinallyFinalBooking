@@ -10,7 +10,7 @@ namespace FinallyFinalBoocking
 {
     public partial class Cover : Form
     {
-        private readonly string userPasswdPath = @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
+        private readonly string userPasswdPath = @"C:\\Users\\qwerd\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
 
         public Cover()
         {
