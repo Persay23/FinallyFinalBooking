@@ -1,16 +1,12 @@
-﻿namespace FinallyFinalBoocking
+﻿using System.Drawing;
+using System.Drawing.Drawing2D;
+
+namespace FinallyFinalBoocking
 {
     partial class Cover
     {
-        /// <summary>
-        ///  Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        ///  Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +18,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             singInbtn = new Button();
@@ -35,90 +27,120 @@
             label1 = new Label();
             exitbtn = new Button();
             SuspendLayout();
-            this.UsernameInputTextBox = new System.Windows.Forms.TextBox();
-            this.PasswordInputTextBox = new System.Windows.Forms.TextBox();
             // 
             // singInbtn
             // 
-            singInbtn.Location = new Point(121, 264);
+            singInbtn.BackColor = Color.RoyalBlue;
+            singInbtn.FlatAppearance.BorderSize = 0;
+            singInbtn.FlatAppearance.MouseDownBackColor = Color.DodgerBlue;
+            singInbtn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            singInbtn.FlatStyle = FlatStyle.Flat;
+            singInbtn.ForeColor = Color.White;
+            singInbtn.Location = new Point(121, 289);
             singInbtn.Name = "singInbtn";
-            singInbtn.Size = new Size(102, 29);
+            singInbtn.Size = new Size(102, 38);
             singInbtn.TabIndex = 0;
-            singInbtn.Text = "SingIn";
-            singInbtn.UseVisualStyleBackColor = true;
+            singInbtn.Text = "Sign In";
+            singInbtn.UseVisualStyleBackColor = false;
             singInbtn.Click += singInbtn_Click;
             // 
             // logInbtn
             // 
-            logInbtn.Location = new Point(121, 215);
+            logInbtn.BackColor = Color.RoyalBlue;
+            logInbtn.FlatAppearance.BorderSize = 0;
+            logInbtn.FlatAppearance.MouseDownBackColor = Color.DodgerBlue;
+            logInbtn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            logInbtn.FlatStyle = FlatStyle.Flat;
+            logInbtn.ForeColor = Color.White;
+            logInbtn.Location = new Point(121, 235);
             logInbtn.Name = "logInbtn";
-            logInbtn.Size = new Size(102, 29);
+            logInbtn.Size = new Size(102, 38);
             logInbtn.TabIndex = 1;
-            logInbtn.Text = "LogIn";
-            logInbtn.UseVisualStyleBackColor = true;
+            logInbtn.Text = "Log In";
+            logInbtn.UseVisualStyleBackColor = false;
             logInbtn.Click += logInbtn_Click;
             // 
             // UsernameInputTextBox
             // 
-            UsernameInputTextBox.Location = new Point(12, 77);
+            UsernameInputTextBox.BackColor = Color.LightGray;
+            UsernameInputTextBox.ForeColor = Color.Black;
+            UsernameInputTextBox.Location = new Point(12, 84);
             UsernameInputTextBox.Name = "UsernameInputTextBox";
-            UsernameInputTextBox.PlaceholderText = "User name";
-            UsernameInputTextBox.Size = new Size(321, 29);
+            UsernameInputTextBox.PlaceholderText = "Username";
+            UsernameInputTextBox.Size = new Size(321, 30);
             UsernameInputTextBox.TabIndex = 2;
             UsernameInputTextBox.Text = "user_1";
-            //UsernameInputTextBox.TextChanged += UsernameInputTextBox_TextChanged;
             // 
             // PasswordInputTextBox
             // 
-            PasswordInputTextBox.Location = new Point(12, 146);
+            PasswordInputTextBox.BackColor = Color.LightGray;
+            PasswordInputTextBox.ForeColor = Color.Black;
+            PasswordInputTextBox.Location = new Point(12, 160);
             PasswordInputTextBox.Name = "PasswordInputTextBox";
             PasswordInputTextBox.PasswordChar = '*';
             PasswordInputTextBox.PlaceholderText = "Password";
-            PasswordInputTextBox.Size = new Size(321, 29);
+            PasswordInputTextBox.Size = new Size(321, 30);
             PasswordInputTextBox.TabIndex = 3;
             PasswordInputTextBox.Text = "password1";
-            //PasswordInputTextBox.TextChanged += PasswordInputTextBox_TextChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(124, 11);
+            label1.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            label1.ForeColor = Color.RoyalBlue;
+            label1.Location = new Point(96, 24);
             label1.Name = "label1";
-            label1.Size = new Size(96, 21);
+            label1.Size = new Size(151, 32);
             label1.TabIndex = 4;
-            label1.Text = "Booking  2.0";
+            label1.Text = "Booking 2.0";
             // 
             // exitbtn
             // 
-            exitbtn.Location = new Point(121, 311);
+            exitbtn.BackColor = Color.RoyalBlue;
+            exitbtn.FlatAppearance.BorderSize = 0;
+            exitbtn.FlatAppearance.MouseDownBackColor = Color.DodgerBlue;
+            exitbtn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            exitbtn.FlatStyle = FlatStyle.Flat;
+            exitbtn.ForeColor = Color.White;
+            exitbtn.Location = new Point(121, 341);
             exitbtn.Name = "exitbtn";
-            exitbtn.Size = new Size(102, 31);
+            exitbtn.Size = new Size(102, 38);
             exitbtn.TabIndex = 5;
             exitbtn.Text = "Exit";
-            exitbtn.UseVisualStyleBackColor = true;
+            exitbtn.UseVisualStyleBackColor = false;
             exitbtn.Click += exitbtn_Click;
             // 
             // Cover
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(9F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(349, 369);
+            BackColor = Color.White;
+            ClientSize = new Size(349, 404);
             Controls.Add(exitbtn);
             Controls.Add(label1);
             Controls.Add(PasswordInputTextBox);
             Controls.Add(UsernameInputTextBox);
             Controls.Add(logInbtn);
             Controls.Add(singInbtn);
+            Font = new Font("Segoe UI", 10F);
             Name = "Cover";
             Text = "CoverPage";
             ResumeLayout(false);
             PerformLayout();
-            this.Controls.Add(this.UsernameInputTextBox);
-            this.Controls.Add(this.PasswordInputTextBox);
+        }
+
+        private Region CreateRoundedRegion(Size size, int radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            path.AddArc(0, 0, radius, radius, 180, 90);
+            path.AddArc(size.Width - radius, 0, radius, radius, 270, 90);
+            path.AddArc(size.Width - radius, size.Height - radius, radius, radius, 0, 90);
+            path.AddArc(0, size.Height - radius, radius, radius, 90, 90);
+            path.CloseFigure();
+            return new Region(path);
         }
 
         #endregion
-
 
         private Button singInbtn;
         private Button logInbtn;

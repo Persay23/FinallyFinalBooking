@@ -25,17 +25,6 @@ namespace FinallyFinalBoocking
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
             DirectoryInfo dir = new DirectoryInfo(baseDir);
 
-            while (dir != null && dir.Name != "FinallyFinalBoocking")
-            {
-                dir = dir.Parent;
-            }
-
-            if (dir == null)
-            {
-                MessageBox.Show("Error: Could not locate project directory!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-
             return Path.Combine(dir.FullName, "DumbStaffDB", fileName);
         }
 
