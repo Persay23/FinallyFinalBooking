@@ -16,6 +16,7 @@ namespace FinallyFinalBoocking
     {
         private List<Room> _rooms = new List<Room>();
         private bool roomsLoaded = false;
+
         public Room SelectedRoom { get; private set; }
         public MainPage()
         {
@@ -25,6 +26,11 @@ namespace FinallyFinalBoocking
         private void MainPage_Load(object sender, EventArgs e)
         {
             RefreshHotelList();
+            AddComboBox();
+        }
+
+        private void AddComboBox()
+        {
             comboBoxFilter.Items.Add("By Name ↓");
             comboBoxFilter.Items.Add("By Name ↑");
             comboBoxFilter.Items.Add("By Price ↓");
@@ -32,13 +38,13 @@ namespace FinallyFinalBoocking
             comboBoxFilter.Items.Add("By Rooms ↓");
             comboBoxFilter.Items.Add("By Rooms ↑");
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             var accountPage = new AccountPage(this);
             accountPage.Show();
             this.Hide();
         }
-
 
         private void openbtn_Click(object sender, EventArgs e)
         {
@@ -71,7 +77,7 @@ namespace FinallyFinalBoocking
                 var hotelDateAvb = split[3];
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
-                var reservedOrNot = bool.Parse(split[6]);
+                var reservedOrNot = true;
                 var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
                 _rooms.Add(room);
             }
@@ -79,8 +85,6 @@ namespace FinallyFinalBoocking
             roomsLoaded = true;
             hotelsScrollMenu(_rooms);
         }
-
-
 
         private void Exitbtn2_Click(object sender, EventArgs e)
         {
@@ -149,9 +153,8 @@ namespace FinallyFinalBoocking
                     parts[3],
                     int.Parse(parts[4]),
                     int.Parse(parts[5]),
-                    bool.Parse(parts[6])
+                    true
                 ))
-                .Where(room => !room.ReservedOrNot)
                 .ToList();
 
             hotelsScrollMenu(availableRooms);
@@ -173,7 +176,6 @@ namespace FinallyFinalBoocking
 
             return null;
         }
-
 
         private void hotelsScrollMenu(List<Room> rooms)
         {

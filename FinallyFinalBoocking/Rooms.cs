@@ -14,9 +14,8 @@ namespace FinallyFinalBoocking
         private string _dateAvb;
         private int _amountOfRooms;
         private int _costForNight;
-        private bool _reservedOrNot;
 
-        public Room(int hotelId, string hotelName, string hotelLocation, string hotelDateAvb, 
+        public Room(int hotelId, string hotelName, string hotelLocation, string hotelDateAvb,
             int hotelAmountOfRooms, int hotelCostForNight, bool reservedOrNot)
         {
             _hotelName = hotelName;
@@ -25,7 +24,6 @@ namespace FinallyFinalBoocking
             _amountOfRooms = hotelAmountOfRooms;
             _costForNight = hotelCostForNight;
             _hotelId = hotelId;
-            _reservedOrNot = reservedOrNot;
         }
         public int HotelId => _hotelId;
         public string HotelName => _hotelName;
@@ -33,11 +31,5 @@ namespace FinallyFinalBoocking
         public string HotelDateAvb => _dateAvb;
         public int HotelAmountOfRooms => _amountOfRooms;
         public int HotelCostForNight => _costForNight;
-        public bool ReservedOrNot => _reservedOrNot;
-
-        public void SetReserved(bool reserved)
-        {
-            _reservedOrNot = reserved;
-        }
     }
 }
