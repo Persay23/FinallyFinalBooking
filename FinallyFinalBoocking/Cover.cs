@@ -10,11 +10,27 @@ namespace FinallyFinalBoocking
 {
     public partial class Cover : Form
     {
-        private readonly string userPasswdPath = @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
+        private readonly string userPasswdPath =
+            @"C:\\Users\\qwerd\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
+
+        private readonly string termsAcceptedPath =
+            @"C:\\Users\\qwerd\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\termsAccepted.txt";
 
         public Cover()
         {
             InitializeComponent();
+            ShowTermsOfUseIfNeeded();
+        }
+
+        private void ShowTermsOfUseIfNeeded()
+        {
+            if (!File.Exists(termsAcceptedPath) || File.ReadAllText(termsAcceptedPath).Trim() != "Accepted")
+            {
+                using (var termsForm = new TermsOfUseForm(termsAcceptedPath))
+                {
+                    termsForm.ShowDialog();
+                }
+            }
         }
 
         private void logInbtn_Click(object sender, EventArgs e)
@@ -25,9 +41,9 @@ namespace FinallyFinalBoocking
             if (string.IsNullOrEmpty(usernameInput) || string.IsNullOrEmpty(passwordInput))
             {
                 MessageBox.Show("Username and password cannot be empty.",
-                                "Validation Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
+                    "Validation Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -56,9 +72,9 @@ namespace FinallyFinalBoocking
             else
             {
                 MessageBox.Show("User data file not found!",
-                                "Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
@@ -73,9 +89,9 @@ namespace FinallyFinalBoocking
             else
             {
                 MessageBox.Show("Invalid username or password.",
-                                "Login Failed",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                    "Login Failed",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -86,7 +102,8 @@ namespace FinallyFinalBoocking
 
             if (string.IsNullOrEmpty(usernameInput) || string.IsNullOrEmpty(passwordInput))
             {
-                MessageBox.Show("Username and password cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Username and password cannot be empty.", "Validation Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -98,24 +115,27 @@ namespace FinallyFinalBoocking
             var lines = File.ReadAllLines(userPasswdPath);
             if (lines.Any(line => line.Split(';')[0].Equals(usernameInput, StringComparison.OrdinalIgnoreCase)))
             {
-                MessageBox.Show("Username already exists. Please choose a different one.", "Sign Up Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Username already exists. Please choose a different one.", "Sign Up Failed",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            string usersBookingFile = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
+            string usersBookingFile =
+                $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
             using (FileStream fs = File.Create(usersBookingFile))
             {
 
             }
 
-                string hashedPassword = HashPassword(passwordInput);
+            string hashedPassword = HashPassword(passwordInput);
 
             using (StreamWriter sw = File.AppendText(userPasswdPath))
             {
                 sw.WriteLine($"{usernameInput};{hashedPassword}");
             }
 
-            MessageBox.Show("Account successfully created! You can now log in.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Account successfully created! You can now log in.", "Success", MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         private string HashPassword(string password)
@@ -131,6 +151,67 @@ namespace FinallyFinalBoocking
         {
             Application.Exit();
         }
+
+
+        public class TermsOfUseForm : Form
+        {
+            private readonly string termsFilePath;
+            private CheckBox acceptCheckBox;
+            private Button okButton;
+
+            public TermsOfUseForm(string termsFilePath)
+            {
+                this.termsFilePath = termsFilePath;
+                InitializeComponents();
+            }
+
+            private void InitializeComponents()
+            {
+                this.Text = "Terms of Use";
+                this.Size = new System.Drawing.Size(400, 200);
+                this.StartPosition = FormStartPosition.CenterScreen;
+                this.FormBorderStyle = FormBorderStyle.FixedDialog;
+                this.MaximizeBox = false;
+
+                Label messageLabel = new Label()
+                {
+                    Text = "I accept the terms of use of the application.",
+                    AutoSize = true,
+                    Location = new System.Drawing.Point(20, 20)
+                };
+
+                acceptCheckBox = new CheckBox()
+                {
+                    Location = new System.Drawing.Point(20, 50)
+                };
+                acceptCheckBox.CheckedChanged += AcceptCheckBox_CheckedChanged;
+
+                okButton = new Button()
+                {
+                    Text = "OK",
+                    Location = new System.Drawing.Point(20, 80),
+                    Size = new System.Drawing.Size(50, 30),
+                    Enabled = false
+                };
+                okButton.Click += OkButton_Click;
+
+                this.Controls.Add(messageLabel);
+                this.Controls.Add(acceptCheckBox);
+                this.Controls.Add(okButton);
+            }
+
+            private void AcceptCheckBox_CheckedChanged(object sender, EventArgs e)
+            {
+                okButton.Enabled = acceptCheckBox.Checked;
+            }
+
+            private void OkButton_Click(object sender, EventArgs e)
+            {
+                File.WriteAllText(termsFilePath, "Accepted");
+                this.Close();
+            }
+        }
+
     }
 }
 
