@@ -54,7 +54,7 @@ namespace FinallyFinalBoocking
             textBox4.Location = new Point(5, 127);
             textBox4.Name = "textBox4";
             textBox4.ReadOnly = true;
-            textBox4.Size = new Size(160, 32);
+            textBox4.Size = new Size(160, 30);
             textBox4.TabIndex = 3;
             textBox4.TextChanged += textBox4_TextChanged;
             // 
@@ -66,7 +66,7 @@ namespace FinallyFinalBoocking
             textBox3.Location = new Point(5, 93);
             textBox3.Name = "textBox3";
             textBox3.ReadOnly = true;
-            textBox3.Size = new Size(160, 32);
+            textBox3.Size = new Size(160, 30);
             textBox3.TabIndex = 2;
             textBox3.TextChanged += textBox3_TextChanged;
             // 
@@ -78,7 +78,7 @@ namespace FinallyFinalBoocking
             textBox2.Location = new Point(5, 60);
             textBox2.Name = "textBox2";
             textBox2.ReadOnly = true;
-            textBox2.Size = new Size(160, 32);
+            textBox2.Size = new Size(160, 30);
             textBox2.TabIndex = 1;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
@@ -90,7 +90,7 @@ namespace FinallyFinalBoocking
             textBox1.Location = new Point(5, 27);
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
-            textBox1.Size = new Size(160, 32);
+            textBox1.Size = new Size(160, 30);
             textBox1.TabIndex = 0;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
@@ -101,9 +101,9 @@ namespace FinallyFinalBoocking
             exit3.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
             exit3.FlatStyle = FlatStyle.Flat;
             exit3.ForeColor = Color.White;
-            exit3.Location = new Point(3, 48);
+            exit3.Location = new Point(5, 45);
             exit3.Name = "exit3";
-            exit3.Size = new Size(159, 30);
+            exit3.Size = new Size(159, 32);
             exit3.TabIndex = 4;
             exit3.Text = "Exit";
             exit3.UseVisualStyleBackColor = false;
@@ -116,9 +116,9 @@ namespace FinallyFinalBoocking
             cancelBtn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
             cancelBtn.FlatStyle = FlatStyle.Flat;
             cancelBtn.ForeColor = Color.White;
-            cancelBtn.Location = new Point(3, 12);
+            cancelBtn.Location = new Point(5, 7);
             cancelBtn.Name = "cancelBtn";
-            cancelBtn.Size = new Size(159, 30);
+            cancelBtn.Size = new Size(159, 32);
             cancelBtn.TabIndex = 3;
             cancelBtn.Text = "Cancel";
             cancelBtn.UseVisualStyleBackColor = false;
@@ -130,7 +130,7 @@ namespace FinallyFinalBoocking
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label1.Location = new Point(42, 15);
             label1.Name = "label1";
-            label1.Size = new Size(133, 25);
+            label1.Size = new Size(115, 23);
             label1.TabIndex = 2;
             label1.Text = "Your Account";
             // 
@@ -140,7 +140,7 @@ namespace FinallyFinalBoocking
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label2.Location = new Point(510, 15);
             label2.Name = "label2";
-            label2.Size = new Size(143, 25);
+            label2.Size = new Size(124, 23);
             label2.TabIndex = 3;
             label2.Text = "Your Bookings";
             // 
@@ -150,7 +150,7 @@ namespace FinallyFinalBoocking
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label3.Location = new Point(59, 233);
             label3.Name = "label3";
-            label3.Size = new Size(78, 25);
+            label3.Size = new Size(69, 23);
             label3.TabIndex = 4;
             label3.Text = "Actions";
             label3.Click += label3_Click;
@@ -166,9 +166,14 @@ namespace FinallyFinalBoocking
             // 
             // button1
             // 
-            button1.Location = new Point(3, 81);
+            button1.BackColor = Color.RoyalBlue;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(5, 83);
             button1.Name = "button1";
-            button1.Size = new Size(159, 30);
+            button1.Size = new Size(159, 32);
             button1.TabIndex = 8;
             button1.Text = "Admin Page";
             button1.UseVisualStyleBackColor = true;
@@ -186,7 +191,7 @@ namespace FinallyFinalBoocking
             // 
             // AccountPage
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(9F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(952, 546);

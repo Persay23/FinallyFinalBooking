@@ -96,9 +96,6 @@
     <None Update="DumbStaffDB\Screenshot 2024-12-10 023140.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="DumbStaffDB\termsAccepted.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="DumbStaffDB\UserPasswdDumbDb.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
