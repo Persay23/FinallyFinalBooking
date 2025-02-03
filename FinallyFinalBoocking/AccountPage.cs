@@ -15,7 +15,6 @@ using Microsoft.VisualBasic.ApplicationServices;
 
 namespace FinallyFinalBoocking
 {
-    [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
     public partial class AccountPage : Form
     {
         private List<Room> _rooms = new List<Room>();
@@ -45,11 +44,6 @@ namespace FinallyFinalBoocking
                 _mainPage.Show();
             }
             this.Close();
-        }
-
-        private string GetDebuggerDisplay()
-        {
-            return ToString();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -218,20 +212,7 @@ namespace FinallyFinalBoocking
             if (File.Exists(currentUserFilePath))
             {
                 var allUserData = File.ReadAllLines(currentUserFilePath);
-                string currentUserData = null;
-
-                string userBookingsFilePath = FilePathHelper.GetFilePath($"users\\{CurrentUser.Username}.txt");
-                NumberOfBookingsCounter(userBookingsFilePath);
-
-                foreach (var line in allUserData)
-                {
-                    var userData = line.Split(';');
-                    if (userData.Length >= 3 && userData[0].Trim() == CurrentUser.Username)
-                    {
-                        currentUserData = line;
-                        break;
-                    }
-                }
+                string currentUserData = allUserData.FirstOrDefault(line => line.Split(';')[0].Trim() == CurrentUser.Username);
 
                 if (currentUserData != null)
                 {
@@ -244,6 +225,9 @@ namespace FinallyFinalBoocking
                 {
                     MessageBox.Show("User data not found for the logged-in user!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                string userBookingsFilePath = FilePathHelper.GetFilePath($"users\\{CurrentUser.Username}.txt");
+                NumberOfBookingsCounter(userBookingsFilePath);
             }
             else
             {
@@ -297,6 +281,8 @@ namespace FinallyFinalBoocking
             LoadUserData();
             string loggedInUsername = GetLoggedInUsername();
             ShowAdminBttn(loggedInUsername);
+            button3.Click += SaveUserData;
+            button2.Click += EnableEditing;
         }
 
         private void ShowAdminBttn(string loggedInUsername)
@@ -315,10 +301,6 @@ namespace FinallyFinalBoocking
             return CurrentUser.Username;
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -339,6 +321,53 @@ namespace FinallyFinalBoocking
             Cover coverPage = new Cover();
             coverPage.Show();
 
+        }
+
+        private void SaveUserData(object sender, EventArgs e)
+        {
+            string currentUserFilePath = FilePathHelper.GetFilePath("users\\usersInfo.txt");
+
+            if (!File.Exists(currentUserFilePath))
+            {
+                MessageBox.Show("User data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var allLines = File.ReadAllLines(currentUserFilePath).ToList();
+            for (int i = 0; i < allLines.Count; i++)
+            {
+                var userData = allLines[i].Split(';');
+                if (userData.Length >= 3 && userData[0].Trim() == CurrentUser.Username)
+                {
+                    allLines[i] = $"{textBox1.Text.Trim()};{textBox2.Text.Trim()};{textBox3.Text.Trim()}";
+                    break;
+                }
+            }
+
+            File.WriteAllLines(currentUserFilePath, allLines);
+
+            MessageBox.Show("User information updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void EnableEditing(object sender, EventArgs e)
+        {
+            textBox1.Enabled = false;
+            textBox2.Enabled = false;
+            textBox3.Enabled = true;
+
+            button2.Enabled = false;
+            button3.Enabled = true;
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button2.Click += EnableEditing;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            button3.Click += SaveUserData;
         }
     }
 }

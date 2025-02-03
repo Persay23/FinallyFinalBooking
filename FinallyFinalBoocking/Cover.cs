@@ -108,7 +108,7 @@ namespace FinallyFinalBoocking
                 return;
             }
 
-            string usersBookingFile = $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
+            string usersBookingFile = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
 
             if (string.IsNullOrEmpty(usersBookingFile))
             {

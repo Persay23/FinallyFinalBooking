@@ -62,3 +62,4 @@
 1; I dream of staying in this place again
 4; The stay was magnificent
 17; Normal
+20; comfortable

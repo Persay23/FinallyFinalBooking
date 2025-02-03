@@ -29,6 +29,8 @@ namespace FinallyFinalBoocking
             panel1 = new Panel();
             button1 = new Button();
             panel2 = new Panel();
+            button2 = new Button();
+            button3 = new Button();
             groupBox1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -52,7 +54,6 @@ namespace FinallyFinalBoocking
             textBox4.ForeColor = Color.Black;
             textBox4.Location = new Point(5, 127);
             textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
             textBox4.Size = new Size(160, 32);
             textBox4.TabIndex = 3;
             // 
@@ -63,7 +64,6 @@ namespace FinallyFinalBoocking
             textBox3.ForeColor = Color.Black;
             textBox3.Location = new Point(5, 93);
             textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
             textBox3.Size = new Size(160, 32);
             textBox3.TabIndex = 2;
             // 
@@ -74,7 +74,6 @@ namespace FinallyFinalBoocking
             textBox2.ForeColor = Color.Black;
             textBox2.Location = new Point(5, 60);
             textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
             textBox2.Size = new Size(160, 32);
             textBox2.TabIndex = 1;
             // 
@@ -85,7 +84,6 @@ namespace FinallyFinalBoocking
             textBox1.ForeColor = Color.Black;
             textBox1.Location = new Point(5, 27);
             textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
             textBox1.Size = new Size(160, 32);
             textBox1.TabIndex = 0;
             // 
@@ -168,10 +166,31 @@ namespace FinallyFinalBoocking
             panel2.Controls.Add(button1);
             panel2.Controls.Add(logOutbttn);
             panel2.Controls.Add(exit3);
-            panel2.Location = new Point(12, 279);
+            panel2.Location = new Point(12, 396);
             panel2.Name = "panel2";
             panel2.Size = new Size(170, 121);
             panel2.TabIndex = 8;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(18, 226);
+            button2.Name = "button2";
+            button2.Size = new Size(159, 30);
+            button2.TabIndex = 9;
+            button2.Text = "Edit";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button3
+            // 
+            button3.Enabled = false;
+            button3.Location = new Point(18, 262);
+            button3.Name = "button3";
+            button3.Size = new Size(159, 30);
+            button3.TabIndex = 10;
+            button3.Text = "Save";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // AccountPage
             // 
@@ -179,6 +198,8 @@ namespace FinallyFinalBoocking
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(952, 546);
+            Controls.Add(button3);
+            Controls.Add(button2);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(label2);
@@ -209,5 +230,7 @@ namespace FinallyFinalBoocking
         private TextBox textBox1;
         private Button button1;
         private Panel panel2;
+        private Button button2;
+        private Button button3;
     }
 }
