@@ -56,7 +56,6 @@ namespace FinallyFinalBoocking
             textBox4.ReadOnly = true;
             textBox4.Size = new Size(160, 32);
             textBox4.TabIndex = 3;
-            textBox4.TextChanged += textBox4_TextChanged;
             // 
             // textBox3
             // 
@@ -68,7 +67,6 @@ namespace FinallyFinalBoocking
             textBox3.ReadOnly = true;
             textBox3.Size = new Size(160, 32);
             textBox3.TabIndex = 2;
-            textBox3.TextChanged += textBox3_TextChanged;
             // 
             // textBox2
             // 
@@ -80,7 +78,6 @@ namespace FinallyFinalBoocking
             textBox2.ReadOnly = true;
             textBox2.Size = new Size(160, 32);
             textBox2.TabIndex = 1;
-            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // textBox1
             // 
@@ -92,7 +89,6 @@ namespace FinallyFinalBoocking
             textBox1.ReadOnly = true;
             textBox1.Size = new Size(160, 32);
             textBox1.TabIndex = 0;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // exit3
             // 

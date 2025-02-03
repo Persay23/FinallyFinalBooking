@@ -93,10 +93,10 @@ namespace FinallyFinalBoocking
 
         private void buyBtn_Click(object sender, EventArgs e)
         {
-            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
-            string userRoomsFilePath = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt";
+            string roomsFilePath = GetDatabaseFilePath("Rooms.txt");
+            string userRoomsFilePath = GetDatabaseFilePath($"users\\{CurrentUser.Username}.txt");
 
-            if (roomsFilePath == null || userRoomsFilePath == null)
+            if (string.IsNullOrEmpty(roomsFilePath) || string.IsNullOrEmpty(userRoomsFilePath))
                 return;
 
             if (!File.Exists(roomsFilePath) || !File.Exists(userRoomsFilePath))
@@ -119,10 +119,11 @@ namespace FinallyFinalBoocking
             new AccountPage(mainPage).Show();
             Hide();
         }
+
         private void RemoveLine()
         {
-            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
-            if (roomsFilePath == null || !File.Exists(roomsFilePath))
+            string roomsFilePath = GetDatabaseFilePath("Rooms.txt");
+            if (string.IsNullOrEmpty(roomsFilePath) || !File.Exists(roomsFilePath))
                 return;
 
             string selectedRoomText = $"{_selectedRoom.HotelId}; {_selectedRoom.HotelName}; {_selectedRoom.HotelLocation}; {_selectedRoom.HotelDateAvb}; {_selectedRoom.HotelAmountOfRooms}; {_selectedRoom.HotelCostForNight};";
@@ -209,8 +210,8 @@ namespace FinallyFinalBoocking
             hotelInfoLabel = new Label
             {
                 AutoSize = true,
-                Location = new Point(500, 120),
-                Font = new Font("Arial", 12, FontStyle.Bold)
+                Location = new Point(233, 140),
+                Font = new Font("Arial", 12, FontStyle.Regular)
             };
             Controls.Add(hotelInfoLabel);
         }
@@ -259,3 +260,4 @@ namespace FinallyFinalBoocking
         }
     }
 }
+

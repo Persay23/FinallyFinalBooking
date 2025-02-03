@@ -33,9 +33,9 @@
             // 
             // personalpictureBox
             // 
-            personalpictureBox.Location = new Point(12, 87);
+            personalpictureBox.Location = new Point(11, 83);
             personalpictureBox.Name = "personalpictureBox";
-            personalpictureBox.Size = new Size(225, 210);
+            personalpictureBox.Size = new Size(200, 200);
             personalpictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             personalpictureBox.TabIndex = 10;
             personalpictureBox.TabStop = false;
@@ -48,9 +48,9 @@
             contactBtn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
             contactBtn.FlatStyle = FlatStyle.Flat;
             contactBtn.ForeColor = Color.White;
-            contactBtn.Location = new Point(397, 533);
+            contactBtn.Location = new Point(257, 508);
             contactBtn.Name = "contactBtn";
-            contactBtn.Size = new Size(157, 36);
+            contactBtn.Size = new Size(140, 34);
             contactBtn.TabIndex = 7;
             contactBtn.Text = "Contact Us";
             contactBtn.UseVisualStyleBackColor = false;
@@ -63,9 +63,9 @@
             commentBtn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
             commentBtn.FlatStyle = FlatStyle.Flat;
             commentBtn.ForeColor = Color.White;
-            commentBtn.Location = new Point(716, 533);
+            commentBtn.Location = new Point(494, 508);
             commentBtn.Name = "commentBtn";
-            commentBtn.Size = new Size(157, 36);
+            commentBtn.Size = new Size(140, 34);
             commentBtn.TabIndex = 6;
             commentBtn.Text = "Leave a Comment";
             commentBtn.UseVisualStyleBackColor = false;
@@ -78,9 +78,9 @@
             buyBtn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
             buyBtn.FlatStyle = FlatStyle.Flat;
             buyBtn.ForeColor = Color.White;
-            buyBtn.Location = new Point(80, 533);
+            buyBtn.Location = new Point(11, 508);
             buyBtn.Name = "buyBtn";
-            buyBtn.Size = new Size(157, 36);
+            buyBtn.Size = new Size(140, 34);
             buyBtn.TabIndex = 5;
             buyBtn.Text = "Go to Checkout";
             buyBtn.UseVisualStyleBackColor = false;
@@ -88,10 +88,10 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(12, 714);
+            textBox2.Location = new Point(11, 571);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(926, 121);
+            textBox2.Size = new Size(623, 63);
             textBox2.TabIndex = 4;
             textBox2.TextChanged += textBox2_TextChanged;
             // 
@@ -99,9 +99,9 @@
             // 
             hotelNameLabel.AutoSize = true;
             hotelNameLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            hotelNameLabel.Location = new Point(379, 9);
+            hotelNameLabel.Location = new Point(233, 18);
             hotelNameLabel.Name = "hotelNameLabel";
-            hotelNameLabel.Size = new Size(204, 30);
+            hotelNameLabel.Size = new Size(189, 28);
             hotelNameLabel.TabIndex = 3;
             hotelNameLabel.Text = "Name of the Hotel";
             hotelNameLabel.Click += hotelNameLabel_Click;
@@ -113,9 +113,9 @@
             submitBtn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
             submitBtn.FlatStyle = FlatStyle.Flat;
             submitBtn.ForeColor = Color.White;
-            submitBtn.Location = new Point(397, 848);
+            submitBtn.Location = new Point(257, 659);
             submitBtn.Name = "submitBtn";
-            submitBtn.Size = new Size(157, 36);
+            submitBtn.Size = new Size(140, 34);
             submitBtn.TabIndex = 2;
             submitBtn.Text = "Submit";
             submitBtn.UseVisualStyleBackColor = false;
@@ -128,9 +128,9 @@
             reload2.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
             reload2.FlatStyle = FlatStyle.Flat;
             reload2.ForeColor = Color.White;
-            reload2.Location = new Point(80, 848);
+            reload2.Location = new Point(11, 659);
             reload2.Name = "reload2";
-            reload2.Size = new Size(157, 36);
+            reload2.Size = new Size(140, 34);
             reload2.TabIndex = 1;
             reload2.Text = "Reload";
             reload2.UseVisualStyleBackColor = false;
@@ -143,9 +143,9 @@
             exit2.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
             exit2.FlatStyle = FlatStyle.Flat;
             exit2.ForeColor = Color.White;
-            exit2.Location = new Point(716, 848);
+            exit2.Location = new Point(494, 659);
             exit2.Name = "exit2";
-            exit2.Size = new Size(157, 36);
+            exit2.Size = new Size(140, 34);
             exit2.TabIndex = 0;
             exit2.Text = "Exit";
             exit2.UseVisualStyleBackColor = false;
@@ -154,27 +154,27 @@
             // hotelInfoLabel
             // 
             hotelInfoLabel.AutoSize = true;
-            hotelInfoLabel.Location = new Point(775, 87);
+            hotelInfoLabel.Location = new Point(689, 83);
             hotelInfoLabel.Name = "hotelInfoLabel";
-            hotelInfoLabel.Size = new Size(0, 21);
+            hotelInfoLabel.Size = new Size(0, 20);
             hotelInfoLabel.TabIndex = 11;
             // 
             // descriptionTextBox
             // 
-            descriptionTextBox.Location = new Point(12, 341);
+            descriptionTextBox.Location = new Point(11, 325);
             descriptionTextBox.Multiline = true;
             descriptionTextBox.Name = "descriptionTextBox";
             descriptionTextBox.ReadOnly = true;
             descriptionTextBox.ScrollBars = ScrollBars.Vertical;
-            descriptionTextBox.Size = new Size(926, 160);
+            descriptionTextBox.Size = new Size(623, 153);
             descriptionTextBox.TabIndex = 13;
             // 
             // PropertysPage
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(953, 921);
+            ClientSize = new Size(651, 724);
             Controls.Add(descriptionTextBox);
             Controls.Add(hotelInfoLabel);
             Controls.Add(exit2);
