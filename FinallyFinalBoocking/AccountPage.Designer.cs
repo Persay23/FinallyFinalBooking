@@ -26,7 +26,6 @@ namespace FinallyFinalBoocking
             logOutbttn = new Button();
             label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
             panel1 = new Panel();
             button1 = new Button();
             panel2 = new Panel();
@@ -56,7 +55,6 @@ namespace FinallyFinalBoocking
             textBox4.ReadOnly = true;
             textBox4.Size = new Size(160, 32);
             textBox4.TabIndex = 3;
-            textBox4.TextChanged += textBox4_TextChanged;
             // 
             // textBox3
             // 
@@ -68,7 +66,6 @@ namespace FinallyFinalBoocking
             textBox3.ReadOnly = true;
             textBox3.Size = new Size(160, 32);
             textBox3.TabIndex = 2;
-            textBox3.TextChanged += textBox3_TextChanged;
             // 
             // textBox2
             // 
@@ -80,7 +77,6 @@ namespace FinallyFinalBoocking
             textBox2.ReadOnly = true;
             textBox2.Size = new Size(160, 32);
             textBox2.TabIndex = 1;
-            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // textBox1
             // 
@@ -92,7 +88,6 @@ namespace FinallyFinalBoocking
             textBox1.ReadOnly = true;
             textBox1.Size = new Size(160, 32);
             textBox1.TabIndex = 0;
-            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // exit3
             // 
@@ -128,7 +123,7 @@ namespace FinallyFinalBoocking
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label1.Location = new Point(42, 15);
+            label1.Location = new Point(30, 15);
             label1.Name = "label1";
             label1.Size = new Size(133, 25);
             label1.TabIndex = 2;
@@ -143,17 +138,6 @@ namespace FinallyFinalBoocking
             label2.Size = new Size(143, 25);
             label2.TabIndex = 3;
             label2.Text = "Your Bookings";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            label3.Location = new Point(59, 233);
-            label3.Name = "label3";
-            label3.Size = new Size(78, 25);
-            label3.TabIndex = 4;
-            label3.Text = "Actions";
-            label3.Click += label3_Click;
             // 
             // panel1
             // 
@@ -197,7 +181,6 @@ namespace FinallyFinalBoocking
             ClientSize = new Size(952, 546);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(groupBox1);
@@ -217,7 +200,6 @@ namespace FinallyFinalBoocking
         private GroupBox groupBox1;
         private Label label1;
         private Label label2;
-        private Label label3;
         private Button exit3;
         private Button logOutbttn;
         private Panel panel1;

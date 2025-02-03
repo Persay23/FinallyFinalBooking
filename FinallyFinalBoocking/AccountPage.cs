@@ -225,24 +225,64 @@ namespace FinallyFinalBoocking
 
         private void LoadUserData()
         {
-
             string currentUserFilePath = GetCurrentUserInfoFilePath();
 
             if (File.Exists(currentUserFilePath))
             {
-                var userData = File.ReadAllText(currentUserFilePath).Split(';');
-                if (userData.Length >= 4)
+                var allUserData = File.ReadAllLines(currentUserFilePath);
+                string currentUserData = null;
+
+                string userBookingsFilePath = GetUserBookingsFilePath(CurrentUser.Username);
+                NumberOfBookingsCounter(userBookingsFilePath);
+
+                foreach (var line in allUserData)
                 {
+                    var userData = line.Split(';');
+                    if (userData.Length >= 3 && userData[0].Trim() == CurrentUser.Username)
+                    {
+                        currentUserData = line;
+                        break;
+                    }
+                }
+
+                if (currentUserData != null)
+                {
+                    var userData = currentUserData.Split(';');
                     textBox1.Text = userData[0].Trim();
                     textBox2.Text = userData[1].Trim();
                     textBox3.Text = userData[2].Trim();
-                    textBox4.Text = userData[3].Trim();
+                }
+                else
+                {
+                    MessageBox.Show("User data not found for the logged-in user!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
                 MessageBox.Show("User data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void NumberOfBookingsCounter(string userBookingsFilePath)
+        {
+            if (File.Exists(userBookingsFilePath))
+            {
+
+                var lines = File.ReadLines(userBookingsFilePath);
+                var numberOfBookings = lines.Count();
+
+                textBox4.Text = numberOfBookings.ToString();
+            }
+            else
+            {
+                MessageBox.Show("User bookings file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string GetUserBookingsFilePath(string username)
+        {
+            // Assuming the bookings are stored in a separate file per user
+            return $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{username}.txt";
         }
 
         private string GetCurrentUserFilePath()
@@ -294,26 +334,6 @@ namespace FinallyFinalBoocking
         public void SetSelectedRoom(Room room)
         {
             SelectedRoom = room;
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void AccountPage_Load(object sender, EventArgs e)
