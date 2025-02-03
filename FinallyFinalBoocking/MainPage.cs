@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -181,8 +182,8 @@ namespace FinallyFinalBoocking
         {
             scrollablePanel.Controls.Clear();
 
-            int groupBoxHeight = 150;
-            int spacing = 10;
+            int groupBoxHeight = 200;
+            int spacing = 75;
             int currentY = 10;
 
             foreach (var room in rooms)
@@ -191,52 +192,58 @@ namespace FinallyFinalBoocking
                 {
                     Text = room.HotelName,
                     AutoSize = true,
-                    Location = new Point((scrollablePanel.Width - 500) / 2, currentY),
+                    Location = new Point((scrollablePanel.Width - 625) / 2, currentY),
                 };
 
                 Label locationLabel = new Label
                 {
                     Text = $"Location: {room.HotelLocation}",
-                    Location = new Point(10, 20),
+                    Location = new Point(10, 40),
                     AutoSize = true
                 };
 
                 Label datesLabel = new Label
                 {
                     Text = $"Available Dates: {room.HotelDateAvb}",
-                    Location = new Point(10, 40),
+                    Location = new Point(10, 80),
                     AutoSize = true
                 };
 
                 Label roomsLabel = new Label
                 {
                     Text = $"Rooms: {room.HotelAmountOfRooms}",
-                    Location = new Point(10, 60),
+                    Location = new Point(10, 120),
                     AutoSize = true
                 };
 
                 Label priceLabel = new Label
                 {
                     Text = $"Price: {room.HotelCostForNight} USD/night",
-                    Location = new Point(10, 80),
+                    Location = new Point(10, 160),
                     AutoSize = true
                 };
 
                 Button button = new Button
                 {
                     Text = "Show",
-                    Location = new Point(10, 100),
+                    Location = new Point(10, 200),
                     AutoSize = true,
-                    Tag = room
+                    Tag = room,
+                    BackColor = Color.RoyalBlue,
+                    FlatAppearance = { BorderSize = 0, MouseDownBackColor = Color.DodgerBlue, MouseOverBackColor = Color.DodgerBlue },
+                    FlatStyle = FlatStyle.Flat,
+                    ForeColor = Color.White,
+                    UseVisualStyleBackColor = false
                 };
                 button.Click += ShowPropertyPage;
 
                 PictureBox pictureBox = new PictureBox
                 {
-                    Size = new Size(200, 110),
-                    Location = new Point(320, 20),
+                    Size = new Size(200, 200),
+                    Location = new Point(360, 35),
                     BorderStyle = BorderStyle.Fixed3D,
                     SizeMode = PictureBoxSizeMode.StretchImage
+                    
                 };
 
                 string imagePath = null;

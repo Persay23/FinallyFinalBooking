@@ -99,59 +99,69 @@ namespace FinallyFinalBoocking
                 {
                     Text = reservedRoom.HotelName,
                     AutoSize = true,
-                    Location = new Point((panel1.Width - 500) / 2, currentY),
+                    Location = new Point((panel1.Width - 570) / 2, currentY),
                 };
 
                 Label locationLabel = new Label
                 {
                     Text = $"Location: {reservedRoom.HotelLocation}",
-                    Location = new Point(10, 20),
+                    Location = new Point(10, 40),
                     AutoSize = true
                 };
 
                 Label datesLabel = new Label
                 {
                     Text = $"Available Dates: {reservedRoom.HotelDateAvb}",
-                    Location = new Point(10, 40),
+                    Location = new Point(10, 80),
                     AutoSize = true
                 };
 
                 Label roomsLabel = new Label
                 {
                     Text = $"Rooms: {reservedRoom.HotelAmountOfRooms}",
-                    Location = new Point(10, 60),
+                    Location = new Point(10, 120),
                     AutoSize = true
                 };
 
                 Label priceLabel = new Label
                 {
                     Text = $"Price: {reservedRoom.HotelCostForNight} USD/night",
-                    Location = new Point(10, 80),
+                    Location = new Point(10, 160),
                     AutoSize = true
                 };
 
                 Button cancelButton = new Button
                 {
                     Text = "Cancel",
-                    Location = new Point(10, 100),
+                    Location = new Point(10, 200),
                     AutoSize = true,
-                    Tag = reservedRoom
+                    Tag = reservedRoom,
+                    BackColor = Color.RoyalBlue,
+                    FlatAppearance = { BorderSize = 0, MouseDownBackColor = Color.DodgerBlue, MouseOverBackColor = Color.DodgerBlue },
+                    FlatStyle = FlatStyle.Flat,
+                    ForeColor = Color.White,
+                    UseVisualStyleBackColor = false
                 };
                 //cancelBtn.Click += RemoveLine();
 
                 Button showPropButton = new Button
                 {
                     Text = "Open Hotel",
-                    Location = new Point(100, 100),
+                    Location = new Point(100, 200),
                     AutoSize = true,
-                    Tag = reservedRoom
+                    Tag = reservedRoom,
+                    BackColor = Color.RoyalBlue,
+                    FlatAppearance = { BorderSize = 0, MouseDownBackColor = Color.DodgerBlue, MouseOverBackColor = Color.DodgerBlue },
+                    FlatStyle = FlatStyle.Flat,
+                    ForeColor = Color.White,
+                    UseVisualStyleBackColor = false
                 };
                 showPropButton.Click += ShowPropertyPage;
 
                 PictureBox pictureBox = new PictureBox
                 {
-                    Size = new Size(200, 110),
-                    Location = new Point(320, 20),
+                    Size = new Size(200, 200),
+                    Location = new Point(360, 35),
                     BorderStyle = BorderStyle.Fixed3D,
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
