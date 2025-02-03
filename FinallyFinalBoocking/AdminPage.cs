@@ -89,7 +89,20 @@ namespace FinallyFinalBoocking
             lines.RemoveAll(line => line.StartsWith(usernameToRemove + ";"));
             File.WriteAllLines(usersFilePath, lines);
 
-            MessageBox.Show("User removed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            string userFilePath = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameToRemove}.txt";
+
+            if (File.Exists(userFilePath) && new FileInfo(userFilePath).Length > 0)
+            {
+
+                var userFileContent = File.ReadAllLines(userFilePath).ToList();
+
+                string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+                File.AppendAllLines(roomsFilePath, userFileContent);
+
+                File.Delete(userFilePath);
+            }
+
+            MessageBox.Show("User and their associated data file removed successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void returnToAcc_Click(object sender, EventArgs e)
