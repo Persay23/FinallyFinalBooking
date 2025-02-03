@@ -63,3 +63,5 @@
 4; The stay was magnificent
 17; Normal
 20; comfortable
+3; something was amazing
+6; pretty place

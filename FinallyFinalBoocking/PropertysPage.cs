@@ -29,8 +29,6 @@ namespace FinallyFinalBoocking
             string imagePath = FilePathHelper.GetFilePath($"images\\{_selectedRoom.HotelId}.png");
             if (imagePath == null) return;
 
-            //string imagePath = Path.Combine(imagesFolderPath, $"{_selectedRoom.HotelId}.png");
-
             if (File.Exists(imagePath))
             {
                 personalpictureBox.Image = Image.FromFile(imagePath);
@@ -192,8 +190,6 @@ namespace FinallyFinalBoocking
                                   $"Rooms Available: {_selectedRoom.HotelAmountOfRooms}\n" +
                                   $"Price per Night: {_selectedRoom.HotelCostForNight} USD";
             hotelNameLabel.Text = _selectedRoom.HotelName;
-
-
         }
 
         private void HotelLable()
@@ -207,47 +203,16 @@ namespace FinallyFinalBoocking
             Controls.Add(hotelInfoLabel);
         }
 
-
-        private void personalpictureBox_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void PropertysPage_Load(object sender, EventArgs e)
         {
             textBox2.Visible = false;
             submitBtn.Visible = false;
         }
 
-        private void descriptionTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void hotelNameLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void commentBtn_Click(object sender, EventArgs e)
         {
             textBox2.Visible = !textBox2.Visible;
             submitBtn.Visible = !submitBtn.Visible;
-        }
-
-        private void reserveBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void descriptionPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

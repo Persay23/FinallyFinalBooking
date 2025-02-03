@@ -68,8 +68,7 @@ namespace FinallyFinalBoocking
                 var hotelDateAvb = split[3];
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
-                var reservedOrNot = true;
-                var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
+                var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost);
                 _rooms.Add(room);
             }
 
@@ -150,8 +149,7 @@ namespace FinallyFinalBoocking
                     parts[2],
                     parts[3],
                     int.Parse(parts[4]),
-                    int.Parse(parts[5]),
-                    true
+                    int.Parse(parts[5])
                 ))
                 .ToList();
 

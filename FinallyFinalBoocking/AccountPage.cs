@@ -74,8 +74,7 @@ namespace FinallyFinalBoocking
                 var hotelDateAvb = split[3];
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
-                bool reservedOrNot = true;
-                var reservedRoom = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
+                var reservedRoom = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost);
                 _rooms.Add(reservedRoom);
             }
 

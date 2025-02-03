@@ -39,7 +39,6 @@
             personalpictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             personalpictureBox.TabIndex = 10;
             personalpictureBox.TabStop = false;
-            personalpictureBox.Click += personalpictureBox_Click;
             // 
             // contactBtn
             // 
@@ -93,7 +92,6 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(623, 63);
             textBox2.TabIndex = 4;
-            textBox2.TextChanged += textBox2_TextChanged;
             // 
             // hotelNameLabel
             // 
@@ -104,7 +102,6 @@
             hotelNameLabel.Size = new Size(217, 29);
             hotelNameLabel.TabIndex = 3;
             hotelNameLabel.Text = "Name of the Hotel";
-            hotelNameLabel.Click += hotelNameLabel_Click;
             // 
             // submitBtn
             // 
