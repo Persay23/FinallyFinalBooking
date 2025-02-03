@@ -196,7 +196,7 @@ namespace FinallyFinalBoocking
             if (clickedButton == null || !(clickedButton.Tag is Room selectedRoom))
                 return;
             string userFilePath = GetCurrentUserFilePath();
-            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            string roomsFilePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
 
             if (userFilePath == null || roomsFilePath == null || !File.Exists(userFilePath))
             {
@@ -282,7 +282,7 @@ namespace FinallyFinalBoocking
         private string GetUserBookingsFilePath(string username)
         {
             // Assuming the bookings are stored in a separate file per user
-            return $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{username}.txt";
+            return $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{username}.txt";
         }
 
         private string GetCurrentUserFilePath()

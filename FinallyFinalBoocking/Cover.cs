@@ -14,8 +14,8 @@ namespace FinallyFinalBoocking
     {
 
         private readonly string userPasswdPath =
-            @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
-        private readonly string usersInfoPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\usersInfo.txt";
+            @"C:\\Users\\qwerd\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
+        private readonly string usersInfoPath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\usersInfo.txt";
 
         public Cover()
         {
@@ -110,7 +110,7 @@ namespace FinallyFinalBoocking
             }
 
             string usersBookingFile =
-                $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
+                $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
             using (FileStream fs = File.Create(usersBookingFile))
             {
 
