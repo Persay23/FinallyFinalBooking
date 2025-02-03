@@ -23,21 +23,13 @@ namespace FinallyFinalBoocking
             HotelLable();
             DisplayHotelInfo();
         }
-
-        private string GetDatabaseFilePath(string fileName)
-        {
-            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            DirectoryInfo dir = new DirectoryInfo(baseDir);
-
-            return Path.Combine(dir.FullName, "DumbStaffDB", fileName);
-        }
-
+        
         private void LoadHotelImage()
         {
-            string imagesFolderPath = GetDatabaseFilePath("images");
-            if (imagesFolderPath == null) return;
+            string imagePath = FilePathHelper.GetFilePath($"images\\{_selectedRoom.HotelId}.png");
+            if (imagePath == null) return;
 
-            string imagePath = Path.Combine(imagesFolderPath, $"{_selectedRoom.HotelId}.png");
+            //string imagePath = Path.Combine(imagesFolderPath, $"{_selectedRoom.HotelId}.png");
 
             if (File.Exists(imagePath))
             {
@@ -48,7 +40,7 @@ namespace FinallyFinalBoocking
 
         private void LoadReviews()
         {
-            string reviewsFilePath = GetDatabaseFilePath("AllDescriptios.txt");
+            string reviewsFilePath = FilePathHelper.GetFilePath("AllDescriptios.txt");
 
             if (string.IsNullOrEmpty(reviewsFilePath) || !File.Exists(reviewsFilePath))
             {
@@ -93,8 +85,8 @@ namespace FinallyFinalBoocking
 
         private void buyBtn_Click(object sender, EventArgs e)
         {
-            string roomsFilePath = GetDatabaseFilePath("Rooms.txt");
-            string userRoomsFilePath = GetDatabaseFilePath($"users\\{CurrentUser.Username}.txt");
+            string roomsFilePath = FilePathHelper.GetFilePath("Rooms.txt");
+            string userRoomsFilePath = FilePathHelper.GetFilePath($"users\\{CurrentUser.Username}.txt");
 
             if (string.IsNullOrEmpty(roomsFilePath) || string.IsNullOrEmpty(userRoomsFilePath))
                 return;
@@ -119,10 +111,9 @@ namespace FinallyFinalBoocking
             new AccountPage(mainPage).Show();
             Hide();
         }
-
         private void RemoveLine()
         {
-            string roomsFilePath = GetDatabaseFilePath("Rooms.txt");
+            string roomsFilePath = FilePathHelper.GetFilePath("Rooms.txt");
             if (string.IsNullOrEmpty(roomsFilePath) || !File.Exists(roomsFilePath))
                 return;
 
@@ -131,8 +122,8 @@ namespace FinallyFinalBoocking
             var tempFile = Path.GetTempFileName();
 
             var linesToKeep = File.ReadLines(roomsFilePath)
-                                  .Where(line => !line.Trim().StartsWith($"{_selectedRoom.HotelId};"))
-                                  .ToList();
+                .Where(line => !line.Trim().StartsWith($"{_selectedRoom.HotelId};"))
+                .ToList();
 
             File.WriteAllLines(tempFile, linesToKeep);
             File.Delete(roomsFilePath);
@@ -142,7 +133,7 @@ namespace FinallyFinalBoocking
 
         private void contactBtn_Click(object sender, EventArgs e)
         {
-            string contactFilePath = GetDatabaseFilePath("ContactInfo_rooms.txt");
+            string contactFilePath = FilePathHelper.GetFilePath("ContactInfo_rooms.txt");
             if (contactFilePath == null || !File.Exists(contactFilePath))
             {
                 MessageBox.Show("Contact information not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -177,7 +168,7 @@ namespace FinallyFinalBoocking
                 return;
             }
 
-            string reviewsFilePath = GetDatabaseFilePath("AllDescriptios.txt");
+            string reviewsFilePath = FilePathHelper.GetFilePath("AllDescriptios.txt");
             if (reviewsFilePath == null)
                 return;
 
@@ -260,4 +251,3 @@ namespace FinallyFinalBoocking
         }
     }
 }
-
