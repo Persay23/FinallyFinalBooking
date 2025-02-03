@@ -1,2 +1,5 @@
-user_1;password1;user_1@domain.com;1;
-user_2;password2;user_2@domain.com;2;
+user_1;password1;user_1@domain.com;
+user_2;password2;user_2@domain.com;
+user_5;password5;user_5@domain.com;
+user_6;password6;user_6@domain.com;
+admin;admin;admin@domain.com;
