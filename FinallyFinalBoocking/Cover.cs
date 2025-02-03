@@ -4,6 +4,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using FinallyFinalBoocking.DumbStaffDB.users;
 
 namespace FinallyFinalBoocking
@@ -11,11 +13,7 @@ namespace FinallyFinalBoocking
     public partial class Cover : Form
     {
         private readonly string userPasswdPath =
-            @"C:\\Users\\qwerd\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
-
-        private readonly string termsAcceptedPath =
-            @"C:\\Users\\qwerd\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\termsAccepted.txt";
-
+            @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
         public Cover()
         {
             InitializeComponent();
@@ -24,6 +22,8 @@ namespace FinallyFinalBoocking
 
         private void ShowTermsOfUseIfNeeded()
         {
+
+            var termsAcceptedPath = @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\termsAccepted.txt";
             if (!File.Exists(termsAcceptedPath) || File.ReadAllText(termsAcceptedPath).Trim() != "Accepted")
             {
                 using (var termsForm = new TermsOfUseForm(termsAcceptedPath))
@@ -121,7 +121,7 @@ namespace FinallyFinalBoocking
             }
 
             string usersBookingFile =
-                $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
+                $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
             using (FileStream fs = File.Create(usersBookingFile))
             {
 

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace FinallyFinalBoocking
     {
         private List<Room> _rooms = new List<Room>();
         private bool roomsLoaded = false;
+
         public Room SelectedRoom { get; private set; }
         public MainPage()
         {
@@ -25,6 +27,11 @@ namespace FinallyFinalBoocking
         private void MainPage_Load(object sender, EventArgs e)
         {
             RefreshHotelList();
+            AddComboBox();
+        }
+
+        private void AddComboBox()
+        {
             comboBoxFilter.Items.Add("By Name ↓");
             comboBoxFilter.Items.Add("By Name ↑");
             comboBoxFilter.Items.Add("By Price ↓");
@@ -32,13 +39,13 @@ namespace FinallyFinalBoocking
             comboBoxFilter.Items.Add("By Rooms ↓");
             comboBoxFilter.Items.Add("By Rooms ↑");
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             var accountPage = new AccountPage(this);
             accountPage.Show();
             this.Hide();
         }
-
 
         private void openbtn_Click(object sender, EventArgs e)
         {
@@ -71,7 +78,7 @@ namespace FinallyFinalBoocking
                 var hotelDateAvb = split[3];
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
-                var reservedOrNot = bool.Parse(split[6]);
+                var reservedOrNot = true;
                 var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
                 _rooms.Add(room);
             }
@@ -79,8 +86,6 @@ namespace FinallyFinalBoocking
             roomsLoaded = true;
             hotelsScrollMenu(_rooms);
         }
-
-
 
         private void Exitbtn2_Click(object sender, EventArgs e)
         {
@@ -149,9 +154,8 @@ namespace FinallyFinalBoocking
                     parts[3],
                     int.Parse(parts[4]),
                     int.Parse(parts[5]),
-                    bool.Parse(parts[6])
+                    true
                 ))
-                .Where(room => !room.ReservedOrNot)
                 .ToList();
 
             hotelsScrollMenu(availableRooms);
@@ -174,13 +178,12 @@ namespace FinallyFinalBoocking
             return null;
         }
 
-
         private void hotelsScrollMenu(List<Room> rooms)
         {
             scrollablePanel.Controls.Clear();
 
-            int groupBoxHeight = 150;
-            int spacing = 10;
+            int groupBoxHeight = 200;
+            int spacing = 75;
             int currentY = 10;
 
             foreach (var room in rooms)
@@ -189,52 +192,58 @@ namespace FinallyFinalBoocking
                 {
                     Text = room.HotelName,
                     AutoSize = true,
-                    Location = new Point((scrollablePanel.Width - 500) / 2, currentY),
+                    Location = new Point((scrollablePanel.Width - 625) / 2, currentY),
                 };
 
                 Label locationLabel = new Label
                 {
                     Text = $"Location: {room.HotelLocation}",
-                    Location = new Point(10, 20),
+                    Location = new Point(10, 40),
                     AutoSize = true
                 };
 
                 Label datesLabel = new Label
                 {
                     Text = $"Available Dates: {room.HotelDateAvb}",
-                    Location = new Point(10, 40),
+                    Location = new Point(10, 80),
                     AutoSize = true
                 };
 
                 Label roomsLabel = new Label
                 {
                     Text = $"Rooms: {room.HotelAmountOfRooms}",
-                    Location = new Point(10, 60),
+                    Location = new Point(10, 120),
                     AutoSize = true
                 };
 
                 Label priceLabel = new Label
                 {
                     Text = $"Price: {room.HotelCostForNight} USD/night",
-                    Location = new Point(10, 80),
+                    Location = new Point(10, 160),
                     AutoSize = true
                 };
 
                 Button button = new Button
                 {
                     Text = "Show",
-                    Location = new Point(10, 100),
+                    Location = new Point(10, 200),
                     AutoSize = true,
-                    Tag = room
+                    Tag = room,
+                    BackColor = Color.RoyalBlue,
+                    FlatAppearance = { BorderSize = 0, MouseDownBackColor = Color.DodgerBlue, MouseOverBackColor = Color.DodgerBlue },
+                    FlatStyle = FlatStyle.Flat,
+                    ForeColor = Color.White,
+                    UseVisualStyleBackColor = false
                 };
                 button.Click += ShowPropertyPage;
 
                 PictureBox pictureBox = new PictureBox
                 {
-                    Size = new Size(200, 110),
-                    Location = new Point(320, 20),
+                    Size = new Size(200, 200),
+                    Location = new Point(360, 35),
                     BorderStyle = BorderStyle.Fixed3D,
                     SizeMode = PictureBoxSizeMode.StretchImage
+                    
                 };
 
                 string imagePath = null;
