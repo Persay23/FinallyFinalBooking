@@ -14,6 +14,7 @@ namespace FinallyFinalBoocking
         private string usersFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
         private Form parentForm;
         private AccountPage _accountPage;
+
         public AdminPage(object sender, EventArgs e, AccountPage accountPage, Form parent)
         {
             InitializeComponent();
@@ -73,14 +74,6 @@ namespace FinallyFinalBoocking
         {
             _accountPage.Show();
             this.Close();
-        }
-        
-
-        public Room SelectedRoom { get; private set; }
-
-        public void SetSelectedRoom(Room room)
-        {
-            SelectedRoom = room;
         }
     }
 }
