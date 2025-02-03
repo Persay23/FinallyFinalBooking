@@ -12,6 +12,7 @@ namespace FinallyFinalBoocking
 {
     public partial class Cover : Form
     {
+
         private readonly string userPasswdPath =
             @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
         public Cover()
