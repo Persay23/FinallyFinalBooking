@@ -16,8 +16,8 @@ namespace FinallyFinalBoocking
         {
             InitializeComponent();
             _selectedRoom = selectedRoom;
-            LoadReviews();  
-            LoadHotelImage(); 
+            LoadReviews();
+            LoadHotelImage();
         }
 
         private string GetDatabaseFilePath(string fileName)
@@ -38,8 +38,8 @@ namespace FinallyFinalBoocking
             if (File.Exists(imagePath))
             {
                 personalpictureBox.Image = Image.FromFile(imagePath);
-                personalpictureBox.SizeMode = PictureBoxSizeMode.StretchImage; 
-            }           
+                personalpictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
         }
 
         private void LoadReviews()
@@ -79,7 +79,7 @@ namespace FinallyFinalBoocking
 
         private void reload2_Click(object sender, EventArgs e)
         {
-            LoadReviews();  
+            LoadReviews();
         }
 
         private void buyBtn_Click(object sender, EventArgs e)
@@ -176,7 +176,7 @@ namespace FinallyFinalBoocking
                 File.AppendAllText(reviewsFilePath, $"{_selectedRoom.HotelId}; {reviewText}{Environment.NewLine}");
                 MessageBox.Show("Review submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 textBox2.Clear();
-                LoadReviews();  
+                LoadReviews();
             }
             catch (Exception ex)
             {
@@ -201,5 +201,9 @@ namespace FinallyFinalBoocking
         {
         }
 
+        private void hotelNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
