@@ -300,11 +300,11 @@ namespace FinallyFinalBoocking
             string adminUsername = "admin";
             if (loggedInUsername.Equals(adminUsername, StringComparison.OrdinalIgnoreCase))
             {
-                buttonAdminPage.Visible = true;
+                button1.Visible = true;
             }
             else
             {
-                buttonAdminPage.Visible = false;
+                button1.Visible = false;
             }
         }
         private string GetLoggedInUsername()
@@ -318,10 +318,22 @@ namespace FinallyFinalBoocking
             {
                 return "regular user";
             }
-            
+
         }
 
-        private void buttonAdminPage_Click(object sender, EventArgs e)
+        //private void buttonAdminPage_Click(object sender, EventArgs e)
+        //{
+        //    var adminPage = new AdminPage(sender, e, this, this);
+        //    adminPage.Show();
+        //    this.Hide();
+        //}
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             var adminPage = new AdminPage(sender, e, this, this);
             adminPage.Show();
