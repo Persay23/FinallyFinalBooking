@@ -98,10 +98,10 @@
             // hotelNameLabel
             // 
             hotelNameLabel.AutoSize = true;
-            hotelNameLabel.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            hotelNameLabel.Font = new Font("Arial", 14F, FontStyle.Bold);
             hotelNameLabel.Location = new Point(233, 18);
             hotelNameLabel.Name = "hotelNameLabel";
-            hotelNameLabel.Size = new Size(189, 28);
+            hotelNameLabel.Size = new Size(217, 29);
             hotelNameLabel.TabIndex = 3;
             hotelNameLabel.Text = "Name of the Hotel";
             hotelNameLabel.Click += hotelNameLabel_Click;

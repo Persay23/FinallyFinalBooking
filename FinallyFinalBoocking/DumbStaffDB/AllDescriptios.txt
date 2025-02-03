@@ -61,3 +61,4 @@
 2; It was truely amazing
 1; I dream of staying in this place again
 4; The stay was magnificent
+17; Normal

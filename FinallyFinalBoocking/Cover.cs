@@ -13,9 +13,8 @@ namespace FinallyFinalBoocking
     public partial class Cover : Form
     {
 
-        private readonly string userPasswdPath =
-            @"C:\\Users\\qwerd\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
-        private readonly string usersInfoPath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\usersInfo.txt";
+        private readonly string userPasswdPath = FilePathHelper.GetFilePath("UserPasswdDumbDb.txt");
+        private readonly string usersInfoPath = FilePathHelper.GetFilePath($"users\\usersInfo.txt");
 
         public Cover()
         {
@@ -109,11 +108,24 @@ namespace FinallyFinalBoocking
                 return;
             }
 
-            string usersBookingFile =
-                $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
-            using (FileStream fs = File.Create(usersBookingFile))
-            {
+            string usersBookingFile = $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameInput}.txt";
 
+            if (string.IsNullOrEmpty(usersBookingFile))
+            {
+                MessageBox.Show("Error: Could not find the file path for the user's booking file.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            try
+            {
+                using (FileStream fs = File.Create(usersBookingFile))
+                {
+
+                }
+                MessageBox.Show("Booking file created successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while creating the file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             string hashedPassword = HashPassword(passwordInput);
