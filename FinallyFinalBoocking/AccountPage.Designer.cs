@@ -1,205 +1,3 @@
-﻿//namespace FinallyFinalBoocking
-//{
-//    partial class AccountPage
-//    {
-//        /// <summary>
-//        /// Required designer variable.
-//        /// </summary>
-//        private System.ComponentModel.IContainer components = null;
-
-//        /// <summary>
-//        /// Clean up any resources being used.
-//        /// </summary>
-//        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-//        protected override void Dispose(bool disposing)
-//        {
-//            if (disposing && (components != null))
-//            {
-//                components.Dispose();
-//            }
-//            base.Dispose(disposing);
-//        }
-
-//        #region Windows Form Designer generated code
-
-//        /// <summary>
-//        /// Required method for Designer support - do not modify
-//        /// the contents of this method with the code editor.
-//        /// </summary>
-//        private void InitializeComponent()
-//        {
-//            groupBox1 = new GroupBox();
-//            textBox4 = new TextBox();
-//            textBox3 = new TextBox();
-//            textBox2 = new TextBox();
-//            textBox1 = new TextBox();
-//            groupBox3 = new GroupBox();
-//            exit3 = new Button();
-//            cancelBtn = new Button();
-//            label1 = new Label();
-//            label2 = new Label();
-//            label3 = new Label();
-//            panel1 = new Panel();
-//            groupBox1.SuspendLayout();
-//            groupBox3.SuspendLayout();
-//            SuspendLayout();
-//            // 
-//            // groupBox1
-//            // 
-//            groupBox1.Controls.Add(textBox4);
-//            groupBox1.Controls.Add(textBox3);
-//            groupBox1.Controls.Add(textBox2);
-//            groupBox1.Controls.Add(textBox1);
-//            groupBox1.Location = new Point(12, 53);
-//            groupBox1.Name = "groupBox1";
-//            groupBox1.Size = new Size(170, 167);
-//            groupBox1.TabIndex = 0;
-//            groupBox1.TabStop = false;
-//            // 
-//            // textBox4
-//            // 
-//            textBox4.Enabled = false;
-//            textBox4.Location = new Point(5, 127);
-//            textBox4.Name = "textBox4";
-//            textBox4.ReadOnly = true;
-//            textBox4.Size = new Size(160, 27);
-//            textBox4.TabIndex = 3;
-//            textBox4.TextChanged += textBox4_TextChanged;
-//            // 
-//            // textBox3
-//            // 
-//            textBox3.Enabled = false;
-//            textBox3.Location = new Point(5, 93);
-//            textBox3.Name = "textBox3";
-//            textBox3.ReadOnly = true;
-//            textBox3.Size = new Size(160, 27);
-//            textBox3.TabIndex = 2;
-//            textBox3.TextChanged += textBox3_TextChanged;
-//            // 
-//            // textBox2
-//            // 
-//            textBox2.Enabled = false;
-//            textBox2.Location = new Point(5, 60);
-//            textBox2.Name = "textBox2";
-//            textBox2.ReadOnly = true;
-//            textBox2.Size = new Size(160, 27);
-//            textBox2.TabIndex = 1;
-//            textBox2.TextChanged += textBox2_TextChanged;
-//            // 
-//            // textBox1
-//            // 
-//            textBox1.Enabled = false;
-//            textBox1.Location = new Point(5, 27);
-//            textBox1.Name = "textBox1";
-//            textBox1.ReadOnly = true;
-//            textBox1.Size = new Size(160, 27);
-//            textBox1.TabIndex = 0;
-//            textBox1.TextChanged += textBox1_TextChanged;
-//            // 
-//            // groupBox3
-//            // 
-//            groupBox3.Controls.Add(exit3);
-//            groupBox3.Controls.Add(cancelBtn);
-//            groupBox3.Location = new Point(803, 53);
-//            groupBox3.Name = "groupBox3";
-//            groupBox3.Size = new Size(124, 129);
-//            groupBox3.TabIndex = 1;
-//            groupBox3.TabStop = false;
-//            // 
-//            // exit3
-//            // 
-//            exit3.Location = new Point(5, 93);
-//            exit3.Name = "exit3";
-//            exit3.Size = new Size(114, 30);
-//            exit3.TabIndex = 4;
-//            exit3.Text = "Exit";
-//            exit3.UseVisualStyleBackColor = true;
-//            exit3.Click += exit3_Click;
-//            // 
-//            // cancelBtn
-//            // 
-//            cancelBtn.Location = new Point(5, 62);
-//            cancelBtn.Name = "cancelBtn";
-//            cancelBtn.Size = new Size(114, 30);
-//            cancelBtn.TabIndex = 3;
-//            cancelBtn.Text = "Cancel";
-//            cancelBtn.UseVisualStyleBackColor = true;
-//            cancelBtn.Click += cancelBtn_Click;
-//            // 
-//            // label1
-//            // 
-//            label1.AutoSize = true;
-//            label1.Location = new Point(42, 15);
-//            label1.Name = "label1";
-//            label1.Size = new Size(96, 20);
-//            label1.TabIndex = 2;
-//            label1.Text = "Your Account";
-//            // 
-//            // label2
-//            // 
-//            label2.AutoSize = true;
-//            label2.Location = new Point(367, 15);
-//            label2.Name = "label2";
-//            label2.Size = new Size(103, 20);
-//            label2.TabIndex = 3;
-//            label2.Text = "Your Bookings";
-//            // 
-//            // label3
-//            // 
-//            label3.AutoSize = true;
-//            label3.Location = new Point(803, 15);
-//            label3.Name = "label3";
-//            label3.Size = new Size(58, 20);
-//            label3.TabIndex = 4;
-//            label3.Text = "Actions";
-//            // 
-//            // panel1
-//            // 
-//            panel1.AutoScroll = true;
-//            panel1.Location = new Point(202, 53);
-//            panel1.Name = "panel1";
-//            panel1.Size = new Size(583, 464);
-//            panel1.TabIndex = 7;
-//            panel1.Paint += panel1_Paint;
-//            // 
-//            // AccountPage
-//            // 
-//            AutoScaleDimensions = new SizeF(8F, 20F);
-//            AutoScaleMode = AutoScaleMode.Font;
-//            ClientSize = new Size(952, 546);
-//            Controls.Add(panel1);
-//            Controls.Add(label3);
-//            Controls.Add(label2);
-//            Controls.Add(label1);
-//            Controls.Add(groupBox3);
-//            Controls.Add(groupBox1);
-//            Name = "AccountPage";
-//            Text = "AccountPage";
-//            Load += AccountPage_Load;
-//            groupBox1.ResumeLayout(false);
-//            groupBox1.PerformLayout();
-//            groupBox3.ResumeLayout(false);
-//            ResumeLayout(false);
-//            PerformLayout();
-//        }
-
-//        #endregion
-
-//        private GroupBox groupBox1;
-//        private GroupBox groupBox3;
-//        private Label label1;
-//        private Label label2;
-//        private Label label3;
-//        private Button exit3;
-//        private Button cancelBtn;
-//        private Panel panel1;
-//        private TextBox textBox4;
-//        private TextBox textBox3;
-//        private TextBox textBox2;
-//        private TextBox textBox1;
-//    }
-//}
-
 namespace FinallyFinalBoocking
 {
     partial class AccountPage
@@ -220,6 +18,7 @@ namespace FinallyFinalBoocking
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            buttonAdminPage = new Button();
             textBox4 = new TextBox();
             textBox3 = new TextBox();
             textBox2 = new TextBox();
@@ -237,6 +36,7 @@ namespace FinallyFinalBoocking
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(buttonAdminPage);
             groupBox1.Controls.Add(textBox4);
             groupBox1.Controls.Add(textBox3);
             groupBox1.Controls.Add(textBox2);
@@ -246,6 +46,16 @@ namespace FinallyFinalBoocking
             groupBox1.Size = new Size(170, 167);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
+            // 
+            // buttonAdminPage
+            // 
+            buttonAdminPage.Location = new Point(6, 168);
+            buttonAdminPage.Name = "buttonAdminPage";
+            buttonAdminPage.Size = new Size(179, 29);
+            buttonAdminPage.TabIndex = 8;
+            buttonAdminPage.Text = "Admin Page";
+            buttonAdminPage.UseVisualStyleBackColor = true;
+            buttonAdminPage.Click += buttonAdminPage_Click;
             // 
             // textBox4
             // 
@@ -411,5 +221,6 @@ namespace FinallyFinalBoocking
         private TextBox textBox3;
         private TextBox textBox2;
         private TextBox textBox1;
+        private Button buttonAdminPage;
     }
 }

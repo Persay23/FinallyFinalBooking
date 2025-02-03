@@ -142,6 +142,7 @@ namespace FinallyFinalBoocking
                     ForeColor = Color.White,
                     UseVisualStyleBackColor = false
                 };
+                //cancelBtn.Click += RemoveLine();
 
                 Button showPropButton = new Button
                 {
@@ -192,6 +193,7 @@ namespace FinallyFinalBoocking
                 currentY += groupBoxHeight + spacing;
             }
         }
+
 
         private void LoadUserData()
         {
@@ -289,6 +291,41 @@ namespace FinallyFinalBoocking
         private void AccountPage_Load(object sender, EventArgs e)
         {
             LoadUserData();
+            string loggedInUsername = GetLoggedInUsername();
+            ShowAdminBttn(loggedInUsername);
+        }
+
+        private void ShowAdminBttn(string loggedInUsername)
+        {
+            string adminUsername = "admin";
+            if (loggedInUsername.Equals(adminUsername, StringComparison.OrdinalIgnoreCase))
+            {
+                buttonAdminPage.Visible = true;
+            }
+            else
+            {
+                buttonAdminPage.Visible = false;
+            }
+        }
+        private string GetLoggedInUsername()
+        {
+            var CurrentUserName = "admin";
+            if (CurrentUserName == "admin")
+            {
+                return "admin";
+            }
+            else
+            {
+                return "regular user";
+            }
+            
+        }
+
+        private void buttonAdminPage_Click(object sender, EventArgs e)
+        {
+            var adminPage = new AdminPage(sender, e, this, this);
+            adminPage.Show();
+            this.Hide();
         }
     }
 }
