@@ -173,6 +173,11 @@ namespace FinallyFinalBoocking
             // 
             // button2
             // 
+            button2.BackColor = Color.RoyalBlue;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.ForeColor = Color.White;
             button2.Location = new Point(18, 226);
             button2.Name = "button2";
             button2.Size = new Size(159, 30);
@@ -183,6 +188,11 @@ namespace FinallyFinalBoocking
             // 
             // button3
             // 
+            button3.BackColor = Color.RoyalBlue;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.ForeColor = Color.White;
             button3.Enabled = false;
             button3.Location = new Point(18, 262);
             button3.Name = "button3";
