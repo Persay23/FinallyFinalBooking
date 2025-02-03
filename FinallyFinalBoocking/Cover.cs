@@ -16,6 +16,7 @@ namespace FinallyFinalBoocking
         private readonly string userPasswdPath =
             @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
         private readonly string usersInfoPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\usersInfo.txt";
+
         public Cover()
         {
             InitializeComponent();
