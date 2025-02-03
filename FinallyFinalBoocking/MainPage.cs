@@ -47,7 +47,7 @@ namespace FinallyFinalBoocking
             this.Hide();
         }
 
-        private void openbtn_Click(object sender, EventArgs e)
+        private void reloadbtn_Click(object sender, EventArgs e)
         {
             if (roomsLoaded) return;
 
@@ -85,6 +85,13 @@ namespace FinallyFinalBoocking
 
             roomsLoaded = true;
             hotelsScrollMenu(_rooms);
+        }
+
+        private void openbtn_Click(object sender, EventArgs e)
+        {
+            var mainPage = new MainPage();
+            mainPage.Show();
+            this.Close();
         }
 
         private void Exitbtn2_Click(object sender, EventArgs e)
@@ -297,7 +304,7 @@ namespace FinallyFinalBoocking
         {
             _rooms.Clear();
             scrollablePanel.Controls.Clear();
-            openbtn_Click(null, null);
+            reloadbtn_Click(null, null);
         }
     }
 }

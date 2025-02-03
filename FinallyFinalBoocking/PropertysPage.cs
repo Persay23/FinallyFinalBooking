@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using FinallyFinalBoocking.DumbStaffDB.users;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace FinallyFinalBoocking
 {
@@ -18,6 +20,8 @@ namespace FinallyFinalBoocking
             _selectedRoom = selectedRoom;
             LoadReviews();
             LoadHotelImage();
+            HotelLable();
+            DisplayHotelInfo();
         }
 
         private string GetDatabaseFilePath(string fileName)
@@ -45,25 +49,30 @@ namespace FinallyFinalBoocking
         private void LoadReviews()
         {
             string reviewsFilePath = GetDatabaseFilePath("AllDescriptios.txt");
-            if (reviewsFilePath == null || !File.Exists(reviewsFilePath))
+
+            if (string.IsNullOrEmpty(reviewsFilePath) || !File.Exists(reviewsFilePath))
             {
-                descriptionPoloniaTextBox.Text = "No reviews available.";
+                descriptionTextBox.Text = "No reviews available.";
                 return;
             }
 
             try
             {
                 var lines = File.ReadAllLines(reviewsFilePath);
-                descriptionPoloniaTextBox.Clear();
+                var reviewBuilder = new System.Text.StringBuilder();
 
                 foreach (string line in lines)
                 {
                     var parts = line.Split(';');
-                    if (int.TryParse(parts[0].Trim(), out int reviewHotelId) && reviewHotelId == _selectedRoom.HotelId)
+
+                    if (parts.Length > 1 && int.TryParse(parts[0].Trim(), out int reviewHotelId) && reviewHotelId == _selectedRoom.HotelId)
                     {
-                        descriptionPoloniaTextBox.AppendText(parts[1].Trim() + Environment.NewLine + Environment.NewLine);
+                        reviewBuilder.AppendLine(parts[1].Trim());
+                        reviewBuilder.AppendLine();
                     }
                 }
+
+                descriptionTextBox.Text = reviewBuilder.Length > 0 ? reviewBuilder.ToString() : "No reviews available.";
             }
             catch (Exception ex)
             {
@@ -84,8 +93,8 @@ namespace FinallyFinalBoocking
 
         private void buyBtn_Click(object sender, EventArgs e)
         {
-            string roomsFilePath = GetDatabaseFilePath("Rooms.txt");
-            string userRoomsFilePath = GetDatabaseFilePath($"users\\{CurrentUser.Username}.txt");
+            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            string userRoomsFilePath = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt";
 
             if (roomsFilePath == null || userRoomsFilePath == null)
                 return;
@@ -97,7 +106,7 @@ namespace FinallyFinalBoocking
             }
 
             var allRooms = File.ReadAllLines(roomsFilePath).ToList();
-            string selectedRoomText = $"{_selectedRoom.HotelId};{_selectedRoom.HotelName};{_selectedRoom.HotelLocation};{_selectedRoom.HotelDateAvb};{_selectedRoom.HotelAmountOfRooms};{_selectedRoom.HotelCostForNight}";
+            string selectedRoomText = $"{_selectedRoom.HotelId};{_selectedRoom.HotelName};{_selectedRoom.HotelLocation};{_selectedRoom.HotelDateAvb};{_selectedRoom.HotelAmountOfRooms};{_selectedRoom.HotelCostForNight};";
 
             File.WriteAllLines(roomsFilePath, allRooms);
             File.AppendAllText(userRoomsFilePath, selectedRoomText + Environment.NewLine);
@@ -112,11 +121,11 @@ namespace FinallyFinalBoocking
         }
         private void RemoveLine()
         {
-            string roomsFilePath = GetDatabaseFilePath("Rooms.txt");
+            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
             if (roomsFilePath == null || !File.Exists(roomsFilePath))
                 return;
 
-            string selectedRoomText = $"{_selectedRoom.HotelId}; {_selectedRoom.HotelName}; {_selectedRoom.HotelLocation}; {_selectedRoom.HotelDateAvb}; {_selectedRoom.HotelAmountOfRooms}; {_selectedRoom.HotelCostForNight}";
+            string selectedRoomText = $"{_selectedRoom.HotelId}; {_selectedRoom.HotelName}; {_selectedRoom.HotelLocation}; {_selectedRoom.HotelDateAvb}; {_selectedRoom.HotelAmountOfRooms}; {_selectedRoom.HotelCostForNight};";
 
             var tempFile = Path.GetTempFileName();
 
@@ -184,24 +193,67 @@ namespace FinallyFinalBoocking
             }
         }
 
+        private void DisplayHotelInfo()
+        {
+            hotelInfoLabel.Text = $"Location: {_selectedRoom.HotelLocation}\n" +
+                                  $"Available Date: {_selectedRoom.HotelDateAvb}\n" +
+                                  $"Rooms Available: {_selectedRoom.HotelAmountOfRooms}\n" +
+                                  $"Price per Night: {_selectedRoom.HotelCostForNight} USD";
+            hotelNameLabel.Text = _selectedRoom.HotelName;
+
+
+        }
+
+        private void HotelLable()
+        {
+            hotelInfoLabel = new Label
+            {
+                AutoSize = true,
+                Location = new Point(500, 120),
+                Font = new Font("Arial", 12, FontStyle.Bold)
+            };
+            Controls.Add(hotelInfoLabel);
+        }
+
 
         private void personalpictureBox_Click(object sender, EventArgs e)
         {
+
         }
 
         private void PropertysPage_Load(object sender, EventArgs e)
         {
+            textBox2.Visible = false;
+            submitBtn.Visible = false;
         }
 
         private void descriptionTextBox_TextChanged(object sender, EventArgs e)
         {
+
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
+
         }
 
         private void hotelNameLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void commentBtn_Click(object sender, EventArgs e)
+        {
+            textBox2.Visible = !textBox2.Visible;
+            submitBtn.Visible = !submitBtn.Visible;
+        }
+
+        private void reserveBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void descriptionPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }

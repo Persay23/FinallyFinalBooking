@@ -39,7 +39,7 @@ namespace FinallyFinalBoocking
             searchTextBox.Location = new Point(164, 60);
             searchTextBox.Name = "searchTextBox";
             searchTextBox.PlaceholderText = "Search";
-            searchTextBox.Size = new Size(566, 30);
+            searchTextBox.Size = new Size(566, 32);
             searchTextBox.TabIndex = 0;
             searchTextBox.TextChanged += searchTextBox_TextChanged;
             // 
@@ -64,7 +64,7 @@ namespace FinallyFinalBoocking
             comboBoxFilter.FormattingEnabled = true;
             comboBoxFilter.Location = new Point(754, 60);
             comboBoxFilter.Name = "comboBoxFilter";
-            comboBoxFilter.Size = new Size(164, 31);
+            comboBoxFilter.Size = new Size(164, 33);
             comboBoxFilter.TabIndex = 2;
             comboBoxFilter.Text = "Filter";
             comboBoxFilter.SelectedIndexChanged += comboBoxFilter_SelectedIndexChanged;
@@ -129,7 +129,7 @@ namespace FinallyFinalBoocking
             // 
             // MainPage
             // 
-            AutoScaleDimensions = new SizeF(9F, 23F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1092, 677);

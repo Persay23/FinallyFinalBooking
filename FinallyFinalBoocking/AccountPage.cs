@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FinallyFinalBoocking.DumbStaffDB.users;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace FinallyFinalBoocking
 {
@@ -44,12 +46,6 @@ namespace FinallyFinalBoocking
             this.Close();
         }
 
-        private void cancelBtn_Click(object sender, EventArgs e)
-        {
-            _mainPage.Show();
-            this.Close();
-        }
-
         private string GetDebuggerDisplay()
         {
             return ToString();
@@ -58,7 +54,7 @@ namespace FinallyFinalBoocking
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             int groupBoxHeight = 150;
-            int spacing = 10;
+            int spacing = 150;
             int currentY = 10;
 
             string currentUserFilePath = GetCurrentUserFilePath();
@@ -142,7 +138,7 @@ namespace FinallyFinalBoocking
                     ForeColor = Color.White,
                     UseVisualStyleBackColor = false
                 };
-                //cancelBtn.Click += RemoveLine();
+                cancelButton.Click += CancelRoom;
 
                 Button showPropButton = new Button
                 {
@@ -194,6 +190,38 @@ namespace FinallyFinalBoocking
             }
         }
 
+        private void CancelRoom(object sender, EventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            if (clickedButton == null || !(clickedButton.Tag is Room selectedRoom))
+                return;
+            string userFilePath = GetCurrentUserFilePath();
+            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+
+            if (userFilePath == null || roomsFilePath == null || !File.Exists(userFilePath))
+            {
+                MessageBox.Show("File paths not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string selectedRoomText = $"{selectedRoom.HotelId};{selectedRoom.HotelName};{selectedRoom.HotelLocation};{selectedRoom.HotelDateAvb};{selectedRoom.HotelAmountOfRooms};{selectedRoom.HotelCostForNight};";
+
+            var tempUserFile = Path.GetTempFileName();
+            var userLines = File.ReadLines(userFilePath)
+                                .Where(line => !line.Trim().StartsWith($"{selectedRoom.HotelId};"))
+                                .ToList();
+
+            File.WriteAllLines(tempUserFile, userLines);
+            File.Delete(userFilePath);
+            File.Move(tempUserFile, userFilePath);
+
+            File.AppendAllText(roomsFilePath, selectedRoomText + Environment.NewLine);
+
+            MessageBox.Show($"Room {selectedRoom.HotelName} has been canceled.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            panel1.Controls.Clear();
+            DisplayBookings();
+        }
 
         private void LoadUserData()
         {
@@ -297,8 +325,7 @@ namespace FinallyFinalBoocking
 
         private void ShowAdminBttn(string loggedInUsername)
         {
-            string adminUsername = "admin";
-            if (loggedInUsername.Equals(adminUsername, StringComparison.OrdinalIgnoreCase))
+            if (loggedInUsername.Equals("admin", StringComparison.OrdinalIgnoreCase))
             {
                 button1.Visible = true;
             }
@@ -309,24 +336,8 @@ namespace FinallyFinalBoocking
         }
         private string GetLoggedInUsername()
         {
-            var CurrentUserName = "admin";
-            if (CurrentUserName == "admin")
-            {
-                return "admin";
-            }
-            else
-            {
-                return "regular user";
-            }
-
+            return CurrentUser.Username;
         }
-
-        //private void buttonAdminPage_Click(object sender, EventArgs e)
-        //{
-        //    var adminPage = new AdminPage(sender, e, this, this);
-        //    adminPage.Show();
-        //    this.Hide();
-        //}
 
         private void label3_Click(object sender, EventArgs e)
         {
@@ -338,6 +349,20 @@ namespace FinallyFinalBoocking
             var adminPage = new AdminPage(sender, e, this, this);
             adminPage.Show();
             this.Hide();
+        }
+
+        private void logOutbttn_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms.Cast<Form>().ToList())
+            {
+                if (!(form is Cover))
+                {
+                    form.Close();
+                }
+            }
+            Cover coverPage = new Cover();
+            coverPage.Show();
+
         }
     }
 }
