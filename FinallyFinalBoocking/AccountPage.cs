@@ -15,20 +15,20 @@ using Microsoft.VisualBasic.ApplicationServices;
 
 namespace FinallyFinalBoocking
 {
-    [DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
     public partial class AccountPage : Form
     {
         private List<Room> _rooms = new List<Room>();
         private PropertysPage _propertyPage;
         private MainPage _mainPage;
         private string userRoomsFilePath;
+        private Room _selectedRoom;
 
         public AccountPage(MainPage mainPage, PropertysPage propertyPage = null, string filePath = null)
         {
             _mainPage = mainPage;
             _propertyPage = propertyPage;
             InitializeComponent();
-            userRoomsFilePath = filePath ?? GetCurrentUserFilePath();
+            userRoomsFilePath = filePath;
             LoadUserData();
             DisplayBookings();
         }
@@ -46,18 +46,13 @@ namespace FinallyFinalBoocking
             this.Close();
         }
 
-        private string GetDebuggerDisplay()
-        {
-            return ToString();
-        }
-
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             int groupBoxHeight = 150;
             int spacing = 150;
             int currentY = 10;
 
-            string currentUserFilePath = GetCurrentUserFilePath();
+            string currentUserFilePath = FilePathHelper.GetFilePath($"users\\{CurrentUser.Username}.txt");
             if (currentUserFilePath == null)
             {
                 MessageBox.Show("User reservation data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -79,8 +74,7 @@ namespace FinallyFinalBoocking
                 var hotelDateAvb = split[3];
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
-                bool reservedOrNot = true;
-                var reservedRoom = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
+                var reservedRoom = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost);
                 _rooms.Add(reservedRoom);
             }
 
@@ -162,20 +156,7 @@ namespace FinallyFinalBoocking
                     SizeMode = PictureBoxSizeMode.StretchImage
                 };
 
-                string imagePath = null;
-                if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png"))
-                {
-                    imagePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
-                }
-                else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png"))
-                {
-                    imagePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
-                }
-                else
-                {
-                    MessageBox.Show("Hotel photo not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                string imagePath = FilePathHelper.GetFilePath($"images\\{reservedRoom.HotelId}.png");
                 pictureBox.ImageLocation = imagePath;
                 groupBox.Controls.Add(locationLabel);
                 groupBox.Controls.Add(datesLabel);
@@ -195,8 +176,8 @@ namespace FinallyFinalBoocking
             Button clickedButton = sender as Button;
             if (clickedButton == null || !(clickedButton.Tag is Room selectedRoom))
                 return;
-            string userFilePath = GetCurrentUserFilePath();
-            string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+            string userFilePath = FilePathHelper.GetFilePath($"users\\{CurrentUser.Username}.txt");
+            string roomsFilePath = FilePathHelper.GetFilePath("Rooms.txt");
 
             if (userFilePath == null || roomsFilePath == null || !File.Exists(userFilePath))
             {
@@ -225,25 +206,12 @@ namespace FinallyFinalBoocking
 
         private void LoadUserData()
         {
-            string currentUserFilePath = GetCurrentUserInfoFilePath();
+            string currentUserFilePath = FilePathHelper.GetFilePath($"users\\usersInfo.txt");
 
             if (File.Exists(currentUserFilePath))
             {
                 var allUserData = File.ReadAllLines(currentUserFilePath);
-                string currentUserData = null;
-
-                string userBookingsFilePath = GetUserBookingsFilePath(CurrentUser.Username);
-                NumberOfBookingsCounter(userBookingsFilePath);
-
-                foreach (var line in allUserData)
-                {
-                    var userData = line.Split(';');
-                    if (userData.Length >= 3 && userData[0].Trim() == CurrentUser.Username)
-                    {
-                        currentUserData = line;
-                        break;
-                    }
-                }
+                string currentUserData = allUserData.FirstOrDefault(line => line.Split(';')[0].Trim() == CurrentUser.Username);
 
                 if (currentUserData != null)
                 {
@@ -256,6 +224,9 @@ namespace FinallyFinalBoocking
                 {
                     MessageBox.Show("User data not found for the logged-in user!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
+                string userBookingsFilePath = FilePathHelper.GetFilePath($"users\\{CurrentUser.Username}.txt");
+                NumberOfBookingsCounter(userBookingsFilePath);
             }
             else
             {
@@ -277,38 +248,6 @@ namespace FinallyFinalBoocking
             {
                 MessageBox.Show("User bookings file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private string GetUserBookingsFilePath(string username)
-        {
-            // Assuming the bookings are stored in a separate file per user
-            return $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{username}.txt";
-        }
-
-        private string GetCurrentUserFilePath()
-        {
-            string path1 = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt";
-            string path2 = $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{CurrentUser.Username}.txt";
-
-            if (File.Exists(path1))
-                return path1;
-            if (File.Exists(path2))
-                return path2;
-
-            return null;
-        }
-
-        private string GetCurrentUserInfoFilePath()
-        {
-            string path1 = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\usersInfo.txt";
-            string path2 = $@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\usersInfo.txt";
-
-            if (File.Exists(path1))
-                return path1;
-            if (File.Exists(path2))
-                return path2;
-
-            return null;
         }
 
         private void DisplayBookings()
@@ -341,6 +280,8 @@ namespace FinallyFinalBoocking
             LoadUserData();
             string loggedInUsername = GetLoggedInUsername();
             ShowAdminBttn(loggedInUsername);
+            button3.Click += SaveUserData;
+            button2.Click += EnableEditing;
         }
 
         private void ShowAdminBttn(string loggedInUsername)
@@ -359,14 +300,10 @@ namespace FinallyFinalBoocking
             return CurrentUser.Username;
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var adminPage = new AdminPage(sender, e, this, this);
+            var adminPage = new AdminPage(sender, e, this);
             adminPage.Show();
             this.Hide();
         }
@@ -383,6 +320,53 @@ namespace FinallyFinalBoocking
             Cover coverPage = new Cover();
             coverPage.Show();
 
+        }
+
+        private void SaveUserData(object sender, EventArgs e)
+        {
+            string currentUserFilePath = FilePathHelper.GetFilePath("users\\usersInfo.txt");
+
+            if (!File.Exists(currentUserFilePath))
+            {
+                MessageBox.Show("User data file not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var allLines = File.ReadAllLines(currentUserFilePath).ToList();
+            for (int i = 0; i < allLines.Count; i++)
+            {
+                var userData = allLines[i].Split(';');
+                if (userData.Length >= 3 && userData[0].Trim() == CurrentUser.Username)
+                {
+                    allLines[i] = $"{textBox1.Text.Trim()};{textBox2.Text.Trim()};{textBox3.Text.Trim()}";
+                    break;
+                }
+            }
+
+            File.WriteAllLines(currentUserFilePath, allLines);
+
+            MessageBox.Show("User information updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void EnableEditing(object sender, EventArgs e)
+        {
+            textBox1.Enabled = false;
+            textBox2.Enabled = false;
+            textBox3.Enabled = true;
+
+            button2.Enabled = false;
+            button3.Enabled = true;
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button2.Click += EnableEditing;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            button3.Click += SaveUserData;
         }
     }
 }

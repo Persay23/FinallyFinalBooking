@@ -6,10 +6,13 @@ using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualBasic.ApplicationServices;
+using static System.Net.Mime.MediaTypeNames;
+using Application = System.Windows.Forms.Application;
 
 namespace FinallyFinalBoocking
 {
@@ -51,20 +54,7 @@ namespace FinallyFinalBoocking
         {
             if (roomsLoaded) return;
 
-            string selectedPath = null;
-            if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
-            {
-                selectedPath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
-            }
-            else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"))
-            {
-                selectedPath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
-            }
-            else
-            {
-                MessageBox.Show("Hotel rooms list not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            string selectedPath = FilePathHelper.GetFilePath("Rooms.txt");
 
             var lines = File.ReadLines(selectedPath);
 
@@ -78,8 +68,7 @@ namespace FinallyFinalBoocking
                 var hotelDateAvb = split[3];
                 var hotelAmount = int.Parse(split[4]);
                 var hotelTotalCost = int.Parse(split[5]);
-                var reservedOrNot = true;
-                var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost, reservedOrNot);
+                var room = new Room(hotelId, hotelName, hotelLocation, hotelDateAvb, hotelAmount, hotelTotalCost);
                 _rooms.Add(room);
             }
 
@@ -149,7 +138,7 @@ namespace FinallyFinalBoocking
 
         public void DisplayAvailableRooms()
         {
-            string roomsFilePath = GetFilePath();
+            string roomsFilePath = FilePathHelper.GetFilePath("Rooms.txt");
 
             var allRooms = File.ReadAllLines(roomsFilePath).ToList();
             var availableRooms = allRooms
@@ -160,29 +149,11 @@ namespace FinallyFinalBoocking
                     parts[2],
                     parts[3],
                     int.Parse(parts[4]),
-                    int.Parse(parts[5]),
-                    true
+                    int.Parse(parts[5])
                 ))
                 .ToList();
 
             hotelsScrollMenu(availableRooms);
-        }
-        private string GetFilePath()
-        {
-            string[] possiblePaths = {
-                @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt",
-                @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt"
-            };
-
-            foreach (var path in possiblePaths)
-            {
-                if (File.Exists(path))
-                {
-                    return path;
-                }
-            }
-
-            return null;
         }
 
         private void hotelsScrollMenu(List<Room> rooms)
@@ -250,25 +221,10 @@ namespace FinallyFinalBoocking
                     Location = new Point(360, 35),
                     BorderStyle = BorderStyle.Fixed3D,
                     SizeMode = PictureBoxSizeMode.StretchImage
-                    
                 };
 
-                string imagePath = null;
-                if (File.Exists(@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png"))
-                {
-                    imagePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
-                }
-                else if (File.Exists(@"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png"))
-                {
-                    imagePath = @"C:\Users\qwerd\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Screenshot 2024-12-10 023140.png";
-                }
-                else
-                {
-                    MessageBox.Show("Hotel photo not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                string imagePath = FilePathHelper.GetFilePath($"images\\{ room.HotelId}.png");
                 pictureBox.ImageLocation = imagePath;
-
                 groupBox.Controls.Add(locationLabel);
                 groupBox.Controls.Add(datesLabel);
                 groupBox.Controls.Add(roomsLabel);

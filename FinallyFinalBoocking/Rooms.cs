@@ -16,7 +16,7 @@ namespace FinallyFinalBoocking
         private int _costForNight;
 
         public Room(int hotelId, string hotelName, string hotelLocation, string hotelDateAvb,
-            int hotelAmountOfRooms, int hotelCostForNight, bool reservedOrNot)
+            int hotelAmountOfRooms, int hotelCostForNight)
         {
             _hotelName = hotelName;
             _location = hotelLocation;

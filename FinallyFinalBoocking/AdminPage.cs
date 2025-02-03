@@ -10,15 +10,13 @@ namespace FinallyFinalBoocking
 {
     public partial class AdminPage : Form
     {
-        private string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
-        private string usersFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
-        private Form parentForm;
+        private string roomsFilePath = FilePathHelper.GetFilePath("Rooms.txt");
+        private string usersFilePath = FilePathHelper.GetFilePath("UserPasswdDumbDb.txt");
         private AccountPage _accountPage;
 
-        public AdminPage(object sender, EventArgs e, AccountPage accountPage, Form parent)
+        public AdminPage(object sender, EventArgs e, AccountPage accountPage)
         {
             InitializeComponent();
-            parentForm = parent;
             _accountPage = accountPage;
         }
 
@@ -89,14 +87,14 @@ namespace FinallyFinalBoocking
             lines.RemoveAll(line => line.StartsWith(usernameToRemove + ";"));
             File.WriteAllLines(usersFilePath, lines);
 
-            string userFilePath = $@"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\users\{usernameToRemove}.txt";
+            string userFilePath = FilePathHelper.GetFilePath($"users\\{usernameToRemove}.txt");
 
-            if (File.Exists(userFilePath) && new FileInfo(userFilePath).Length > 0)
+            if (File.Exists(userFilePath))
             {
 
                 var userFileContent = File.ReadAllLines(userFilePath).ToList();
 
-                string roomsFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\Rooms.txt";
+                string roomsFilePath = FilePathHelper.GetFilePath("Rooms.txt");
                 File.AppendAllLines(roomsFilePath, userFileContent);
 
                 File.Delete(userFilePath);
