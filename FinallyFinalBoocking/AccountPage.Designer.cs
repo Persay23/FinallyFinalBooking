@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            buttonAdminPage = new Button();
             textBox4 = new TextBox();
             textBox3 = new TextBox();
             textBox2 = new TextBox();
@@ -46,16 +47,27 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(buttonAdminPage);
             groupBox1.Controls.Add(textBox4);
             groupBox1.Controls.Add(textBox3);
             groupBox1.Controls.Add(textBox2);
             groupBox1.Controls.Add(textBox1);
             groupBox1.Location = new Point(12, 56);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(191, 175);
+            groupBox1.Size = new Size(191, 205);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
+            // 
+            // buttonAdminPage
+            // 
+            buttonAdminPage.Location = new Point(6, 168);
+            buttonAdminPage.Name = "buttonAdminPage";
+            buttonAdminPage.Size = new Size(179, 29);
+            buttonAdminPage.TabIndex = 8;
+            buttonAdminPage.Text = "Admin Page";
+            buttonAdminPage.UseVisualStyleBackColor = true;
+            buttonAdminPage.Click += buttonAdminPage_Click;
             // 
             // textBox4
             // 
@@ -199,5 +211,6 @@
         private TextBox textBox3;
         private TextBox textBox2;
         private TextBox textBox1;
+        private Button buttonAdminPage;
     }
 }
