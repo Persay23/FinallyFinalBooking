@@ -12,25 +12,12 @@ namespace FinallyFinalBoocking
 {
     public partial class Cover : Form
     {
+
         private readonly string userPasswdPath =
             @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\UserPasswdDumbDb.txt";
         public Cover()
         {
             InitializeComponent();
-            ShowTermsOfUseIfNeeded();
-        }
-
-        private void ShowTermsOfUseIfNeeded()
-        {
-
-            var termsAcceptedPath = @"C:\\Users\\Orest\\Source\\Repos\\FinallyFinalBooking\\FinallyFinalBoocking\\DumbStaffDB\\termsAccepted.txt";
-            if (!File.Exists(termsAcceptedPath) || File.ReadAllText(termsAcceptedPath).Trim() != "Accepted")
-            {
-                using (var termsForm = new TermsOfUseForm(termsAcceptedPath))
-                {
-                    termsForm.ShowDialog();
-                }
-            }
         }
 
         private void logInbtn_Click(object sender, EventArgs e)
@@ -152,65 +139,6 @@ namespace FinallyFinalBoocking
             Application.Exit();
         }
 
-
-        public class TermsOfUseForm : Form
-        {
-            private readonly string termsFilePath;
-            private CheckBox acceptCheckBox;
-            private Button okButton;
-
-            public TermsOfUseForm(string termsFilePath)
-            {
-                this.termsFilePath = termsFilePath;
-                InitializeComponents();
-            }
-
-            private void InitializeComponents()
-            {
-                this.Text = "Terms of Use";
-                this.Size = new System.Drawing.Size(400, 200);
-                this.StartPosition = FormStartPosition.CenterScreen;
-                this.FormBorderStyle = FormBorderStyle.FixedDialog;
-                this.MaximizeBox = false;
-
-                Label messageLabel = new Label()
-                {
-                    Text = "I accept the terms of use of the application.",
-                    AutoSize = true,
-                    Location = new System.Drawing.Point(20, 20)
-                };
-
-                acceptCheckBox = new CheckBox()
-                {
-                    Location = new System.Drawing.Point(20, 50)
-                };
-                acceptCheckBox.CheckedChanged += AcceptCheckBox_CheckedChanged;
-
-                okButton = new Button()
-                {
-                    Text = "OK",
-                    Location = new System.Drawing.Point(20, 80),
-                    Size = new System.Drawing.Size(50, 30),
-                    Enabled = false
-                };
-                okButton.Click += OkButton_Click;
-
-                this.Controls.Add(messageLabel);
-                this.Controls.Add(acceptCheckBox);
-                this.Controls.Add(okButton);
-            }
-
-            private void AcceptCheckBox_CheckedChanged(object sender, EventArgs e)
-            {
-                okButton.Enabled = acceptCheckBox.Checked;
-            }
-
-            private void OkButton_Click(object sender, EventArgs e)
-            {
-                File.WriteAllText(termsFilePath, "Accepted");
-                this.Close();
-            }
-        }
 
     }
 }

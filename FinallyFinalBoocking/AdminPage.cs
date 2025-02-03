@@ -14,6 +14,7 @@ namespace FinallyFinalBoocking
         private string usersFilePath = @"C:\Users\Orest\Source\Repos\FinallyFinalBooking\FinallyFinalBoocking\DumbStaffDB\UserPasswdDumbDb.txt";
         private Form parentForm;
         private AccountPage _accountPage;
+
         public AdminPage(object sender, EventArgs e, AccountPage accountPage, Form parent)
         {
             InitializeComponent();
@@ -35,6 +36,15 @@ namespace FinallyFinalBoocking
             string rooms = textBoxCRRooms.Text;
             string price = textBoxCRPrice.Text;
 
+            if (string.IsNullOrWhiteSpace(id) || string.IsNullOrWhiteSpace(name) ||
+                string.IsNullOrWhiteSpace(location) || string.IsNullOrWhiteSpace(availability) ||
+                string.IsNullOrWhiteSpace(rooms) || string.IsNullOrWhiteSpace(price) ||
+                rooms == "0" || price == "0")
+            {
+                MessageBox.Show("All fields must be filled out and values cannot be zero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             string hotelData = $"{id};{name};{location};{availability};{rooms};{price}";
             File.AppendAllText(roomsFilePath, hotelData + Environment.NewLine);
 
@@ -44,6 +54,13 @@ namespace FinallyFinalBoocking
         private void buttonRMHotel_Click(object sender, EventArgs e)
         {
             string hotelIdToRemove = textBoxRMId.Text;
+
+            if (string.IsNullOrWhiteSpace(hotelIdToRemove) || hotelIdToRemove == "0")
+            {
+                MessageBox.Show("Hotel ID cannot be empty or zero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var lines = File.ReadAllLines(roomsFilePath).ToList();
             lines.RemoveAll(line => line.StartsWith(hotelIdToRemove + ";"));
             File.WriteAllLines(roomsFilePath, lines);
@@ -55,6 +72,12 @@ namespace FinallyFinalBoocking
         {
             string usernameToRemove = textBoxRMusername.Text;
             string adminUsername = "admin";
+
+            if (string.IsNullOrWhiteSpace(usernameToRemove) || usernameToRemove == "0")
+            {
+                MessageBox.Show("Username cannot be empty or zero.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             if (usernameToRemove.Equals(adminUsername, StringComparison.OrdinalIgnoreCase))
             {
@@ -73,14 +96,6 @@ namespace FinallyFinalBoocking
         {
             _accountPage.Show();
             this.Close();
-        }
-        
-
-        public Room SelectedRoom { get; private set; }
-
-        public void SetSelectedRoom(Room room)
-        {
-            SelectedRoom = room;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace FinallyFinalBoocking
             textBox2 = new TextBox();
             textBox1 = new TextBox();
             exit3 = new Button();
-            cancelBtn = new Button();
+            logOutbttn = new Button();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -101,28 +101,28 @@ namespace FinallyFinalBoocking
             exit3.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
             exit3.FlatStyle = FlatStyle.Flat;
             exit3.ForeColor = Color.White;
-            exit3.Location = new Point(3, 48);
+            exit3.Location = new Point(5, 45);
             exit3.Name = "exit3";
-            exit3.Size = new Size(159, 30);
+            exit3.Size = new Size(159, 32);
             exit3.TabIndex = 4;
             exit3.Text = "Exit";
             exit3.UseVisualStyleBackColor = false;
             exit3.Click += exit3_Click;
             // 
-            // cancelBtn
+            // logOutbttn
             // 
-            cancelBtn.BackColor = Color.RoyalBlue;
-            cancelBtn.FlatAppearance.BorderSize = 0;
-            cancelBtn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
-            cancelBtn.FlatStyle = FlatStyle.Flat;
-            cancelBtn.ForeColor = Color.White;
-            cancelBtn.Location = new Point(3, 12);
-            cancelBtn.Name = "cancelBtn";
-            cancelBtn.Size = new Size(159, 30);
-            cancelBtn.TabIndex = 3;
-            cancelBtn.Text = "Cancel";
-            cancelBtn.UseVisualStyleBackColor = false;
-            cancelBtn.Click += cancelBtn_Click;
+            logOutbttn.BackColor = Color.RoyalBlue;
+            logOutbttn.FlatAppearance.BorderSize = 0;
+            logOutbttn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            logOutbttn.FlatStyle = FlatStyle.Flat;
+            logOutbttn.ForeColor = Color.White;
+            logOutbttn.Location = new Point(5, 9);
+            logOutbttn.Name = "logOutbttn";
+            logOutbttn.Size = new Size(159, 30);
+            logOutbttn.TabIndex = 3;
+            logOutbttn.Text = "Log Out";
+            logOutbttn.UseVisualStyleBackColor = false;
+            logOutbttn.Click += logOutbttn_Click;
             // 
             // label1
             // 
@@ -166,9 +166,14 @@ namespace FinallyFinalBoocking
             // 
             // button1
             // 
-            button1.Location = new Point(3, 81);
+            button1.BackColor = Color.RoyalBlue;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(5, 83);
             button1.Name = "button1";
-            button1.Size = new Size(159, 30);
+            button1.Size = new Size(159, 32);
             button1.TabIndex = 8;
             button1.Text = "Admin Page";
             button1.UseVisualStyleBackColor = true;
@@ -177,7 +182,7 @@ namespace FinallyFinalBoocking
             // panel2
             // 
             panel2.Controls.Add(button1);
-            panel2.Controls.Add(cancelBtn);
+            panel2.Controls.Add(logOutbttn);
             panel2.Controls.Add(exit3);
             panel2.Location = new Point(12, 279);
             panel2.Name = "panel2";
@@ -214,7 +219,7 @@ namespace FinallyFinalBoocking
         private Label label2;
         private Label label3;
         private Button exit3;
-        private Button cancelBtn;
+        private Button logOutbttn;
         private Panel panel1;
         private TextBox textBox4;
         private TextBox textBox3;
