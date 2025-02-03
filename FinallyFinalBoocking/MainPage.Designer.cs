@@ -1,16 +1,12 @@
-﻿namespace FinallyFinalBoocking
+﻿using System.Drawing;
+using System.Drawing.Drawing2D;
+
+namespace FinallyFinalBoocking
 {
     partial class MainPage
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +18,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             searchTextBox = new TextBox();
@@ -41,29 +33,38 @@
             // 
             // searchTextBox
             // 
-            searchTextBox.Location = new Point(164, 55);
+            searchTextBox.BackColor = Color.LightGray;
+            searchTextBox.BorderStyle = BorderStyle.FixedSingle;
+            searchTextBox.ForeColor = Color.Black;
+            searchTextBox.Location = new Point(164, 60);
             searchTextBox.Name = "searchTextBox";
             searchTextBox.PlaceholderText = "Search";
-            searchTextBox.Size = new Size(566, 29);
+            searchTextBox.Size = new Size(566, 30);
             searchTextBox.TabIndex = 0;
             searchTextBox.TextChanged += searchTextBox_TextChanged;
             // 
             // accountInfo
             // 
-            accountInfo.Location = new Point(34, 20);
+            accountInfo.BackColor = Color.RoyalBlue;
+            accountInfo.FlatAppearance.BorderSize = 0;
+            accountInfo.FlatAppearance.MouseDownBackColor = Color.DodgerBlue;
+            accountInfo.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            accountInfo.FlatStyle = FlatStyle.Flat;
+            accountInfo.ForeColor = Color.White;
+            accountInfo.Location = new Point(34, 25);
             accountInfo.Name = "accountInfo";
-            accountInfo.Size = new Size(102, 29);
+            accountInfo.Size = new Size(102, 32);
             accountInfo.TabIndex = 1;
             accountInfo.Text = "Account";
-            accountInfo.UseVisualStyleBackColor = true;
+            accountInfo.UseVisualStyleBackColor = false;
             accountInfo.Click += button1_Click;
             // 
             // comboBoxFilter
             // 
             comboBoxFilter.FormattingEnabled = true;
-            comboBoxFilter.Location = new Point(754, 55);
+            comboBoxFilter.Location = new Point(754, 60);
             comboBoxFilter.Name = "comboBoxFilter";
-            comboBoxFilter.Size = new Size(164, 29);
+            comboBoxFilter.Size = new Size(164, 31);
             comboBoxFilter.TabIndex = 2;
             comboBoxFilter.Text = "Filter";
             comboBoxFilter.SelectedIndexChanged += comboBoxFilter_SelectedIndexChanged;
@@ -77,29 +78,41 @@
             groupBox1.Controls.Add(searchTextBox);
             groupBox1.Location = new Point(95, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(952, 135);
+            groupBox1.Size = new Size(952, 140);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Account details";
             // 
             // Exitbtn2
             // 
-            Exitbtn2.Location = new Point(34, 92);
+            Exitbtn2.BackColor = Color.RoyalBlue;
+            Exitbtn2.FlatAppearance.BorderSize = 0;
+            Exitbtn2.FlatAppearance.MouseDownBackColor = Color.DodgerBlue;
+            Exitbtn2.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            Exitbtn2.FlatStyle = FlatStyle.Flat;
+            Exitbtn2.ForeColor = Color.White;
+            Exitbtn2.Location = new Point(34, 97);
             Exitbtn2.Name = "Exitbtn2";
-            Exitbtn2.Size = new Size(102, 31);
+            Exitbtn2.Size = new Size(102, 32);
             Exitbtn2.TabIndex = 6;
             Exitbtn2.Text = "Exit";
-            Exitbtn2.UseVisualStyleBackColor = true;
+            Exitbtn2.UseVisualStyleBackColor = false;
             Exitbtn2.Click += Exitbtn2_Click;
             // 
             // openbtn
             // 
-            openbtn.Location = new Point(34, 55);
+            openbtn.BackColor = Color.RoyalBlue;
+            openbtn.FlatAppearance.BorderSize = 0;
+            openbtn.FlatAppearance.MouseDownBackColor = Color.DodgerBlue;
+            openbtn.FlatAppearance.MouseOverBackColor = Color.DodgerBlue;
+            openbtn.FlatStyle = FlatStyle.Flat;
+            openbtn.ForeColor = Color.White;
+            openbtn.Location = new Point(34, 60);
             openbtn.Name = "openbtn";
-            openbtn.Size = new Size(102, 31);
+            openbtn.Size = new Size(102, 32);
             openbtn.TabIndex = 5;
             openbtn.Text = "Reload";
-            openbtn.UseVisualStyleBackColor = true;
+            openbtn.UseVisualStyleBackColor = false;
             openbtn.Click += openbtn_Click;
             // 
             // openFileDialog1
@@ -116,11 +129,13 @@
             // 
             // MainPage
             // 
-            AutoScaleDimensions = new SizeF(9F, 21F);
+            AutoScaleDimensions = new SizeF(9F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(1092, 677);
             Controls.Add(scrollablePanel);
             Controls.Add(groupBox1);
+            Font = new Font("Segoe UI", 10F);
             Name = "MainPage";
             Text = "MainPage";
             Load += MainPage_Load;

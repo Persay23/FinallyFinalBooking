@@ -129,17 +129,6 @@ namespace FinallyFinalBoocking
             PerformLayout();
         }
 
-        private Region CreateRoundedRegion(Size size, int radius)
-        {
-            GraphicsPath path = new GraphicsPath();
-            path.AddArc(0, 0, radius, radius, 180, 90);
-            path.AddArc(size.Width - radius, 0, radius, radius, 270, 90);
-            path.AddArc(size.Width - radius, size.Height - radius, radius, radius, 0, 90);
-            path.AddArc(0, size.Height - radius, radius, radius, 90, 90);
-            path.CloseFigure();
-            return new Region(path);
-        }
-
         #endregion
 
         private Button singInbtn;
